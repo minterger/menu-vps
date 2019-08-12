@@ -24,11 +24,13 @@ c) clear;
 echo -e "\e[1;31mMenu";
 echo ;;
 s) clear;
+echo -e "\e[1;0m"
 exit 1;;
 C) clear;
 echo -e "\e[1;31mMenu";
 echo ;;
 S) clear;
+echo -e "\e[1;0m"
 exit 1;;
 *) clear;
 echo -e "\e[1;31mEs una opcion invalida:";
