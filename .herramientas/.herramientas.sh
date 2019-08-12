@@ -24,6 +24,10 @@ else
 unset pid_badvpn
 }
 
+restart () {
+  sudo shutdown -r now
+}
+
 while :
 do
 cd ..
@@ -85,6 +89,8 @@ fast;
 echo ;
 echo -e "\e[1;32mPresiona una tecla para continuar...";
 read foo;;
+9)
+restart;;
 0) clear;
 exit 1;;
 *) clear;
