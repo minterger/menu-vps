@@ -5,8 +5,8 @@ instalar () {
   mkdir .Menu
   cd .Menu
   wget https://github.com/minterger/menu/archive/master.zip
-  unzip master.zip?dl=0 >/dev/null 2>/dev/null
-  rm -r master.zip?dl=0
+  unzip master.zip >/dev/null 2>/dev/null
+  rm -r master.zip
   cd .Menu >/dev/null 2>/dev/null
   sudo cp menu.sh /bin/menu >/dev/null 2>/dev/null
   sudo chmod +x /bin/menu >/dev/null 2>/dev/null
