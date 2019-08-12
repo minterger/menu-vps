@@ -66,7 +66,7 @@ read foo;;
 echo -e "Ejecutando Script: \e[1;31m";
 echo ;
 cd ..;
-cd .Irparpaya-a;
+cd .host
 bash .real-host.sh.;
 cd .herramientas.;;
 6) clear;
