@@ -7,7 +7,8 @@ instalar () {
   rm -r master.zip
   mv menu-master .Menu
   cd .Menu >/dev/null 2>/dev/null
-  sudo cp menu.sh /bin/menu >/dev/null 2>/dev/null
+  rm -r install.sh
+  sudo mv menu.sh /bin/menu >/dev/null 2>/dev/null
   sudo chmod +x /bin/menu >/dev/null 2>/dev/null
   echo -e "\033[1;32mScript instalado con exito"
   echo
