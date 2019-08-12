@@ -2,9 +2,11 @@
 instalar () {
   echo -e "\033[1;32mInstalando Script\033[0m"
   cd ~
-  wget https://github.com/minterger/vpsmanager
-  unzip menu.zip?dl=0 >/dev/null 2>/dev/null
-  rm -r menu.zip?dl=0
+  mkdir .Menu
+  cd .Menu
+  wget https://github.com/minterger/menu/archive/master.zip
+  unzip master.zip?dl=0 >/dev/null 2>/dev/null
+  rm -r master.zip?dl=0
   cd .Menu >/dev/null 2>/dev/null
   sudo cp menu.sh /bin/menu >/dev/null 2>/dev/null
   sudo chmod +x /bin/menu >/dev/null 2>/dev/null
