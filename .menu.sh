@@ -11,12 +11,13 @@ users () {
 }
 
 crearuser () {
+  echo
   if [ $(id -u) -eq 0 ]
   then
-  	echo -e "\033[1;32mNombre del nuevo usuario:\033[0;37m"; read -p " " name
-  	echo -e "\033[1;32mContraseña para el usuario $name:\033[0;37m"; read -p " " pass
-  	echo -e "\033[1;32mCuantos dias el usuario $name debe durar:\033[0;37m"; read -p " " daysrnf
-  	echo -e "\033[1;32mLimite de logins simultaneos:\033[0;37m"; read -p " " limiteuser
+  	echo -e -n "\033[1;32mNombre del nuevo usuario:\033[0;37m"; read -p " " name
+  	echo -e -n "\033[1;32mContraseña para el usuario $name:\033[0;37m"; read -p " " pass
+  	echo -e -n "\033[1;32mCuantos dias el usuario $name debe durar:\033[0;37m"; read -p " " daysrnf
+  	echo -e -n "\033[1;32mLimite de logins simultaneos:\033[0;37m"; read -p " " limiteuser
   	echo -e "\033[0m"
   	if cat /etc/passwd |grep $name: |grep -vi [a-z]$name |grep -v [0-9]$name > /dev/null
   	then
@@ -31,6 +32,8 @@ crearuser () {
   		echo -e "\033[1;36mContraseña: \033[0m$pass"
   		echo -e "\033[1;36mExpira:\033[0m $datexp"
   	    echo "$pass" > ~/.Menu/.users/passwd/$name
+      echo "Presione una tecla para continuar"
+      read foo
   	fi
   else
   	if echo $(id) |grep sudo > /dev/null
