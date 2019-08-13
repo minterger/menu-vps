@@ -47,14 +47,14 @@ crearuser () {
   fi
 }
 
-userdel () {
+userdelete () {
   clear
   echo -e "Eliminar Usuario:\e[1;31m"
   echo
   echo -e -n "\e[1;32mPoner nombre de usuario: "
-  read userdel
+  read user
   echo -e "\e[1;31m"
-  userdel $userdel
+  userdel $user
   echo -e "\e[1;32mPresiona una tecla para continuar..."
   read foo
 }
@@ -106,7 +106,7 @@ users;;
 2)
 crearuser;;
 3)
-userdel;;
+userdelete;;
 4)
 userlist;;
 5)
