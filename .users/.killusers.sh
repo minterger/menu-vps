@@ -59,9 +59,8 @@ do
     NUM3=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
     USER=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $10}'`;
     if [ $NUM3 -eq 1 ]; then
-      echo -e "\e[1;32mdesconectando $USER";
+      echo -e "\e[1;32mdesconectando \e[1;33m$USER \e[1;0m";
     fi
 done
 kill $PID2
-echo
 exit 2
