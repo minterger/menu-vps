@@ -53,7 +53,7 @@ echo
 echo -e -n "\e[1;32mPoner [PID] del usuario: \e[1;33m"
 read PID2
 echo
-data =( `$PID2`)
+data=( $PID2)
 for PID in "${data[@]}"
 do
     NUM3=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
