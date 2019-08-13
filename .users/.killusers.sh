@@ -57,7 +57,7 @@ data =( `$PID2`)
 for PID in "${data[@]}"
 do
     NUM3=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
-    USER=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID\]" | awk '{print $9}'`;
+    USER=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $10}'`;
     if [ $NUM3 -eq 1 ]; then
       echo -e "\e[1;32mdesconectando $USER";
     fi
