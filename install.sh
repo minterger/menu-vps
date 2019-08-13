@@ -7,6 +7,7 @@ instalar () {
   rm -r master.zip
   mv menu-master .Menu
   cd .Menu >/dev/null 2>/dev/null
+  mkdir .Menu/.users/passwd
   rm -r install.sh
   sudo mv menu.sh /bin/menu >/dev/null 2>/dev/null
   sudo chmod +x /bin/menu >/dev/null 2>/dev/null
