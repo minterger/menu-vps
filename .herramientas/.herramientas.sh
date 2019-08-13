@@ -2,7 +2,7 @@
 
 BadVPN () {
 pid_badvpn=$(ps x | grep badvpn | grep -v grep | awk '{print $1}')
-if [ "$pid_badvpn" = "" ]; then
+  if [ "$pid_badvpn" = "" ]; then
     echo
     echo "Iniciando Badvpn"
     echo
@@ -13,7 +13,7 @@ if [ "$pid_badvpn" = "" ]; then
     screen -dmS screen /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10
     [[ "$(ps x | grep badvpn | grep -v grep | awk '{print $1}')" ]] && echo "inciado" || echo "fallo"
     echo
-else
+  else
     echo
     echo "Parando Badvpn"
     kill -9 $(ps x | grep badvpn | grep -v grep | awk '{print $1'}) > /dev/null 2>&1
@@ -22,6 +22,13 @@ else
     unset pid_badvpn
     fi
 unset pid_badvpn
+}
+
+update () {
+  cd ~
+  wget https://raw.githubusercontent.com/minterger/menu/master/install.sh
+  sudo bash install.sh
+  sudo rm -r install.sh
 }
 
 restart () {
@@ -39,14 +46,15 @@ echo -e "\e[1;31m[1]\e[1;32m start/stop BADVPN"
 echo -e "\e[1;31m[2]\e[1;32m Consumo de recursos Top"
 echo -e "\e[1;31m[3]\e[1;32m Consumo de recursos Htop"
 echo -e "\e[1;31m[4]\e[1;32m Servicios funcionando"
-echo -e "\e[1;31m[5]\e[1;32m Host extractor"
-echo -e "\e[1;31m[6]\e[1;32m Speedtest.net Online"
-echo -e "\e[1;31m[7]\e[1;32m Speedtest.net"
-echo -e "\e[1;31m[8]\e[1;32m Fast"
-echo -e "\e[1;31m[9]\e[1;32m Reiniciar vps"
+echo -e "\e[1;31m[5]\e[1;32m Update Script"
+echo -e "\e[1;31m[6]\e[1;32m Host extractor"
+echo -e "\e[1;31m[7]\e[1;32m Speedtest.net Online"
+echo -e "\e[1;31m[8]\e[1;32m Speedtest.net"
+echo -e "\e[1;31m[9]\e[1;32m Fast"
+echo -e "\e[1;31m[10]\e[1;32m Reiniciar vps"
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
-echo -n "Seleccione una opcion [1 - 9]: "
+echo -n "Seleccione una opcion [1 - 10]: "
 read opcion
 case $opcion in
 1)BadVPN;
@@ -67,30 +75,32 @@ lsof -n -i -P | grep '*';
 echo ;
 echo -e "\e[1;32mPresiona una tecla para continuar...";
 read foo;;
-5) clear;
+5)
+update;;
+6) clear;
 echo -e "Ejecutando Script: \e[1;31m";
 echo ;
 cd ..;
 cd .host
 bash .real-host.sh.;
 cd .herramientas.;;
-6) clear;
-bash .speedtest.sh;;
 7) clear;
+bash .speedtest.sh;;
+8) clear;
 echo -e "Ejecutando test de velocidad: \e[1;31m";
 echo ;
 speedtest;
 echo ;
 echo -e "\e[1;32mPresiona una tecla para continuar...";
 read foo;;
-8) clear;
+9) clear;
 echo -e "Ejecutando test de velocidad:\e[1;31m";
 echo ;
 fast;
 echo ;
 echo -e "\e[1;32mPresiona una tecla para continuar...";
 read foo;;
-9)
+10)
 restart;;
 0) clear;
 exit 1;;
