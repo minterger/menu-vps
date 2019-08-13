@@ -20,16 +20,10 @@ echo
 echo -n "Seleccione una opcion [S o C]: "
 read opcion
 case $opcion in
-c) clear;
+c|C) clear;
 echo -e "\e[1;31mMenu";
 echo ;;
-s) clear;
-echo -e "\e[1;0m"
-exit 1;;
-C) clear;
-echo -e "\e[1;31mMenu";
-echo ;;
-S) clear;
+s|S) clear;
 echo -e "\e[1;0m"
 exit 1;;
 *) clear;
