@@ -90,5 +90,5 @@ read -p ": " option
  echo "El usuario $name fue desconectado"
  read foo
  fi
-exit 1;;
+exit 1
 esac
