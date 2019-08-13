@@ -53,8 +53,14 @@ echo
 echo -e -n "\e[1;32mPoner [PID] del usuario: \e[1;33m"
 read PID2
 echo
-USER2=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID2\]" | awk '{print $9}'`
-echo -e "\e[1;32mdesconectando $USER2"
+for PID in "${PID2[@]}"
+do
+    NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
+    USER=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID\]" | awk '{print $9}'`;
+    if [ $NUM2 -eq 1 ]; then
+      echo -e "\e[1;32mdesconectando $USER";
+    fi
+done
 kill $PID2
 echo
 exit 2
