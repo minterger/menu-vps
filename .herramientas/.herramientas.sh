@@ -25,6 +25,7 @@ unset pid_badvpn
 }
 
 update () {
+  echo -e "\e[1;0m"
   cd ~
   wget https://raw.githubusercontent.com/minterger/menu/master/install.sh
   sudo bash install.sh
