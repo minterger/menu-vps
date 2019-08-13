@@ -115,10 +115,44 @@ echo "=============================================="
 echo -e "\e[1;33m------\e[1;31mMinterger Script\e[1;33m------\e[1;32m";
 echo "=============================================="
 echo
-echo -e "Desconectar Usuario:\e[1;31m"
-echo
-echo -e -n "\e[1;32mPoner PID del usuario: "
-read pid
-echo -e "\e[1;32m"
-kill $pid
+echo -e "\033[1;33mOpciones:\033[1;30m
+1) Eliminar usuario
+2) Eliminar y desconectar usuario
+3) Desconectar usuario\033[0m"
+read -p ": " option
+ if [ $option -eq 1 ]; then
+ read -p "Cual es el nombre del usuario: " name
+ if [ $(cat /etc/passwd |grep "^$name:" |wc -l) -eq 0 ]; then
+ echo "Usuario no existe"
+ exit
+ fi
+ userdel --force $name > /dev/null 2>/dev/null
+ echo "El usuario $name fue eliminado"
+ exit
+ fi
+
+ if [ $option -eq 2 ]; then
+ read -p "Cual es el nombre del usuario: " name
+ if [ $(cat /etc/passwd |grep "^$name:" |wc -l) -eq 0 ]; then
+ echo "Usuario no existe"
+ exit
+ fi
+ pids=$(ps -u $name |awk {'print $1'})
+ kill "$pids" >/dev/null 2>/dev/null
+ userdel $name 1>/dev/null 2>/dev/null
+ echo "El usuario $name fue desconectado y eliminado"
+ exit
+ fi
+
+ if [ $option -eq 3 ]; then
+ read -p "Cual es el nombre del ususario: " name
+ if [ $(cat /etc/passwd |grep "^$name:" |wc -l) -eq 0 ]; then
+ echo "Usuario no existe"
+ exit
+ fi
+ pids=$(ps -u $name |awk {'print $1'})
+ kill "$pids" >/dev/null 2>/dev/null
+ echo "El usuario $name fue desconectado"
+ exit
+ fi
 exit 2
