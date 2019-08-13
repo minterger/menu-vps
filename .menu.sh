@@ -25,7 +25,7 @@ crearuser () {
   	else
   		valid=$(date '+%C%y-%m-%d' -d " +$daysrnf days")
   		datexp=$(date "+%d/%m/%Y" -d "+ $daysrnf days")
-  		useradd -M -s /bin/false $name -e $valid
+  		useradd -M $name -e $valid
   		( echo "$pass";echo "$pass" ) | passwd $name 2> /dev/null
   		limite $name $limiteuser
   		echo -e "\033[1;36mUsuario: \033[0m$name"
