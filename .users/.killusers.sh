@@ -57,6 +57,4 @@ USER2=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | 
 echo -e "\e[1;32mdesconectando $USER2"
 kill $PID2
 echo
-echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
-read foo
 exit 2
