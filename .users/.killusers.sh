@@ -55,9 +55,9 @@ read PID2
 echo
 for PID in "${PID2[@]}"
 do
-    NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
+    NUM3=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
     USER=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID\]" | awk '{print $9}'`;
-    if [ $NUM2 -eq 1 ]; then
+    if [ $NUM3 -eq 1 ]; then
       echo -e "\e[1;32mdesconectando $USER";
     fi
 done
