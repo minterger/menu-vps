@@ -34,6 +34,8 @@ update () {
 }
 
 restart () {
+  echo ""
+  echo "Reiniciando"
   sudo shutdown -r now
 }
 
@@ -51,12 +53,11 @@ echo -e "\e[1;31m[4]\e[1;32m Servicios funcionando"
 echo -e "\e[1;31m[5]\e[1;32m Update Script"
 echo -e "\e[1;31m[6]\e[1;32m Host extractor"
 echo -e "\e[1;31m[7]\e[1;32m Speedtest.net Online"
-echo -e "\e[1;31m[8]\e[1;32m Speedtest.net"
-echo -e "\e[1;31m[9]\e[1;32m Fast"
-echo -e "\e[1;31m[10]\e[1;32m Reiniciar vps"
+echo -e "\e[1;31m[8]\e[1;32m Fast"
+echo -e "\e[1;31m[9]\e[1;32m Reiniciar vps"
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
-echo -n "Seleccione una opcion [1 - 10]: "
+echo -n "Seleccione una opcion [1 - 9]: "
 read opcion
 case $opcion in
 1)BadVPN;
@@ -89,20 +90,13 @@ cd .herramientas.;;
 7) clear;
 bash .speedtest.sh;;
 8) clear;
-echo -e "Ejecutando test de velocidad: \e[1;31m";
-echo ;
-speedtest;
-echo ;
-echo -e "\e[1;32mPresiona una tecla para continuar...";
-read foo;;
-9) clear;
 echo -e "Ejecutando test de velocidad:\e[1;31m";
 echo ;
 fast;
 echo ;
 echo -e "\e[1;32mPresiona una tecla para continuar...";
 read foo;;
-10)
+9)
 restart;;
 0) clear;
 exit 1;;
