@@ -11,17 +11,37 @@ users () {
 }
 
 crearuser () {
-  clear
-  echo -e "Crear Usuario:\e[1;31m"
-  echo
-  echo -e -n "\e[1;32mPoner nombre de usuario: "
-  read username
-  echo -e "\e[1;31m"
-  useradd $username
-  passwd $username
-  echo
-  echo -e "\e[1;32mPresiona una tecla para continuar..."
-  read foo
+  if [ $(id -u) -eq 0 ]
+  then
+  	echo -e "\033[1;32mNombre del nuevo usuario:\033[0;37m"; read -p " " name
+  	echo -e "\033[1;32mContraseña para el usuario $name:\033[0;37m"; read -p " " pass
+  	echo -e "\033[1;32mCuantos dias el usuario $name debe durar:\033[0;37m"; read -p " " daysrnf
+  	echo -e "\033[1;32mLimite de logins simultaneos:\033[0;37m"; read -p " " limiteuser
+  	echo -e "\033[0m"
+  	if cat /etc/passwd |grep $name: |grep -vi [a-z]$name |grep -v [0-9]$name > /dev/null
+  	then
+  		echo -e "\033[1;31mUsuario $name ya existe\033[0m"
+  	else
+  		valid=$(date '+%C%y-%m-%d' -d " +$daysrnf days")
+  		datexp=$(date "+%d/%m/%Y" -d "+ $daysrnf days")
+  		useradd -M -s /bin/false $name -e $valid
+  		( echo "$pass";echo "$pass" ) | passwd $name 2> /dev/null
+  		limite $name $limiteuser
+  		echo -e "\033[1;36mUsuario: \033[0m$name"
+  		echo -e "\033[1;36mContraseña: \033[0m$pass"
+  		echo -e "\033[1;36mExpira:\033[0m $datexp"
+  	    echo "$pass" > ~/.Menu/.users/passwd/$name
+  	fi
+  else
+  	if echo $(id) |grep sudo > /dev/null
+  	then
+  	echo "Su usuario no esta en el grupo sudo"
+  	echo -e "Para ejecutar root escriba: \033[1;31msudo su\033[0m"
+  	echo -e "O ejecute menu como sudo. \033[1;31msudo menu\033[0m"
+  	else
+  	echo -e "Vc no esta como usuario root, ni con sus derechos (sudo)\nPara ejecutar root escribe \033[1;31msu\033[0m y escribe su contraseña root"
+  	fi
+  fi
 }
 
 userdel () {
