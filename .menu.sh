@@ -97,7 +97,7 @@ inf_system () {
   [[ "$system" ]] && echo -e "${null2}Sistema: ${null}$system" || echo -e "${null2}Sistema: ${null}???"
   [[ "$based" ]] && echo -e "${null2}Basado en: ${null}$based" || echo -e "${null2}Baseado: ${null}???"
   [[ "$processor" ]] && echo -e "${null2}Processador: ${null}$processor x$cpus" || echo -e "${null2}Processador: ${null}???"
-  [[ "$clock" ]] && echo -e "${null2}Frequecia de Operacao: ${null}$clock MHz" || echo -e "${null2}Frequecia de Operacao: ${null}???"
+  [[ "$clock" ]] && echo -e "${null2}Frequecia de Operacion: ${null}$clock MHz" || echo -e "${null2}Frequecia de Operacion: ${null}???"
   echo -e "${null2}Uso del Processador: ${null}$(ps aux  | awk 'BEGIN { sum = 0 }  { sum += sprintf("%f",$3) }; END { printf " " "%.2f" "%%", sum}')"
   echo -e "${null2}Memoria Virtual Total: ${null}$(($totalram / 1024))"
   echo -e "${null2}Memoria Virtual En Uso: ${null}$(($usedram / 1024))"
