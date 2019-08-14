@@ -51,11 +51,11 @@ userdelete () {
   clear
   read -p "Cual es el nombre del usuario: " name
   if [ $(cat /etc/passwd |grep "^$name:" |wc -l) -eq 0 ]; then
-    userdel --force $name > /dev/null 2>/dev/null
-    echo "El usuario $name fue eliminado"
+    echo "Usuario no existe"
     read foo
   else
-    echo "Usuario no existe"
+    userdel --force $name > /dev/null 2>/dev/null
+    echo "El usuario $name fue eliminado"
     read foo
   fi
   fi
