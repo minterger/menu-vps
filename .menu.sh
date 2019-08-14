@@ -58,7 +58,6 @@ userdelete () {
     echo "El usuario $name fue eliminado"
     read foo
   fi
-  fi
 }
 
 userlist () {
