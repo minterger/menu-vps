@@ -105,7 +105,7 @@ inf_system () {
   echo -e "${null2}Memoria Virtual Swap: ${null}$(($swapram / 1024))MB"
   echo -e "${null2}Tiempo Online: ${null}$(uptime)"
   echo -e "${null2}Nombre De La Maquina: ${null}$(hostname)"
-  echo -e "${null2}Direccion De La Maquina: ${null}$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')"
+  echo -e "${null2}Direccion IP De La Maquina: ${null}$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')"
   echo -e "${null2}Version del Kernel: ${null}$(uname -r)"
   echo -e "${null2}Arquitectura: ${null}$(uname -m)"
   echo
@@ -144,7 +144,7 @@ echo -e "\e[1;31m[6]\e[1;32m Herramientas"
 echo -e "\e[1;31m[7]\e[1;32m Menu de instalacion"
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
-echo -n "Seleccione una opcion [1 - 6]: "
+echo -n "Seleccione una opcion [1 - 7]: "
 read opcion
 case $opcion in
 1)
