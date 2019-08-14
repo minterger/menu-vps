@@ -53,11 +53,15 @@ userdelete () {
   if [ $(cat /etc/passwd |grep "^$name:" |wc -l) -eq 0 ]; then
     echo
     echo -e "\e[1;32mUsuario \e[1;31m$name \e[1;32mno existe\e[1;0m"
+    echo
+    echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
     read foo
   else
     userdel --force $name > /dev/null 2>/dev/null
     echo
     echo -e "\e[1;32mEl usuario \e[1;31m$name \e[1;32mfue eliminado\e[1;0m"
+    echo
+    echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
     read foo
   fi
 }
