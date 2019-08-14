@@ -52,12 +52,12 @@ userdelete () {
   read -p "Cual es el nombre del usuario: " name
   if [ $(cat /etc/passwd |grep "^$name:" |wc -l) -eq 0 ]; then
     echo
-    echo "Usuario $name no existe"
+    echo -e "\e[1;32mUsuario \e[1;31m$name \e[1;32mno existe\e[1;0m"
     read foo
   else
     userdel --force $name > /dev/null 2>/dev/null
     echo
-    echo "El usuario $name fue eliminado"
+    echo "\e[1;32mEl usuario \e[1;31m$name \e[1;32mfue eliminado\e[1;0m"
     read foo
   fi
 }
@@ -68,7 +68,7 @@ userlist () {
   bash .listusers.sh
   echo
   cd ..
-  echo -e "\e[1;32mPresiona una tecla para continuar..."
+  echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
   read foo
 }
 
