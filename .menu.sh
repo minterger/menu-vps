@@ -49,14 +49,15 @@ crearuser () {
 
 userdelete () {
   clear
-  echo -e "Eliminar Usuario:\e[1;31m"
-  echo
-  echo -e -n "\e[1;32mPoner nombre de usuario: "
-  read user
-  echo -e "\e[1;31m"
-  userdel $user
-  echo -e "\e[1;32mPresiona una tecla para continuar..."
-  read foo
+  read -p "Cual es el nombre del usuario: " name
+  if [ $(cat /etc/passwd |grep "^$name:" |wc -l) -eq 0 ]; then
+    echo "Usuario no existe"
+    read foo
+  fi
+    userdel --force $name > /dev/null 2>/dev/null
+    echo "El usuario $name fue eliminado"
+    read foo
+  fi
 }
 
 userlist () {
