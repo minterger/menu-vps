@@ -8,7 +8,10 @@ instalar () {
   mv menu-master .Menu
   cd .Menu >/dev/null 2>/dev/null
   mkdir .users/passwd
+  mkdir .users/limite
   rm -r install.sh
+  sudo mv limite /bin/limite >/dev/null 2>/dev/null
+  sudo chmod +x /bin/limite >/dev/null 2>/dev/null
   sudo mv menu.sh /bin/menu >/dev/null 2>/dev/null
   sudo chmod +x /bin/menu >/dev/null 2>/dev/null
   echo -e "\033[1;32mScript instalado con exito"
