@@ -76,6 +76,44 @@ userlist () {
   read foo
 }
 
+inf_system () {
+  clear
+  echo "DETALLES DEL SISTEMA"
+  null="\033[1;31m"
+  null2="\033[1;32m"
+  echo
+  if [ ! /proc/cpuinfo ]; then echo "Sistema No Soportado" && echo; return 1; fi
+  if [ ! /etc/issue.net ]; then echo "Sistema No Soportado" && echo; return 1; fi
+  if [ ! /proc/meminfo ]; then echo "Sistema No Soportado" && echo; return 1; fi
+  totalram=$(free | grep Mem | awk '{print $2}')
+  usedram=$(free | grep Mem | awk '{print $3}')
+  freeram=$(free | grep Mem | awk '{print $4}')
+  swapram=$(cat /proc/meminfo | grep SwapTotal | awk '{print $2}')
+  system=$(cat /etc/issue.net)
+  clock=$(lscpu | grep "CPU MHz:" | awk '{print $3}')
+  based=$(cat /etc/*release | grep ID_LIKE | awk -F "=" '{print $2}')
+  processor=$(cat /proc/cpuinfo | grep "model name" | uniq | awk -F ":" '{print $2}')
+  cpus=$(cat /proc/cpuinfo | grep processor | wc -l)
+  [[ "$system" ]] && echo -e "${null2}Sistema: ${null}$system" || echo -e "${null2}Sistema: ${null}???"
+  [[ "$based" ]] && echo -e "${null2}Basado en: ${null}$based" || echo -e "${null2}Baseado: ${null}???"
+  [[ "$processor" ]] && echo -e "${null2}Processador: ${null}$processor x$cpus" || echo -e "${null2}Processador: ${null}???"
+  [[ "$clock" ]] && echo -e "${null2}Frequecia de Operacao: ${null}$clock MHz" || echo -e "${null2}Frequecia de Operacao: ${null}???"
+  echo -e "${null2}Uso del Processador: ${null}$(ps aux  | awk 'BEGIN { sum = 0 }  { sum += sprintf("%f",$3) }; END { printf " " "%.2f" "%%", sum}')"
+  echo -e "${null2}Memoria Virtual Total: ${null}$(($totalram / 1024))"
+  echo -e "${null2}Memoria Virtual En Uso: ${null}$(($usedram / 1024))"
+  echo -e "${null2}Memoria Virtual Libre: ${null}$(($freeram / 1024))"
+  echo -e "${null2}Memoria Virtual Swap: ${null}$(($swapram / 1024))MB"
+  echo -e "${null2}Tiempo Online: ${null}$(uptime)"
+  echo -e "${null2}Nombre De La Maquina: ${null}$(hostname)"
+  echo -e "${null2}Direccion De La Maquina: ${null}$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')"
+  echo -e "${null2}Version del Kernel: ${null}$(uname -r)"
+  echo -e "${null2}Arquitectura: ${null}$(uname -m)"
+  echo
+  echo -e "\e[1;32mPresiona una tecla para continuar..."
+  read foo
+  return 0
+}
+
 herramientas () {
   clear
   echo -e "Herramientas: \e[1;31m"
@@ -101,8 +139,9 @@ echo -e "\e[1;31m[1]\e[1;32m Usuario conectados"
 echo -e "\e[1;31m[2]\e[1;32m Crear usuario"
 echo -e "\e[1;31m[3]\e[1;32m Eliminar usuario"
 echo -e "\e[1;31m[4]\e[1;32m Lista de usuarios"
-echo -e "\e[1;31m[5]\e[1;32m Herramientas"
-echo -e "\e[1;31m[6]\e[1;32m Menu de instalacion"
+echo -e "\e[1;31m[5]\e[1;32m Informacion del sistema"
+echo -e "\e[1;31m[6]\e[1;32m Herramientas"
+echo -e "\e[1;31m[7]\e[1;32m Menu de instalacion"
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
 echo -n "Seleccione una opcion [1 - 6]: "
@@ -117,8 +156,10 @@ userdelete;;
 4)
 userlist;;
 5)
-herramientas;;
+inf_system;;
 6)
+herramientas;;
+7)
 install;;
 0) clear;
 exit 1;;
