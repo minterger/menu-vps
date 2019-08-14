@@ -57,7 +57,7 @@ userdelete () {
   else
     userdel --force $name > /dev/null 2>/dev/null
     echo
-    echo "\e[1;32mEl usuario \e[1;31m$name \e[1;32mfue eliminado\e[1;0m"
+    echo -e "\e[1;32mEl usuario \e[1;31m$name \e[1;32mfue eliminado\e[1;0m"
     read foo
   fi
 }
