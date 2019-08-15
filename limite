@@ -53,4 +53,5 @@ exit
 chmod a+x ~/.Menu/.users/limite/$1.sh 2>/dev/null
 echo "*/1 * * * * root /etc/VpsPackdir/limite/$1.sh #$1#" >> /etc/crontab
 echo -e "\033[1;37mUsuario: \033[1;31m[\033[1;37m$1\033[1;31m]\033[1;37m Limite: \033[1;31m[\033[1;37m$2\033[1;31m] \033[1;37m[\033[1;31mLimite Aplicado\033[1;37m]  \033[0m"
+echo -e "\033[1;36mIP: \033[0m$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')"
 echo "$2" > ~/.Menu/.users/limite/$1
