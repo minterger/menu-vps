@@ -10,7 +10,6 @@ case $opcion in
   echo ;
   apt-get remove -y dropbear >/dev/null 2>/dev/null;
   apt-get autoremove -y >/dev/null 2>/dev/null;
-  sudo rm -r /usr/sbin/dropbear >/dev/null 2>/dev/null;
   echo ;
   echo -e "\e[1;32mDesinstalado. Reinicia para que surga efecto\n\nPresiona una tecla para continuar...";
   read foo;
@@ -27,7 +26,7 @@ else
 
   echo -e "\033[1;32m             Instalacion completada\033[0m"
   echo
-  echo -e "\033[1;37mEjecutando en el puerto 80 y 443"
+  echo -e "\033[1;37mEjecutando en el puerto 443 y 444"
   echo
 
   rclocale='# disabled because OpenSSH is installed
@@ -37,7 +36,7 @@ else
   DROPBEAR_PORT=443
 
   # any additional arguments for Dropbear
-  DROPBEAR_EXTRA_ARGS="-p 80"
+  DROPBEAR_EXTRA_ARGS="-p 444"
 
   # specify an optional banner file containing a message to be
   # sent to clients before they connect, such as "/etc/issue.net"
