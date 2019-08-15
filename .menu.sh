@@ -86,6 +86,13 @@ inf_system () {
   if [ ! /proc/cpuinfo ]; then echo "Sistema No Soportado" && echo; return 1; fi
   if [ ! /etc/issue.net ]; then echo "Sistema No Soportado" && echo; return 1; fi
   if [ ! /proc/meminfo ]; then echo "Sistema No Soportado" && echo; return 1; fi
+
+  mempor=`df -h | grep dev | grep sda | awk '{print $5}'`
+  mempor2=`df -h | grep dev | grep vda | awk '{print $5}'`
+
+  memto=`df -h | grep dev | grep sda | awk '{print $2}'`
+  memto2=`df -h | grep dev | grep sda | awk '{print $2}'`
+
   totalram=$(free | grep Mem | awk '{print $2}')
   usedram=$(free | grep Mem | awk '{print $3}')
   freeram=$(free | grep Mem | awk '{print $4}')
@@ -100,6 +107,7 @@ inf_system () {
   [[ "$processor" ]] && echo -e "${null2}Processador: ${null}$processor x$cpus" || echo -e "${null2}Processador: ${null}???"
   [[ "$clock" ]] && echo -e "${null2}Frequecia de Operacion: ${null}$clock MHz" || echo -e "${null2}Frequecia de Operacion: ${null}???"
   echo -e "${null2}Uso del Processador: ${null}$(ps aux  | awk 'BEGIN { sum = 0 }  { sum += sprintf("%f",$3) }; END { printf " " "%.2f" "%%", sum}')"
+  echo -e "${null2}Momoria usada ${null}$mempor$mempor2 ${null2}de ${null}$memto$memto2"
   echo -e "${null2}Memoria Virtual Total: ${null}$(($totalram / 1024))"
   echo -e "${null2}Memoria Virtual En Uso: ${null}$(($usedram / 1024))"
   echo -e "${null2}Memoria Virtual Libre: ${null}$(($freeram / 1024))"
