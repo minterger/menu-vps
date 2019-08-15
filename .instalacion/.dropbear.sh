@@ -9,8 +9,10 @@ case $opcion in
   echo -e "Desinstalando Dropbear:\e[1;31m";
   echo ;
   apt-get remove -y dropbear >/dev/null 2>/dev/null;
+  apt-get autoremove -y >/dev/null 2>/dev/null;
+  sudo rm -r /usr/sbin/dropbear >/dev/null 2>/dev/null;
   echo ;
-  echo -e "\e[1;32mDesinstalado\n\nPresiona una tecla para continuar...";
+  echo -e "\e[1;32mDesinstalado. Reinicia para que surga efecto\n\nPresiona una tecla para continuar...";
   read foo;
   exit 1;;
   n|N) clear;
@@ -25,19 +27,8 @@ else
 
   echo -e "\033[1;32m             Instalacion completada\033[0m"
   echo
-  echo -e "\033[1;37mEjecutando en el puerto 443"
+  echo -e "\033[1;37mEjecutando en el puerto 80 y 443"
   echo
-  echo -n "Desea agregar mas puertos S (si) o N (no): "
-  read opcion
-  case $opcion in
-    s|S) clear;
-    echo -e -n "Escriba los puertos seperados por coma:\e[1;31m ";
-    read ports
-    echo ;
-    echo -e "\e[1;32mPuertos agregados\n\nPresiona una tecla para continuar...";
-    read foo;;
-    n|N) ;;
-  esac
 
   rclocale='# disabled because OpenSSH is installed
   # change to NO_START=0 to enable Dropbear
@@ -46,7 +37,7 @@ else
   DROPBEAR_PORT=443
 
   # any additional arguments for Dropbear
-  DROPBEAR_EXTRA_ARGS="-p $ports"
+  DROPBEAR_EXTRA_ARGS="-p 80"
 
   # specify an optional banner file containing a message to be
   # sent to clients before they connect, such as "/etc/issue.net"
@@ -69,7 +60,6 @@ else
 
   service ssh stop
   service dropbear start
-  netstat -nlpt | grep dropbear
 
   echo -e "\e[1;32mPresiona una tecla para continuar..."
   read foo
