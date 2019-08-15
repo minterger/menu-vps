@@ -32,7 +32,8 @@ crearuser () {
   		echo -e "\033[1;36mContraseña: \033[0m$pass"
   		echo -e "\033[1;36mExpira:\033[0m $datexp"
   	    echo "$pass" > ~/.Menu/.users/passwd/$name
-      echo "Presione una tecla para continuar"
+      echo
+      echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
       read foo
   	fi
   else
