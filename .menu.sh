@@ -14,7 +14,7 @@ crearuser () {
   echo
   if [ $(id -u) -eq 0 ]
   then
-    ip=(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')
+    ip=$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')
   	echo -e -n "\033[1;32mNombre del nuevo usuario:\033[0;37m"; read -p " " name
   	echo -e -n "\033[1;32mContraseña para el usuario $name:\033[0;37m"; read -p " " pass
   	echo -e -n "\033[1;32mCuantos dias el usuario $name debe durar:\033[0;37m"; read -p " " daysrnf
