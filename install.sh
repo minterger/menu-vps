@@ -40,6 +40,8 @@ then
   echo -e "\033[1;32mScript instalado con exito"
   echo
   echo -e "\033[1;32mPara ejecutarlo use menu\033[0m"
+  read foo
+
 else
   echo
   echo -e "\033[1;32mInstalando Script\033[0m"
@@ -59,4 +61,5 @@ else
   echo -e "\033[1;32mScript instalado con exito"
   echo
   echo -e "\033[1;32mPara ejecutarlo use menu\033[0m"
+  read foo
 fi
