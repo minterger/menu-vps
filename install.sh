@@ -13,8 +13,28 @@ instalar () {
   sudo chmod +x /bin/limite >/dev/null 2>/dev/null
   sudo mv menu.sh /bin/menu >/dev/null 2>/dev/null
   sudo chmod +x /bin/menu >/dev/null 2>/dev/null
+
+}
+
+instalar2 () {
+  echo -e "\033[1;32mInstalando Script\033[0m"
+
+  (
+  echo -ne "[" >&2
+  while [[ ! -e /tmp/instmp ]]; do
+  echo -ne "." >&2
+  sleep 0.8s
+  done
+  rm /tmp/instmp
+  echo -e "]" >&2
+  ) &
+  install=$(instalar) && touch /tmp/instmp
+  sleep 0.6s
+
+  echo -e "\033[1;32mScript instalado con exito"
   echo
   echo -e "\033[1;32mPara ejecutarlo use menu\033[0m"
+  read foo
 }
 
 if [ -f /bin/menu ]
@@ -23,43 +43,10 @@ then
   rm -r /bin/menu
   rm -r ~/.Menu
   echo
-  echo -e "\033[1;32mInstalando Script\033[0m"
-
-  (
-  echo -ne "[" >&2
-  while [[ ! -e /tmp/pyend ]]; do
-  echo -ne "." >&2
-  sleep 0.8s
-  done
-  rm /tmp/pyend
-  echo -e "]" >&2
-  ) &
-  install=$(instalar) && touch /tmp/pyend
-  sleep 0.6s
-
-  echo -e "\033[1;32mScript instalado con exito"
-  echo
-  echo -e "\033[1;32mPara ejecutarlo use menu\033[0m"
-  read foo
+  instalar2
 
 else
   echo
-  echo -e "\033[1;32mInstalando Script\033[0m"
-
-  (
-  echo -ne "[" >&2
-  while [[ ! -e /tmp/pyend ]]; do
-  echo -ne "." >&2
-  sleep 0.8s
-  done
-  rm /tmp/pyend
-  echo -e "]" >&2
-  ) &
-  install=$(instalar) && touch /tmp/pyend
-  sleep 0.6s
-
-  echo -e "\033[1;32mScript instalado con exito"
-  echo
-  echo -e "\033[1;32mPara ejecutarlo use menu\033[0m"
-  read foo
+  instalar2
+  
 fi
