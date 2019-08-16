@@ -91,11 +91,11 @@ inf_system () {
   if [ ! /etc/issue.net ]; then echo "Sistema No Soportado" && echo; return 1; fi
   if [ ! /proc/meminfo ]; then echo "Sistema No Soportado" && echo; return 1; fi
 
-  mempor=`df -h | grep dev | grep sda | awk '{print $5}'`
-  mempor2=`df -h | grep dev | grep vda | awk '{print $5}'`
+  mempor=`df -h | grep dev | grep sda | grep -v boot | awk '{print $5}'`
+  mempor2=`df -h | grep dev | grep vda | grep -v boot | awk '{print $5}'`
 
-  memto=`df -h | grep dev | grep sda | awk '{print $2}'`
-  memto2=`df -h | grep dev | grep vda | awk '{print $2}'`
+  memto=`df -h | grep dev | grep sda | grep -v boot | awk '{print $2}'`
+  memto2=`df -h | grep dev | grep vda | grep -v boot | awk '{print $2}'`
 
   totalram=$(free | grep Mem | awk '{print $2}')
   usedram=$(free | grep Mem | awk '{print $3}')
