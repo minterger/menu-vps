@@ -1,7 +1,7 @@
 #!/bin/bash
 instalar () {
   cd ~
-  wget https://github.com/minterger/menu/archive/master.zip
+  wget https://github.com/minterger/menu/archive/master.zip >/dev/null 2>/dev/null
   unzip master.zip >/dev/null 2>/dev/null
   rm -r master.zip
   mv menu-master .Menu
@@ -48,5 +48,5 @@ then
 else
   echo
   instalar2
-  
+
 fi
