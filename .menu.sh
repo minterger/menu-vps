@@ -18,6 +18,7 @@ crearuser () {
   	echo -e -n "\033[1;32mContraseña para el usuario $name:\033[0;37m"; read -p " " pass
   	echo -e -n "\033[1;32mCuantos dias el usuario $name debe durar:\033[0;37m"; read -p " " daysrnf
   	echo -e -n "\033[1;32mLimite de logins simultaneos:\033[0;37m"; read -p " " limiteuser
+    echo -e -n "\033[1;32mEscribe un puerto Dropbear:\033[0;37m"; read -p " " portd
   	echo -e "\033[0m"
   	if cat /etc/passwd |grep $name: |grep -vi [a-z]$name |grep -v [0-9]$name > /dev/null
   	then
@@ -32,6 +33,7 @@ crearuser () {
   		echo -e "\033[1;36mUsuario: \033[0m$name"
   		echo -e "\033[1;36mContraseña: \033[0m$pass"
   		echo -e "\033[1;36mExpira:\033[0m $datexp"
+      echo -e "\033[1;36mDatos HTTP custom:\033[0m $(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}'):$portd@$name:$pass "
   	    echo "$pass" > ~/.Menu/.users/passwd/$name
       echo
       echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
