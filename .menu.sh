@@ -14,6 +14,7 @@ crearuser () {
   echo
   if [ $(id -u) -eq 0 ]
   then
+    ip="(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')"
   	echo -e -n "\033[1;32mNombre del nuevo usuario:\033[0;37m"; read -p " " name
   	echo -e -n "\033[1;32mContraseña para el usuario $name:\033[0;37m"; read -p " " pass
   	echo -e -n "\033[1;32mCuantos dias el usuario $name debe durar:\033[0;37m"; read -p " " daysrnf
@@ -28,12 +29,12 @@ crearuser () {
   		datexp=$(date "+%d/%m/%Y" -d "+ $daysrnf days")
   		useradd -M $name -e $valid
   		( echo "$pass";echo "$pass" ) | passwd $name 2> /dev/null
-      echo -e "\033[1;36mIP: \033[0m$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')"
+      echo -e "\033[1;36mIP: \033[0m$ip"
   		limite $name $limiteuser
   		echo -e "\033[1;36mUsuario: \033[0m$name"
   		echo -e "\033[1;36mContraseña: \033[0m$pass"
   		echo -e "\033[1;36mExpira:\033[0m $datexp"
-      echo -e "\033[1;36mDatos HTTP custom:\033[0m $(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}'):$portd@$name:$pass "
+      echo -e "\033[1;36mDatos HTTP custom:\033[0m $ip:$portd@$name:$pass "
   	    echo "$pass" > ~/.Menu/.users/passwd/$name
       echo
       echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
