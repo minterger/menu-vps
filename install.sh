@@ -18,7 +18,7 @@ instalar () {
 
 instalar2 () {
   echo -e "\033[1;32mInstalando Script\033[0m"
-
+  echo
   (
   echo -ne "[" >&2
   while [[ ! -e /tmp/instmp ]]; do
@@ -31,6 +31,7 @@ instalar2 () {
   install=$(instalar) && touch /tmp/instmp
   sleep 0.6s
 
+  echo
   echo -e "\033[1;32mScript instalado con exito"
   echo
   echo -e "\033[1;32mPara ejecutarlo use menu\033[0m"
