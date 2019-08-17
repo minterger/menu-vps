@@ -30,8 +30,8 @@ update () {
   echo
   cd ~
   wget https://raw.githubusercontent.com/minterger/menu/master/install.sh >/dev/null 2>/dev/null
-  sudo bash install.sh
-  sudo rm -r install.sh
+  sudo bash install.sh >/dev/null 2>/dev/null
+  sudo rm -r install.sh >/dev/null 2>/dev/null
   exit 5
 }
 
