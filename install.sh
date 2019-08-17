@@ -34,6 +34,8 @@ instalar2 () {
   echo -e "\033[1;32mScript instalado con exito"
   echo
   echo -e "\033[1;32mPara ejecutarlo use menu\033[0m"
+  echo
+  echo -e "\033[1;32mPresione una tecla para continuar\033[0m"
   read foo
 }
 
