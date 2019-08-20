@@ -1,4 +1,43 @@
 #!/bin/bash
+
+desinstalar () {
+  apt-get remove -y dropbear >/dev/null 2>/dev/null
+  apt-get autoremove -y >/dev/null 2>/dev/null
+}
+
+desinstalar2 () {
+  (
+  echo -ne "[" >&2
+  while [[ ! -e /tmp/instmp ]]; do
+  echo -ne "." >&2
+  sleep 0.8s
+  done
+  rm /tmp/instmp
+  echo -e "]" >&2
+  ) &
+  desinstala=$(desinstalar) && touch /tmp/instmp
+  sleep 0.6s
+}
+
+instalar () {
+  apt-get update >/dev/null 2>/dev/null
+  apt-get install -y dropbear >/dev/null 2>/dev/null
+}
+
+instalar2 () {
+  (
+  echo -ne "[" >&2
+  while [[ ! -e /tmp/instmp ]]; do
+  echo -ne "." >&2
+  sleep 0.8s
+  done
+  rm /tmp/instmp
+  echo -e "]" >&2
+  ) &
+  install=$(instalar) && touch /tmp/instmp
+  sleep 0.6s
+}
+
 if [ -f /usr/sbin/dropbear ]; then
 echo -e "\033[1;32mDrobear ya esta instalado\033[0m"
 echo
@@ -8,8 +47,7 @@ case $opcion in
   s|S) clear;
   echo -e "Desinstalando Dropbear:\e[1;31m";
   echo ;
-  apt-get remove -y dropbear >/dev/null 2>/dev/null;
-  apt-get autoremove -y >/dev/null 2>/dev/null;
+  desinstalar2;
   echo ;
   echo -e "\e[1;32mDesinstalado. Reinicia para que surga efecto\n\nPresiona una tecla para continuar...";
   read foo;
@@ -21,10 +59,9 @@ case $opcion in
 esac
 else
   echo -e "\033[1;31m           Instalador Dropbear\n\033[1;37mInstalando Dropbear...\033[0m"
-  apt-get update >/dev/null 2>/dev/null
-  apt-get install -y dropbear >/dev/null 2>/dev/null
+  instalar2
 
-  echo -e "\033[1;32m             Instalacion completada\033[0m"
+  echo -e "\033[1;32mInstalacion completada\033[0m"
   echo
   echo -e "\033[1;37mEjecutando en el puerto 443 y 444"
   echo
