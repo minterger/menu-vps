@@ -11,9 +11,9 @@ desinstalar2 () {
   echo -ne "." >&2
   sleep 0.8s
   done
-  rm /tmp/instmp
   echo -ne "]" >&2
   echo
+  rm /tmp/instmp
   ) &
   desinstala=$(desinstalar) && touch /tmp/instmp
   sleep 0.6s
@@ -30,9 +30,9 @@ instalar2 () {
   echo -ne "." >&2
   sleep 0.8s
   done
-  rm /tmp/instmp
   echo -ne "]" >&2
   echo
+  rm /tmp/instmp
   ) &
   install=$(instalar) && touch /tmp/instmp
   sleep 0.6s
