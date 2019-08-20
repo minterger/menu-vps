@@ -86,7 +86,7 @@ inf_system () {
   echo "DETALLES DEL SISTEMA"
   null="\033[1;31m"
   null2="\033[1;32m"
-  echo
+  echo -e "\e[1;37m-----------------------------------------------------\e[1;0m"
   if [ ! /proc/cpuinfo ]; then echo "Sistema No Soportado" && echo; return 1; fi
   if [ ! /etc/issue.net ]; then echo "Sistema No Soportado" && echo; return 1; fi
   if [ ! /proc/meminfo ]; then echo "Sistema No Soportado" && echo; return 1; fi
@@ -121,7 +121,7 @@ inf_system () {
   echo -e "${null2}Direccion IP De La Maquina: ${null}$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')"
   echo -e "${null2}Version del Kernel: ${null}$(uname -r)"
   echo -e "${null2}Arquitectura: ${null}$(uname -m)"
-  echo
+  echo -e "\e[1;37m-----------------------------------------------------\e[1;0m"
   echo -e "\e[1;32mPresiona una tecla para continuar..."
   read foo
   return 0
