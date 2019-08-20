@@ -10,7 +10,8 @@ speedtest () {
   sleep 0.8s
   done
   rm /tmp/pyend
-  echo -e "]" >&2
+  echo -ne "]" >&2
+  echo
   ) &
   starts_test=$(python speedtest.py) && touch /tmp/pyend
   sleep 0.6s
