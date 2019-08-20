@@ -26,7 +26,8 @@ instalar2 () {
   sleep 0.8s
   done
   rm /tmp/instmp
-  echo -e "]" >&2
+  echo -ne "]" >&2
+  echo
   ) &
   install=$(instalar) && touch /tmp/instmp
   sleep 0.6s
