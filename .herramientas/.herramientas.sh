@@ -44,7 +44,13 @@ TCPspeed () {
     net.ipv4.tcp_slow_start_after_idle = 0" >> /etc/sysctl.conf
     sysctl -p /etc/sysctl.conf > /dev/null 2>&1
     echo "TCP Activado Con Exito!"
+    echo
+    echo -e "\e[1;32mPresiona una tecla para continuar...";
+    read foo;;
   } || echo "Cancelado!"
+    echo
+    echo -e "\e[1;32mPresiona una tecla para continuar...";
+    read foo;;
   else
     #REMOVE
     echo "TCP Speed ya esta Activado, Desea Parar Ahora?"
@@ -64,7 +70,13 @@ TCPspeed () {
     net.ipv4.tcp_slow_start_after_idle = 0" /etc/sysctl.conf > /tmp/syscl && mv -f /tmp/syscl /etc/sysctl.conf
     sysctl -p /etc/sysctl.conf > /dev/null 2>&1
     echo "TCP Parado Con Exito!"
+    echo
+    echo -e "\e[1;32mPresiona una tecla para continuar...";
+    read foo;;
   } || echo "Cancelado!"
+    echo
+    echo -e "\e[1;32mPresiona una tecla para continuar...";
+    read foo;;
   fi
 }
 
