@@ -66,6 +66,9 @@ TCPspeed () {
     echo "TCP Parado Con Exito!"
   } || echo "Cancelado!"
   fi
+  echo;
+  echo -e "\e[1;32mPresiona una tecla para continuar...";
+  read foo;;
 }
 
 
