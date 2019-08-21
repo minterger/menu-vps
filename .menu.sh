@@ -52,6 +52,53 @@ crearuser () {
   fi
 }
 
+redefiniruser () {
+    read -p "Nombre del usuario: " name
+  if cat /etc/passwd |grep $name: > /dev/null
+  then
+   echo " "
+  else
+   clear
+   echo "El usuario $name no existe"
+   echo
+   echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
+   read foo
+  fi
+  clear
+  echo -e "\033[1;33mOpciones a modificar ?\033[1;30m
+  1) Numero de Conexiones
+  2) Fecha de expiracion
+  3) Cambiar contraseña del usuario"
+  read -p "opcion: " option
+  if [ $option -eq 1 ]; then
+    read -p "Cual es el nuevo limite de logins: " liml
+    limite $name $liml
+    echo
+    echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
+    read foo
+  fi
+
+  if [ $option -eq 2 ]; then
+    echo "Cual es la nueva fecha : formato AAAA/MM/DD"
+    read -p ": " date
+    chage -E $date $name 2> /dev/null
+    echo -e "\033[1;31mEl usuario $name se desconectara el dia: $date\033[0m"
+    echo
+    echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
+    read foo
+  fi
+  if [ $option -eq 3 ]
+  then
+    read -p "Cual es la nueva contraseña para el usuario $name: " pass
+    (echo "$pass" ; echo "$pass" ) |passwd $name > /dev/null 2>/dev/null
+    echo "$pass" > ~/.Menu/.users/passwd/$name
+    echo "Nueva contraseña aplicada: $pass"
+    echo
+    echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
+    read foo
+  fi
+}
+
 userdelete () {
   clear
   read -p "Cual es el nombre del usuario: " name
@@ -150,14 +197,15 @@ echo -e "\e[1;32mEscoja una opcion "
 echo
 echo -e "\e[1;31m[1]\e[1;32m Usuario conectados"
 echo -e "\e[1;31m[2]\e[1;32m Crear usuario"
-echo -e "\e[1;31m[3]\e[1;32m Eliminar usuario"
-echo -e "\e[1;31m[4]\e[1;32m Lista de usuarios"
-echo -e "\e[1;31m[5]\e[1;32m Informacion del sistema"
-echo -e "\e[1;31m[6]\e[1;32m Herramientas"
-echo -e "\e[1;31m[7]\e[1;32m Menu de instalacion"
+echo -e "\e[1;31m[3]\e[1;32m Redefinir usuario"
+echo -e "\e[1;31m[4]\e[1;32m Eliminar usuario"
+echo -e "\e[1;31m[5]\e[1;32m Lista de usuarios"
+echo -e "\e[1;31m[6]\e[1;32m Informacion del sistema"
+echo -e "\e[1;31m[7]\e[1;32m Herramientas"
+echo -e "\e[1;31m[8]\e[1;32m Menu de instalacion"
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
-echo -n "Seleccione una opcion [1 - 7]: "
+echo -n "Seleccione una opcion [1 - 8]: "
 read opcion
 case $opcion in
 1)
@@ -165,14 +213,16 @@ users;;
 2)
 crearuser;;
 3)
-userdelete;;
+redefiniruser;;
 4)
-userlist;;
+userdelete;;
 5)
-inf_system;;
+userlist;;
 6)
-herramientas;;
+inf_system;;
 7)
+herramientas;;
+8)
 install;;
 0) clear;
 exit 1;;
