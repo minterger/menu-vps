@@ -82,6 +82,7 @@ update () {
 
 killusers () {
   data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
+
   for PID in "${data[@]}"
   do
           #echo "check $PID";
@@ -94,6 +95,7 @@ killusers () {
   done
 
   data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
+
   for PID in "${data[@]}"
   do
           #echo "check $PID";
