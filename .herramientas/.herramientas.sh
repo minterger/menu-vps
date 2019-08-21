@@ -24,6 +24,51 @@ pid_badvpn=$(ps x | grep badvpn | grep -v grep | awk '{print $1}')
 unset pid_badvpn
 }
 
+TCPspeed () {
+  if [[ `grep -c "^#ADM" /etc/sysctl.conf` -eq 0 ]]; then
+    #INSTALA
+    echo "TCP Speed No esta Activado, Desea Activar Ahora?"
+    echo
+    while [[ ${resposta} != @(s|S|n|N|y|Y) ]]; do
+      read -p " [S/N]: " -e -i s resposta
+      tput cuu1 && tput dl1
+    done
+    [[ "$resposta" = @(s|S|y|Y) ]] && {
+    echo "#ADM" >> /etc/sysctl.conf
+    echo "net.ipv4.tcp_window_scaling = 1
+    net.core.rmem_max = 16777216
+    net.core.wmem_max = 16777216
+    net.ipv4.tcp_rmem = 4096 87380 16777216
+    net.ipv4.tcp_wmem = 4096 16384 16777216
+    net.ipv4.tcp_low_latency = 1
+    net.ipv4.tcp_slow_start_after_idle = 0" >> /etc/sysctl.conf
+    sysctl -p /etc/sysctl.conf > /dev/null 2>&1
+    echo "TCP Activado Con Exito!"
+  } || echo "Cancelado!"
+  else
+    #REMOVE
+    echo "TCP Speed ya esta Activado, Desea Parar Ahora?"
+    echo
+    while [[ ${resposta} != @(s|S|n|N|y|Y) ]]; do
+      read -p " [S/N]: " -e -i s resposta
+      tput cuu1 && tput dl1
+    done
+    [[ "$resposta" = @(s|S|y|Y) ]] && {
+    grep -v "^#ADM
+    net.ipv4.tcp_window_scaling = 1
+    net.core.rmem_max = 16777216
+    net.core.wmem_max = 16777216
+    net.ipv4.tcp_rmem = 4096 87380 16777216
+    net.ipv4.tcp_wmem = 4096 16384 16777216
+    net.ipv4.tcp_low_latency = 1
+    net.ipv4.tcp_slow_start_after_idle = 0" /etc/sysctl.conf > /tmp/syscl && mv -f /tmp/syscl /etc/sysctl.conf
+    sysctl -p /etc/sysctl.conf > /dev/null 2>&1
+    echo "TCP Parado Con Exito!"
+  } || echo "Cancelado!"
+  fi
+}
+
+
 update () {
   echo -e "\e[1;0m"
   echo -e "\033[1;32mDescargando"
@@ -49,7 +94,7 @@ cd .herramientas
 echo -e "\e[1;32mEscoja una opcion "
 echo
 echo -e "\e[1;31m[1]\e[1;32m start/stop BADVPN"
-echo -e "\e[1;31m[2]\e[1;32m Consumo de recursos Top"
+echo -e "\e[1;31m[2]\e[1;32m TCP Speed"
 echo -e "\e[1;31m[3]\e[1;32m Consumo de recursos Htop"
 echo -e "\e[1;31m[4]\e[1;32m Servicios funcionando"
 echo -e "\e[1;31m[5]\e[1;32m Update Script"
@@ -66,9 +111,7 @@ case $opcion in
 echo -e "\e[1;32mPresiona una tecla para continuar...";
 read foo;;
 2) clear;
-echo -e "Ejecutando top\e[1;31m";
-echo ;
-top;;
+TCPspeed;;
 3) clear;
 echo -e "Ejecutando htop\e[1;31m";
 echo ;
