@@ -66,9 +66,6 @@ TCPspeed () {
     echo "TCP Parado Con Exito!"
   } || echo "Cancelado!"
   fi
-  echo;
-  echo -e "\e[1;32mPresiona una tecla para continuar...";
-  read foo;;
 }
 
 
@@ -114,7 +111,10 @@ case $opcion in
 echo -e "\e[1;32mPresiona una tecla para continuar...";
 read foo;;
 2) clear;
-TCPspeed;;
+TCPspeed;
+echo;
+echo -e "\e[1;32mPresiona una tecla para continuar...";
+read foo;;
 3) clear;
 echo -e "Ejecutando htop\e[1;31m";
 echo ;
