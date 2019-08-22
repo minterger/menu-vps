@@ -2,7 +2,7 @@
 
 agregarpuerto () {
   ports1=$(netstat -tunlp | awk '{print $4}' | awk -F : '{print $2}')
-  
+
   while read ports; do
     if [ "$ports" = "$ports1" ]
     then
@@ -113,6 +113,7 @@ else
 
   service ssh stop
   service dropbear start
+  service ssh start
 
   echo -e "\e[1;32mPresiona una tecla para continuar..."
   read foo
