@@ -9,7 +9,7 @@ agregarpuerto () {
   then
     echo -e "\033[1;32mEl puerto \033[1;31m$ports esta ocupado\033[1;0m"
   else
-    replace=$(echo "\'/DROPBEAR_EXTRA_ARGS=/c DROPBEAR_EXTRA_ARGS=\"-p $ports\".\'")
+    replace=$(echo "'/DROPBEAR_EXTRA_ARGS=/c DROPBEAR_EXTRA_ARGS=\"-p $ports\".'")
     sed $replace /etc/default/dropbear
     echo -e "\033[1;32mEl puerto 444 fue remplazado por \033[1;31m$ports\033[1;0m"
   fi
@@ -112,7 +112,7 @@ else
   '
   echo "$rclocale" > /etc/default/dropbear
 
-  echo -e -n "\033[1;32mDesea remplazar el puerto secundario \033[1;31m444 \033[1;32mpor otro \"S\" o \"N\"?: \033[1;0m"
+  echo -n -e "\033[1;32mDesea remplazar el puerto secundario \033[1;31m444 \033[1;32mpor otro \"S\" o \"N\"?: \033[1;0m"
   read siono
 
   case $siono in
@@ -121,9 +121,9 @@ else
     n|N)echo;;
   esac
 
-  service ssh stop
-  service dropbear start
-  service ssh start
+  service ssh stop >/dev/null 2>/dev/null
+  service dropbear start >/dev/null 2>/dev/null
+  service ssh start >/dev/null 2>/dev/null
 
   echo -e "\e[1;32mPresiona una tecla para continuar...\033[1;0m"
   read foo
