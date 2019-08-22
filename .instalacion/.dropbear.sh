@@ -1,6 +1,21 @@
 #!/bin/bash
 
+agregarpuerto () {
+  ports1=$(netstat -tunlp | awk '{print $4}' | awk -F : '{print $2}')
+  
+  while read ports; do
+    if [ "$ports" = "$ports1" ]
+    then
+      hecho "El puerto $ports esta ocupado"
+    else
+      replace=$(echo "\'/DROPBEAR_EXTRA_ARGS=/c DROPBEAR_EXTRA_ARGS=\"-p $ports\".\'")
+      sed $replace /etc/default/dropbear
+    fi
+  done
+}
+
 desinstalar () {
+  service dropbear stop > /dev/null 2>&1
   apt-get remove -y dropbear >/dev/null 2>/dev/null
   apt-get autoremove -y >/dev/null 2>/dev/null
 }
