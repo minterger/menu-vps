@@ -7,10 +7,10 @@ agregarpuerto () {
   read ports
   if [ "$ports" = "$ports1" ]
   then
+    echo "DROPBEAR_EXTRA_ARGS=\"-p 444\"" >>/etc/default/dropbear
     echo -e "\033[1;32mEl puerto \033[1;31m$ports esta ocupado\033[1;0m"
   else
-    replace=$(echo "'s/444/$ports/g'")
-    sed $replace /etc/default/dropbear
+    echo "DROPBEAR_EXTRA_ARGS=\"-p $ports\"" >>/etc/default/dropbear
     echo -e "\033[1;32mEl puerto 444 fue remplazado por \033[1;31m$ports\033[1;0m"
   fi
 }
@@ -85,31 +85,14 @@ else
   echo
 
   rclocale='# disabled because OpenSSH is installed
-  # change to NO_START=0 to enable Dropbear
-  NO_START=0
-  # the TCP port that Dropbear listens on
-  DROPBEAR_PORT=443
+# change to NO_START=0 to enable Dropbear
+NO_START=0
 
-  # any additional arguments for Dropbear
-  DROPBEAR_EXTRA_ARGS="-p 444"
+# the TCP port that Dropbear listens on
+DROPBEAR_PORT=443
 
-  # specify an optional banner file containing a message to be
-  # sent to clients before they connect, such as "/etc/issue.net"
-  DROPBEAR_BANNER="/etc/issue.net"
-
-  # RSA hostkey file (default: /etc/dropbear/dropbear_rsa_host_key)
-  #DROPBEAR_RSAKEY="/etc/dropbear/dropbear_rsa_host_key"
-
-  # DSS hostkey file (default: /etc/dropbear/dropbear_dss_host_key)
-  #DROPBEAR_DSSKEY="/etc/dropbear/dropbear_dss_host_key"
-
-  # ECDSA hostkey file (default: /etc/dropbear/dropbear_ecdsa_host_key)
-  #DROPBEAR_ECDSAKEY="/etc/dropbear/dropbear_ecdsa_host_key"
-
-  # Receive window size - this is a tradeoff between memory and
-  # network performance
-  DROPBEAR_RECEIVE_WINDOW=65536
-  '
+# any additional arguments for Dropbear
+'
   echo "$rclocale" > /etc/default/dropbear
 
   echo -n -e "\033[1;32mDesea remplazar el puerto secundario \033[1;31m444 \033[1;32mpor otro \"S\" o \"N\"?: \033[1;0m"
@@ -118,8 +101,27 @@ else
   case $siono in
     s|S)
       agregarpuerto;;
-    n|N)echo;;
+    n|N)echo "DROPBEAR_EXTRA_ARGS=\"-p 444\"" >>/etc/default/dropbear;;
   esac
+
+echo "
+# specify an optional banner file containing a message to be
+# sent to clients before they connect, such as "/etc/issue.net"
+DROPBEAR_BANNER="/etc/issue.net"
+
+# RSA hostkey file (default: /etc/dropbear/dropbear_rsa_host_key)
+#DROPBEAR_RSAKEY="/etc/dropbear/dropbear_rsa_host_key"
+
+# DSS hostkey file (default: /etc/dropbear/dropbear_dss_host_key)
+#DROPBEAR_DSSKEY="/etc/dropbear/dropbear_dss_host_key"
+
+# ECDSA hostkey file (default: /etc/dropbear/dropbear_ecdsa_host_key)
+#DROPBEAR_ECDSAKEY="/etc/dropbear/dropbear_ecdsa_host_key"
+
+# Receive window size - this is a tradeoff between memory and
+# network performance
+DROPBEAR_RECEIVE_WINDOW=65536
+" >>/etc/default/dropbear
 
   service ssh stop >/dev/null 2>/dev/null
   service dropbear start >/dev/null 2>/dev/null
