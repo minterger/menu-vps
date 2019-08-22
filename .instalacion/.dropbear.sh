@@ -9,9 +9,9 @@ agregarpuerto () {
   then
     echo -e "\033[1;32mEl puerto \033[1;31m$ports esta ocupado\033[1;0m"
   else
-    sed $(echo "'s/444/$ports/g'") "/etc/default/dropbear"
+    replace=$(echo "'s/444/$ports/g'")
+    sed $replace /etc/default/dropbear
     echo -e "\033[1;32mEl puerto 444 fue remplazado por \033[1;31m$ports\033[1;0m"
-    's/444/$ports/g'
   fi
 }
 
