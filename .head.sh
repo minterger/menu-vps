@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# contador de usuarios beta
 countusers () {
   data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
   NUM2="0"
@@ -14,6 +15,7 @@ countusers () {
   echo -e "\e[1;31mCONECTADOS:\e[1;32m [$NUM2] "
 }
 
+# ver puertos abiertos
 mine_port () {
 local portasVAR=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
 local NOREPEAT
@@ -57,6 +59,7 @@ done <<< "${portasVAR}"
 [[ ! -z $SSL ]] && echo -e $SSL
 }
 
+# ver is badvpn esta activo
 badvpn () {
   badvpn=`netstat -tunlp | grep badvpn | grep tcp | awk '{print $1}'`
 
