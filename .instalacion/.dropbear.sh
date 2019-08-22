@@ -120,7 +120,7 @@ else
     s|S)
       agregarpuerto;;
     n|N)
-      echo
+      echo;;
   esac
 
   service ssh stop
