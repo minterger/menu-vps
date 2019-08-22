@@ -11,7 +11,7 @@ pid_badvpn=$(ps x | grep badvpn | grep -v grep | awk '{print $1}')
     chmod 777 /bin/badvpn-udpgw
     fi
     screen -dmS screen /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10
-    [[ "$(ps x | grep badvpn | grep -v grep | awk '{print $1}')" ]] && echo "inciado" || echo "fallo"
+    [[ "$(ps x | grep badvpn | grep -v grep | awk '{print $1}')" ]] && echo "Inciado" || echo "Fallo"
     echo
   else
     echo
