@@ -10,7 +10,7 @@ countusers () {
           echo -e "\e[1;31mCONECTADOS:\e[1;32m [$NUM1] ";
           if [ $NUM1 -eq 1 ]; then
                   NUM2=$(($NUM2 + 1))
-                  echo -e "\e[1;31mCONECTADOS:\e[1;32m [$NUM2] ";
+                  #echo -e "\e[1;31mCONECTADOS:\e[1;32m [$NUM2] ";
           fi
   done
 }
