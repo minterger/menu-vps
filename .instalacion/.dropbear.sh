@@ -24,7 +24,7 @@ agregarpuerto () {
   else
     echo
     echo "DROPBEAR_EXTRA_ARGS=\"-p $ports\"" >>/etc/default/dropbear
-    echo -e "\033[1;32mEl puerto 444 fue remplazado por \033[1;31m$ports\033[1;0m"
+    echo -e "\033[1;32mEl puerto \033[1;31m444 \033[1;32mfue remplazado por \033[1;31m$ports\033[1;0m"
     echo
   fi
 }
