@@ -11,14 +11,14 @@ agregarpuerto () {
     echo "DROPBEAR_EXTRA_ARGS=\"-p 444\"" >>/etc/default/dropbear
     echo -e "\033[1;32mEl puerto \033[1;31m$ports \033[1;32mesta ocupado\033[1;0m"
     echo
-    echo -n -e "\033[1;32mQuieres intentar otra vez?: \033[1;0m"
+    echo -n -e "\033[1;32mQuieres intentar otra vez \"S\" o \"N\"?: \033[1;0m"
     read options
     case $options in
       s|S)
       agregarpuerto;;
       n|N)
       echo;
-      echo -e "\033[1;37mEjecutando en el puerto 443 y 444";
+      echo -e "\033[1;32mEjecutando en el puerto 443 y 444";
       echo;;
     esac
   else
