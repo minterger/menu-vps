@@ -1,4 +1,19 @@
 #!/bin/bash
+
+countusers () {
+  data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
+  NUM2="0"
+  for PID in "${data[@]}"
+  do
+          #echo "check $PID";
+          NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
+          if [ $NUM1 -eq 1 ]; then
+                  NUM2=$(($NUM2 + 1))
+                  echo -e "\e[1;31mCONECTADOS:\e[1;32m [$NUM2] ";
+          fi
+  done
+}
+
 mine_port () {
 local portasVAR=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
 local NOREPEAT
@@ -69,4 +84,5 @@ echo -e "\e[1;32mPuertos abiertos:"
 echo -e "\e[1;37m-----------------------------------------------------\e[1;0m"
 mine_port
 badvpn
+countusers
 echo -e "\e[1;37m-----------------------------------------------------\e[1;0m"
