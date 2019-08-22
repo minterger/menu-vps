@@ -116,11 +116,10 @@ else
   echo -e -n "\033[1;32mDesea remplazar el puerto secundario \033[1;31m444 \033[1;32mpor otro \"S\" o \"N\"?\033[1;0m"
   read siono
 
-  case siono
+  case $siono in
     s|S)
       agregarpuerto;;
-    n|N)
-      echo;;
+    n|N)echo;;
   esac
 
   service ssh stop
