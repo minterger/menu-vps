@@ -1,10 +1,11 @@
 #!/bin/bash
 
 agregarpuerto () {
-  ports1=$(netstat -tunlp | awk '{print $4}' | awk -F : '{print $2}')
+
   echo
   echo -n -e "\033[1;32mEscribe el puerto: \033[1;0m"
   read ports
+  ports1=$(netstat -tunlp| grep $ports | awk '{print $4}' | awk -F : '{print $2}')
   if [ "$ports" = "$ports1" ]
   then
     echo "DROPBEAR_EXTRA_ARGS=\"-p 444\"" >>/etc/default/dropbear
