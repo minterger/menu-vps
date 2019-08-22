@@ -1,18 +1,21 @@
 #!/bin/bash
 
 agregarpuerto () {
-
   echo
   echo -n -e "\033[1;32mEscribe el puerto: \033[1;0m"
   read ports
   ports1=$(netstat -tunlp| grep $ports | awk '{print $4}' | awk -F : '{print $2}')
   if [ "$ports" = "$ports1" ]
   then
+    echo
     echo "DROPBEAR_EXTRA_ARGS=\"-p 444\"" >>/etc/default/dropbear
-    echo -e "\033[1;32mEl puerto \033[1;31m$ports esta ocupado\033[1;0m"
+    echo -e "\033[1;32mEl puerto \033[1;31m$ports \033[1;32mesta ocupado\033[1;0m"
+    echo
   else
+    echo
     echo "DROPBEAR_EXTRA_ARGS=\"-p $ports\"" >>/etc/default/dropbear
     echo -e "\033[1;32mEl puerto 444 fue remplazado por \033[1;31m$ports\033[1;0m"
+    echo
   fi
 }
 
