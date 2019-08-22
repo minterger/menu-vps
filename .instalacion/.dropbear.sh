@@ -11,6 +11,16 @@ agregarpuerto () {
     echo "DROPBEAR_EXTRA_ARGS=\"-p 444\"" >>/etc/default/dropbear
     echo -e "\033[1;32mEl puerto \033[1;31m$ports \033[1;32mesta ocupado\033[1;0m"
     echo
+    echo -n -e "\033[1;32mQuieres intentar otra vez?: \033[1;0m"
+    read options
+    case $options in
+      s|S)
+      agregarpuerto;;
+      n|N)
+      echo;
+      echo -e "\033[1;37mEjecutando en el puerto 443 y 444";
+      echo;;
+    esac
   else
     echo
     echo "DROPBEAR_EXTRA_ARGS=\"-p $ports\"" >>/etc/default/dropbear
@@ -108,7 +118,7 @@ DROPBEAR_PORT=443
     n|N)echo "DROPBEAR_EXTRA_ARGS=\"-p 444\"" >>/etc/default/dropbear;;
   esac
 
-echo "
+echo '
 # specify an optional banner file containing a message to be
 # sent to clients before they connect, such as "/etc/issue.net"
 DROPBEAR_BANNER="/etc/issue.net"
@@ -125,7 +135,7 @@ DROPBEAR_BANNER="/etc/issue.net"
 # Receive window size - this is a tradeoff between memory and
 # network performance
 DROPBEAR_RECEIVE_WINDOW=65536
-" >>/etc/default/dropbear
+' >>/etc/default/dropbear
 
   service ssh stop >/dev/null 2>/dev/null
   service dropbear start >/dev/null 2>/dev/null
