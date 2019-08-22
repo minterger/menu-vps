@@ -115,7 +115,8 @@ DROPBEAR_PORT=443
   case $siono in
     s|S)
       agregarpuerto;;
-    n|N)echo "DROPBEAR_EXTRA_ARGS=\"-p 444\"" >>/etc/default/dropbear;;
+    n|N)echo;
+      echo "DROPBEAR_EXTRA_ARGS=\"-p 444\"" >>/etc/default/dropbear;;
   esac
 
 echo '
