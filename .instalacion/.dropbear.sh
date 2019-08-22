@@ -2,14 +2,16 @@
 
 agregarpuerto () {
   ports1=$(netstat -tunlp | awk '{print $4}' | awk -F : '{print $2}')
-
+  echo
+  echo -n -e "\033[1;32mEscribe el puerto\033[1;0m"
   while read ports; do
     if [ "$ports" = "$ports1" ]
     then
-      hecho "El puerto $ports esta ocupado"
+      echo -e "\033[1;32mEl puerto \033[1;31m$ports esta ocupado\033[1;0m"
     else
       replace=$(echo "\'/DROPBEAR_EXTRA_ARGS=/c DROPBEAR_EXTRA_ARGS=\"-p $ports\".\'")
       sed $replace /etc/default/dropbear
+      echo -e "\033[1;32mEl puerto 444 fue remplazado por \033[1;31m$ports\033[1;0m"
     fi
   done
 }
@@ -111,11 +113,21 @@ else
   '
   echo "$rclocale" > /etc/default/dropbear
 
+  echo -e -n "\033[1;32mDesea remplazar el puerto secundario \033[1;31m444 \033[1;32mpor otro \"S\" o \"N\"?\033[1;0m"
+  read siono
+
+  case siono
+    s|S)
+      agregarpuerto;;
+    n|N)
+      echo
+  esac
+
   service ssh stop
   service dropbear start
   service ssh start
 
-  echo -e "\e[1;32mPresiona una tecla para continuar..."
+  echo -e "\e[1;32mPresiona una tecla para continuar...\033[1;0m"
   read foo
   exit 1
 fi
