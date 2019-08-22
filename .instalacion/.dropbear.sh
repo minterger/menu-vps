@@ -9,8 +9,7 @@ agregarpuerto () {
   then
     echo -e "\033[1;32mEl puerto \033[1;31m$ports esta ocupado\033[1;0m"
   else
-    replace=$(echo "'s/444/$ports/g'")
-    sed $replace "/etc/default/dropbear"
+    sed $(echo "'s/444/$ports/g'") "/etc/default/dropbear"
     echo -e "\033[1;32mEl puerto 444 fue remplazado por \033[1;31m$ports\033[1;0m"
     's/444/$ports/g'
   fi
@@ -68,7 +67,7 @@ case $opcion in
   echo ;
   desinstalar2;
   echo ;
-  echo -e "\e[1;32mDesinstalado. Reinicia para que surga efecto\n\nPresiona una tecla para continuar...";
+  echo -e "\e[1;32mDesinstalado.\n\nPresiona una tecla para continuar...";
   read foo;
   exit 1;;
   n|N) clear;
