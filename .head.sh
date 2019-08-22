@@ -9,6 +9,7 @@ countusers () {
           NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
           if [ $NUM1 -eq 1 ]; then
                   NUM2=$(($NUM2 + 1))
+                  clear
                   echo -e "\e[1;31mCONECTADOS:\e[1;32m [$NUM2] ";
           fi
   done
