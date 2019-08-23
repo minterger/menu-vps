@@ -1,18 +1,5 @@
 #!/bin/bash
 
-updates () {
-  cd ..
-  version=$(cat versionact)
-  updates1=$(cat version)
-  cd .herramientas
-
-  if [ $updates1 = $version ]; then
-    echo -e " \e[1;37m(no hay actualización)\e[1;0m"
-  else
-    echo -e " \e[1;37m(actualizacion disponible)\e[1;0m"
-  fi
-}
-
 BadVPN () {
 pid_badvpn=$(ps x | grep badvpn | grep -v grep | awk '{print $1}')
   if [ "$pid_badvpn" = "" ]; then
@@ -81,18 +68,6 @@ TCPspeed () {
   fi
 }
 
-
-update () {
-  echo -e "\e[1;0m"
-  echo -e "\033[1;32mDescargando"
-  echo
-  cd ~
-  wget https://raw.githubusercontent.com/minterger/menu/master/install.sh >/dev/null 2>/dev/null
-  bash install.sh
-  sudo rm -r install.sh >/dev/null 2>/dev/null
-  exit 5
-}
-
 killusers () {
   data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
 
@@ -138,19 +113,17 @@ bash .head.sh
 cd .herramientas
 echo -e "\e[1;32mEscoja una opcion "
 echo
-echo -e "\e[1;31m[1]\e[1;32m start/stop BADVPN"
-echo -e "\e[1;31m[2]\e[1;32m TCP Speed"
-echo -e "\e[1;31m[3]\e[1;32m Consumo de recursos Htop"
-echo -e "\e[1;31m[4]\e[1;32m Servicios funcionando"
-echo -n -e "\e[1;31m[5]\e[1;32m Update Script"
-updates
-echo -e "\e[1;31m[6]\e[1;32m Host extractor"
-echo -e "\e[1;31m[7]\e[1;32m Speedtest.net Online"
-echo -e "\e[1;31m[8]\e[1;32m Fast"
-echo -e "\e[1;31m[9]\e[1;32m Reiniciar vps"
+echo -e "\e[1;31m[1]\e[1;32m start/stop BADVPN \e[1;37m(habilitar llamadas udp)\e[1;0m"
+echo -e "\e[1;31m[2]\e[1;32m TCP Speed \e[1;37m(mojorar conexion)\e[1;0m"
+echo -e "\e[1;31m[3]\e[1;32m Htop \e[1;37m(ver el consumo de recursos)\e[1;0m"
+echo -e "\e[1;31m[4]\e[1;32m Servicios \e[1;37m(ver los servicios funcionando)\e[1;0m"
+echo -e "\e[1;31m[5]\e[1;32m Host extractor \e[1;37m(extraer host para payload)\e[1;0m"
+echo -e "\e[1;31m[6]\e[1;32m Speedtest \e[1;37m(hacer un test total de velocidad)\e[1;0m"
+echo -e "\e[1;31m[7]\e[1;32m Fast \e[1;37m(medir solo velocidad de descarga)\e[1;0m"
+echo -e "\e[1;31m[8]\e[1;32m Reiniciar vps"
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
-echo -n "Seleccione una opcion [1 - 9]: "
+echo -n "Seleccione una opcion [1 - 8]: "
 read opcion
 case $opcion in
 1)BadVPN;
@@ -172,25 +145,23 @@ lsof -n -i -P | grep '*';
 echo ;
 echo -e "\e[1;32mPresiona una tecla para continuar...";
 read foo;;
-5)
-update;;
-6) clear;
+5) clear;
 echo -e "Ejecutando Script: \e[1;31m";
 echo ;
 cd ..;
 cd .host
 bash .real-host.sh.;
 cd .herramientas.;;
-7) clear;
+6) clear;
 bash .speedtest.sh;;
-8) clear;
+7) clear;
 echo -e "Ejecutando test de velocidad:\e[1;31m";
 echo ;
 fast;
 echo ;
 echo -e "\e[1;32mPresiona una tecla para continuar...";
 read foo;;
-9)
+8)
 restart;;
 0) clear;
 exit 1;;

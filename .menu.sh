@@ -1,5 +1,28 @@
 #!/bin/bash
 
+updates () {
+
+  version=$(cat versionact)
+  updates1=$(cat version)
+
+  if [ $updates1 = $version ]; then
+    echo -e " \e[1;33m(no hay actualización)\e[1;0m"
+  else
+    echo -e " \e[1;33m(actualizacion disponible)\e[1;0m"
+  fi
+}
+
+update () {
+  echo -e "\e[1;0m"
+  echo -e "\033[1;32mDescargando"
+  echo
+  cd ~
+  wget https://raw.githubusercontent.com/minterger/menu/master/install.sh >/dev/null 2>/dev/null
+  bash install.sh
+  sudo rm -r install.sh >/dev/null 2>/dev/null
+  exit 5
+}
+
 users () {
   clear
   cd .users
@@ -203,9 +226,11 @@ echo -e "\e[1;31m[5]\e[1;32m Lista de usuarios"
 echo -e "\e[1;31m[6]\e[1;32m Informacion del sistema"
 echo -e "\e[1;31m[7]\e[1;32m Herramientas"
 echo -e "\e[1;31m[8]\e[1;32m Menu de instalacion"
+echo -n -e "\e[1;31m[9]\e[1;32m Update Script"
+updates
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
-echo -n "Seleccione una opcion [1 - 8]: "
+echo -n "Seleccione una opcion [1 - 9]: "
 read opcion
 case $opcion in
 1)
@@ -224,6 +249,8 @@ inf_system;;
 herramientas;;
 8)
 install;;
+9)
+update;;
 0) clear;
 exit 1;;
 *) clear;
