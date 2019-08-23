@@ -1,5 +1,16 @@
 #!/bin/bash
 
+version="0.1.27"
+updates1=$(cat version)
+
+updates () {
+  if [ $updates1 = $version ]; then
+    echo "(no hay actualización)"
+  else
+    echo "(actualizacion disponible)"
+  fi
+}
+
 BadVPN () {
 pid_badvpn=$(ps x | grep badvpn | grep -v grep | awk '{print $1}')
   if [ "$pid_badvpn" = "" ]; then
@@ -129,7 +140,8 @@ echo -e "\e[1;31m[1]\e[1;32m start/stop BADVPN"
 echo -e "\e[1;31m[2]\e[1;32m TCP Speed"
 echo -e "\e[1;31m[3]\e[1;32m Consumo de recursos Htop"
 echo -e "\e[1;31m[4]\e[1;32m Servicios funcionando"
-echo -e "\e[1;31m[5]\e[1;32m Update Script"
+echo -n -e "\e[1;31m[5]\e[1;32m Update Script"
+updates
 echo -e "\e[1;31m[6]\e[1;32m Host extractor"
 echo -e "\e[1;31m[7]\e[1;32m Speedtest.net Online"
 echo -e "\e[1;31m[8]\e[1;32m Fast"
