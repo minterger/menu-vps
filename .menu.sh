@@ -19,7 +19,9 @@ update () {
   wget https://raw.githubusercontent.com/minterger/menu/master/install.sh >/dev/null 2>/dev/null
   bash install.sh
   sudo rm -r install.sh >/dev/null 2>/dev/null
-  exit 1 && echo "c"
+  echo -e "\033[1;32mPresione una tecla para continuar\033[0m"
+  read foo
+  exit 1
 }
 
 users () {

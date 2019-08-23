@@ -2,7 +2,7 @@
 
 cd ~/.Menu
 echo -e "\e[1;37mChequeando actualizaciones\e[1;0m"
-sudo rm version
+sudo rm -r version >/dev/null 2>/dev/null
 wget https://raw.githubusercontent.com/minterger/menu/master/version >/dev/null 2>/dev/null
 
 while :

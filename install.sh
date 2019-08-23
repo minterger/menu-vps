@@ -39,8 +39,6 @@ instalar2 () {
   echo
   echo -e "\033[1;32mPara ejecutarlo use \033[1;33mmenu\033[0m"
   echo
-  echo -e "\033[1;32mPresione una tecla para continuar\033[0m"
-  read foo
 }
 
 if [ -f /bin/menu ]
