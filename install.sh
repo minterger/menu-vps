@@ -8,6 +8,7 @@ instalar () {
   cd .Menu >/dev/null 2>/dev/null
   mkdir .users/passwd
   mkdir .users/limite
+  mv version versionact
   rm -r install.sh
   sudo mv limite /bin/limite >/dev/null 2>/dev/null
   sudo chmod +x /bin/limite >/dev/null 2>/dev/null
