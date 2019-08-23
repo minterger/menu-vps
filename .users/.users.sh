@@ -29,8 +29,9 @@ do
 done
 
 echo
-echo -e "\e[1;31mCONECTADOS DROPBEAR:\e[1;32m [$DBR] "
+echo -e "\e[1;31mConectados DROPBEAR:\e[1;32m [$DBR] "
 echo
+
 echo "---";
 
 data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
@@ -49,11 +50,11 @@ do
           echo -e "\e[1;32m[PID]:\e[1;33m $PID \e[1;32m- [Usuario]:\e[1;33m $USER";
           echo -e "\e[1;32m[TOTAL en Dropbear]:\e[1;33m $NUM2";
           SSH=$(($SSH + 1))
-  fi
+        fi
 done
 
 echo
-echo -e "\e[1;31mCONECTADOS SSH:\e[1;32m [$SSH] "
+echo -e "\e[1;31mConectados SSH:\e[1;32m [$SSH] "
 echo
 
 echo ""
