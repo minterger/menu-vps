@@ -1,13 +1,17 @@
 #!/bin/bash
 
-version="0.1.27"
-updates1=$(cat version)
-
 updates () {
+  wget
+
+  cd ..
+  version=$(cat versionact)
+  updates1=$(cat version)
+  cd .herramientas
+
   if [ $updates1 = $version ]; then
-    echo "(no hay actualización)"
+    echo -e " \e[1;37m(no hay actualización)\e[1;0m"
   else
-    echo "(actualizacion disponible)"
+    echo -e " \e[1;37m(actualizacion disponible)\e[1;0m"
   fi
 }
 

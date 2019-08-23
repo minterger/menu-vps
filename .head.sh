@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="0.1.27"
+version=$(cat versionact)
 
 # contador de usuarios beta
 countusers () {
