@@ -29,7 +29,7 @@ do
 done
 
 echo
-echo -e "\e[1;31mCONECTADOS:\e[1;32m [$DBR] "
+echo -e "\e[1;31mCONECTADOS DROPBEAR:\e[1;32m [$DBR] "
 echo
 echo "---";
 
