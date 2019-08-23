@@ -2,11 +2,12 @@
 
 cd ~/.Menu
 echo -e "\e[1;37mChequeando actualizaciones\e[1;0m"
-sudo rm version 
+sudo rm version
 wget https://raw.githubusercontent.com/minterger/menu/master/version >/dev/null 2>/dev/null
 
 while :
 do
+cd ~/.Menu
 version=$(cat versionact)
 bash .menu.sh
 clear
