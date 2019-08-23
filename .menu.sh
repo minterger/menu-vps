@@ -1,7 +1,6 @@
 #!/bin/bash
 
 updates () {
-
   version=$(cat versionact)
   updates1=$(cat version)
 
