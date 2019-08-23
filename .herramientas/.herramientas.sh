@@ -1,8 +1,6 @@
 #!/bin/bash
 
 updates () {
-  wget
-
   cd ..
   version=$(cat versionact)
   updates1=$(cat version)
