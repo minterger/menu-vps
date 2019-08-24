@@ -126,7 +126,9 @@ userlist () {
 
 while :
 do
+cd ..
 bash .head.sh
+cd .users
 echo -e "\e[1;32mEscoja una opcion "
 echo
 echo -e "\e[1;31m[1]\e[1;32m Usuario conectados"
