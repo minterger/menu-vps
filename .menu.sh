@@ -101,7 +101,7 @@ do
 bash .head.sh
 echo -e "\e[1;32mEscoja una opcion "
 echo
-echo -e "\e[1;31m[1]\e[1;32m Usuario conectados"
+echo -e "\e[1;31m[1]\e[1;32m Usuarios"
 echo -e "\e[1;31m[2]\e[1;32m Informacion del sistema"
 echo -e "\e[1;31m[3]\e[1;32m Herramientas"
 echo -e "\e[1;31m[4]\e[1;32m Menu de instalacion"
