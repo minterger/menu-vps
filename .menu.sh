@@ -7,7 +7,7 @@ updates () {
   if [ $updates1 = $version ]; then
     echo -e " \e[1;33m(no hay actualización)\e[1;0m"
   else
-    echo -e " \e[1;33m(actualizacion disponible)\e[1;0m"
+    echo -e " \e[1;33m(actualizacion disponible V= $updates1 )\e[1;0m"
   fi
 }
 
