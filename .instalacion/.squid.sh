@@ -98,7 +98,7 @@ else
 
   echo -e "\033[1;32mInstalacion completada\033[0m"
   echo
-  echo -e "\033[1;37mEjecutando en el puerto \e[1;31m80,3128 \e[1;33my\e[1;31m 8080\e[1;0m"
+  echo -e "\033[1;37mEjecutando en el puerto \e[1;31m80,3128 \e[1;37my\e[1;31m 8080\e[1;0m"
   echo
 
 ip=$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')
@@ -138,7 +138,19 @@ cache allow all
 forwarded_for off
 via off" >> /etc/squid/squid.conf
 
-  service squid restart
+(
+echo -ne "[" >&2
+while [[ ! -e /tmp/instmp ]]; do
+echo -ne "." >&2
+sleep 0.8s
+done
+rm /tmp/instmp
+echo -ne "]" >&2
+echo
+) &
+desinstala=$(service squid restart) && touch /tmp/instmp
+sleep 0.6s
+
   echo -e "\e[1;32mPresiona una tecla para continuar...\033[1;0m"
   read foo
   exit 1
