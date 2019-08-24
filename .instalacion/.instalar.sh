@@ -2,7 +2,7 @@
 while :
 do
 cd ..
-#bash .head.sh
+bash .head.sh
 cd .instalacion
 echo -e "\e[1;32mMenu de instalación "
 echo
