@@ -128,9 +128,9 @@ cache allow all
 #   echo "http_port 8080" >> /etc/squid/squid.conf;;
 # esac
 
-  echo "http_port 80" >> /etc/squid/squid.conf;
-  echo "http_port 3128" >> /etc/squid/squid.conf;
-  echo "http_port 8080" >> /etc/squid/squid.conf;;
+  echo "http_port 80" >> /etc/squid/squid.conf
+  echo "http_port 3128" >> /etc/squid/squid.conf
+  echo "http_port 8080" >> /etc/squid/squid.conf
 
   echo "
 forwarded_for off
