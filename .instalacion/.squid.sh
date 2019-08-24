@@ -101,11 +101,13 @@ else
   echo -e "\033[1;37mEjecutando en el puerto \e[1;31m80,3128 \e[1;33my\e[1;31m 8080\e[1;0m"
   echo
 
+ip=$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')
+
   echo "acl url1 url_regex -i 127.0.0.1
 acl url2 url_regex -i localhost
-acl url3 url_regex -i 66.97.44.155
+acl url3 url_regex -i $ip
 
-acl payload dstdomain -i \"/etc/squid3/payload.txt\"
+acl payload dstdomain -i \"/etc/squid/payload.txt\"
 
 http_access allow url1
 http_access allow url2
