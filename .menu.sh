@@ -26,132 +26,12 @@ update () {
   exit 1
 }
 
-users () {
+menuusers () {
   clear
+  echo -e "Usuarios: \e[1;31m"
   cd .users
-  bash .users.sh
-  echo
+  bash .menuusers.sh
   cd ..
-  echo -e "\e[1;32mPresiona una tecla para continuar..."
-  read foo
-}
-
-crearuser () {
-  clear
-  if [ $(id -u) -eq 0 ]
-  then
-    ip=$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')
-  	echo -e -n "\033[1;32mNombre del nuevo usuario:\033[0;37m"; read -p " " name
-  	echo -e -n "\033[1;32mContraseña para el usuario $name:\033[0;37m"; read -p " " pass
-  	echo -e -n "\033[1;32mCuantos dias el usuario $name debe durar:\033[0;37m"; read -p " " daysrnf
-  	echo -e -n "\033[1;32mLimite de logins simultaneos:\033[0;37m"; read -p " " limiteuser
-    echo -e -n "\033[1;32mEscribe un puerto Dropbear:\033[0;37m"; read -p " " portd
-  	echo -e "\033[0m"
-  	if cat /etc/passwd |grep $name: |grep -vi [a-z]$name |grep -v [0-9]$name > /dev/null
-  	then
-  		echo -e "\033[1;31mUsuario $name ya existe\033[0m"
-  	else
-  		valid=$(date '+%C%y-%m-%d' -d " +$daysrnf days")
-  		datexp=$(date "+%d/%m/%Y" -d "+ $daysrnf days")
-  		useradd -M $name -e $valid
-  		( echo "$pass";echo "$pass" ) | passwd $name 2> /dev/null
-      echo -e "\033[1;36mIP: \033[0m$ip"
-  		limite $name $limiteuser
-  		echo -e "\033[1;36mUsuario: \033[0m$name"
-  		echo -e "\033[1;36mContraseña: \033[0m$pass"
-  		echo -e "\033[1;36mExpira:\033[0m $datexp"
-      echo -e "\033[1;36mDatos HTTP custom:\033[0m $ip:$portd@$name:$pass "
-  	    echo "$pass" > ~/.Menu/.users/passwd/$name
-      echo
-      echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
-      read foo
-  	fi
-  else
-  	if echo $(id) |grep sudo > /dev/null
-  	then
-  	echo "Su usuario no esta en el grupo sudo"
-  	echo -e "Para ejecutar root escriba: \033[1;31msudo su\033[0m"
-  	echo -e "O ejecute menu como sudo. \033[1;31msudo menu\033[0m"
-  	else
-  	echo -e "Vc no esta como usuario root, ni con sus derechos (sudo)\nPara ejecutar root escribe \033[1;31msu\033[0m y escribe su contraseña root"
-  	fi
-  fi
-}
-
-redefiniruser () {
-    read -p "Nombre del usuario: " name
-  if cat /etc/passwd |grep $name: > /dev/null
-  then
-   echo " "
-  else
-   clear
-   echo "El usuario $name no existe"
-   echo
-   echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
-   read foo
-  fi
-  clear
-  echo -e "\033[1;33mOpciones a modificar ?\033[1;30m
-  1) Numero de Conexiones
-  2) Fecha de expiracion
-  3) Cambiar contraseña del usuario"
-  read -p "opcion: " option
-  if [ $option -eq 1 ]; then
-    read -p "Cual es el nuevo limite de logins: " liml
-    limite $name $liml
-    echo
-    echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
-    read foo
-  fi
-
-  if [ $option -eq 2 ]; then
-    echo "Cual es la nueva fecha : formato AAAA/MM/DD"
-    read -p ": " date
-    chage -E $date $name 2> /dev/null
-    echo -e "\033[1;31mEl usuario $name se desconectara el dia: $date\033[0m"
-    echo
-    echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
-    read foo
-  fi
-  if [ $option -eq 3 ]
-  then
-    read -p "Cual es la nueva contraseña para el usuario $name: " pass
-    (echo "$pass" ; echo "$pass" ) |passwd $name > /dev/null 2>/dev/null
-    echo "$pass" > ~/.Menu/.users/passwd/$name
-    echo "Nueva contraseña aplicada: $pass"
-    echo
-    echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
-    read foo
-  fi
-}
-
-userdelete () {
-  clear
-  read -p "Cual es el nombre del usuario: " name
-  if [ $(cat /etc/passwd |grep "^$name:" |wc -l) -eq 0 ]; then
-    echo
-    echo -e "\e[1;32mUsuario \e[1;31m$name \e[1;32mno existe\e[1;0m"
-    echo
-    echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
-    read foo
-  else
-    userdel --force $name > /dev/null 2>/dev/null
-    echo
-    echo -e "\e[1;32mEl usuario \e[1;31m$name \e[1;32mfue eliminado\e[1;0m"
-    echo
-    echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
-    read foo
-  fi
-}
-
-userlist () {
-  clear
-  cd .users
-  bash .listusers.sh
-  echo
-  cd ..
-  echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
-  read foo
 }
 
 inf_system () {
@@ -222,37 +102,25 @@ bash .head.sh
 echo -e "\e[1;32mEscoja una opcion "
 echo
 echo -e "\e[1;31m[1]\e[1;32m Usuario conectados"
-echo -e "\e[1;31m[2]\e[1;32m Crear usuario"
-echo -e "\e[1;31m[3]\e[1;32m Redefinir usuario"
-echo -e "\e[1;31m[4]\e[1;32m Eliminar usuario"
-echo -e "\e[1;31m[5]\e[1;32m Lista de usuarios"
-echo -e "\e[1;31m[6]\e[1;32m Informacion del sistema"
-echo -e "\e[1;31m[7]\e[1;32m Herramientas"
-echo -e "\e[1;31m[8]\e[1;32m Menu de instalacion"
-echo -n -e "\e[1;31m[9]\e[1;32m Update Script"
+echo -e "\e[1;31m[2]\e[1;32m Informacion del sistema"
+echo -e "\e[1;31m[3]\e[1;32m Herramientas"
+echo -e "\e[1;31m[4]\e[1;32m Menu de instalacion"
+echo -n -e "\e[1;31m[5]\e[1;32m Update Script"
 updates
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
-echo -n "Seleccione una opcion [1 - 9]: "
+echo -n "Seleccione una opcion [1 - 5]: "
 read opcion
 case $opcion in
 1)
-users;;
+menuusers;;
 2)
-crearuser;;
-3)
-redefiniruser;;
-4)
-userdelete;;
-5)
-userlist;;
-6)
 inf_system;;
-7)
+3)
 herramientas;;
-8)
+4)
 install;;
-9)
+5)
 update;;
 0) clear;
 exit 1;;
