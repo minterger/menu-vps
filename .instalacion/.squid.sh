@@ -137,4 +137,7 @@ forwarded_for off
 via off" >> /etc/squid/squid.conf
 
   service squid restart
+  echo -e "\e[1;32mPresiona una tecla para continuar...\033[1;0m"
+  read foo
+  exit 1
 fi
