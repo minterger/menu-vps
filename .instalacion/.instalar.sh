@@ -8,10 +8,11 @@ echo -e "\e[1;32mMenu de instalación "
 echo
 echo -e "\e[1;31m[1]\e[1;32m Instalar Fast"
 echo -e "\e[1;31m[2]\e[1;32m Instalar DropBear"
-echo -e "\e[1;31m[3]\e[1;32m Instalar HTOP"
+echo -e "\e[1;31m[3]\e[1;32m Instalar Squid"
+echo -e "\e[1;31m[4]\e[1;32m Instalar HTOP"
 echo -e "\e[1;31m[0]\e[1;32m Volver"
 echo
-echo -n "Seleccione una opcion [1 - 3]: "
+echo -n "Seleccione una opcion [1 - 4]: "
 read opcion
 case $opcion in
 1) clear;
@@ -25,6 +26,11 @@ echo ;
 bash .dropbear.sh;
 echo ;;
 3) clear;
+echo -e "Instalando Squid:\e[1;31m";
+echo ;
+bash .squid.sh;
+echo ;;
+4) clear;
 echo -e "Instalando HTOP:\e[1;31m";
 echo ;
 bash .htop.sh;
