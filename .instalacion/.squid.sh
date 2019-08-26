@@ -74,13 +74,13 @@ instalar2 () {
 }
 
 if [ -f /usr/sbin/squid ]; then
-echo -e "\033[1;32mDrobear ya esta instalado\033[0m"
+echo -e "\033[1;32mSquid ya esta instalado\033[0m"
 echo
 echo -n "Desea desinstalar S (si) o N (no): "
 read opcion
 case $opcion in
   s|S) clear;
-  echo -e "Desinstalando Dropbear:\e[1;31m";
+  echo -e "Desinstalando Squid:\e[1;31m";
   echo ;
   desinstalar2;
   echo ;
@@ -93,7 +93,7 @@ case $opcion in
   exit 1;;
 esac
 else
-  echo -e "\033[1;31m           Instalador Dropbear\n\033[1;37mInstalando Dropbear...\033[0m"
+  echo -e "\033[1;31m           Instalador Squid\n\033[1;37mInstalando Squid...\033[0m"
   instalar2
 
   echo -e "\033[1;32mInstalacion completada\033[0m"
@@ -137,6 +137,9 @@ cache allow all
   echo "
 forwarded_for off
 via off" >> /etc/squid/squid.conf
+
+  echo
+  echo "Reiniciando Squid"
 
 (
 echo -ne "[" >&2
