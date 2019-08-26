@@ -151,7 +151,6 @@ refresh_pattern .		0	20%	4320
 visible_hostname proxy.mastahit.com
 " >> /etc/squid/squid.conf
 
-  echo
   echo -e "\033[1;32mReiniciando Squid\033[1;0m"
 
 (
@@ -167,6 +166,7 @@ echo
 desinstala=$(service squid restart) && touch /tmp/instmp
 sleep 0.6s
 
+  echo
   echo -e "\e[1;32mPresiona una tecla para continuar...\033[1;0m"
   read foo
   exit 1
