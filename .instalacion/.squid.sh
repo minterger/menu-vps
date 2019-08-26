@@ -103,19 +103,27 @@ else
 
 ip=$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')
 
-  echo "acl url1 url_regex -i 127.0.0.1
-acl url2 url_regex -i localhost
-acl url3 url_regex -i $ip
-
-acl payload dstdomain -i \"/etc/squid/payload.txt\"
-
-http_access allow url1
-http_access allow url2
-http_access allow url3
-http_access allow payload
-
-http_access allow all
-cache allow all
+  echo "cl manager proto cache_object
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst $ip
+http_access allow SSH
+http_access allow manager localhost
+http_access deny manager
+http_access allow localhost
+http_access deny all
 " > /etc/squid/squid.conf
 
 # echo -n -e "\033[1;32mDesea remplazar los puertos por defecto por otro \"S\" o \"N\"?: \033[1;0m"
@@ -130,13 +138,18 @@ cache allow all
 #   echo "http_port 8080" >> /etc/squid/squid.conf;;
 # esac
 
-  echo "http_port 80" >> /etc/squid/squid.conf
+  #echo "http_port 80" >> /etc/squid/squid.conf
   echo "http_port 3128" >> /etc/squid/squid.conf
   echo "http_port 8080" >> /etc/squid/squid.conf
 
   echo "
-forwarded_for off
-via off" >> /etc/squid/squid.conf
+  coredump_dir /var/spool/squid
+  refresh_pattern ^ftp:		1440	20%	10080
+  refresh_pattern ^gopher:	1440	0%	1440
+  refresh_pattern -i (/cgi-bin/|\?) 0	0%	0
+  refresh_pattern .		0	20%	4320
+  visible_hostname proxy.mastahit.com
+" >> /etc/squid/squid.conf
 
   echo
   echo -e "\033[1;32mReiniciando Squid\033[1;0m"
