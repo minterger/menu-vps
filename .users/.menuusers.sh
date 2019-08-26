@@ -124,6 +124,30 @@ userlist () {
   read foo
 }
 
+killusers () {
+  data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
+
+  for PID in "${data[@]}"
+  do
+          #echo "check $PID";
+          NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
+          if [ $NUM1 -eq 1 ]; then
+                  kill $PID;
+          fi
+  done
+
+  data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
+
+  for PID in "${data[@]}"
+  do
+          #echo "check $PID";
+          NUM2=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID\]" | wc -l`;
+          if [ $NUM2 -eq 1 ]; then
+            kill $PID;
+          fi
+  done
+}
+
 while :
 do
 cd ..
@@ -136,6 +160,7 @@ echo -e "\e[1;31m[2]\e[1;32m Crear usuario"
 echo -e "\e[1;31m[3]\e[1;32m Redefinir usuario"
 echo -e "\e[1;31m[4]\e[1;32m Eliminar usuario"
 echo -e "\e[1;31m[5]\e[1;32m Lista de usuarios"
+echo -e "\e[1;31m[6]\e[1;32m Desconectar todos los usuarios \e[1;31m(beta)"
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
 echo -n "Seleccione una opcion [1 - 5]: "
@@ -151,6 +176,8 @@ redefiniruser;;
 userdelete;;
 5)
 userlist;;
+6)
+killusers;;
 0) clear;
 exit 1;;
 *) clear;
