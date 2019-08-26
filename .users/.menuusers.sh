@@ -97,6 +97,34 @@ redefiniruser () {
   fi
 }
 
+killusers () {
+  clear
+
+  data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
+
+  echo -e "Desconectando Usuarios"
+
+  for PID in "${data[@]}"
+  do
+          #echo "check $PID";
+          NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
+          if [ $NUM1 -eq 1 ]; then
+                  kill $PID;
+          fi
+  done
+
+  data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
+
+  for PID in "${data[@]}"
+  do
+          #echo "check $PID";
+          NUM2=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID\]" | wc -l`;
+          if [ $NUM2 -eq 1 ]; then
+            kill $PID;
+          fi
+  done
+}
+
 userdelete () {
   clear
   read -p "Cual es el nombre del usuario: " name
@@ -124,33 +152,6 @@ userlist () {
   read foo
 }
 
-killusers () {
-  clear
-  
-  data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
-
-  echo -e "Desconectando Usuarios"
-
-  for PID in "${data[@]}"
-  do
-          #echo "check $PID";
-          NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
-          if [ $NUM1 -eq 1 ]; then
-                  kill $PID;
-          fi
-  done
-
-  data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
-
-  for PID in "${data[@]}"
-  do
-          #echo "check $PID";
-          NUM2=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID\]" | wc -l`;
-          if [ $NUM2 -eq 1 ]; then
-            kill $PID;
-          fi
-  done
-}
 
 while :
 do
