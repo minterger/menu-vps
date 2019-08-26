@@ -125,7 +125,11 @@ userlist () {
 }
 
 killusers () {
+  clear
+  
   data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
+
+  echo -e "Desconectando Usuarios"
 
   for PID in "${data[@]}"
   do
