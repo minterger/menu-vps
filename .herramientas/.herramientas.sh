@@ -104,9 +104,10 @@ restart () {
 }
 
 #proximamente badvpn autostart
-badvpnautostart () {
-  if [[ `grep -c "^#ADM" /etc/sysctl.conf` -eq 0 ]]; then
-}
+
+#badvpnautostart () {
+  #if [[ `grep -c "^#ADM" /etc/sysctl.conf` -eq 0 ]]; then
+#}
 
 while :
 do
