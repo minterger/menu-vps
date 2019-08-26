@@ -139,7 +139,7 @@ forwarded_for off
 via off" >> /etc/squid/squid.conf
 
   echo
-  echo "Reiniciando Squid"
+  echo -e "\033[1;32mReiniciando Squid\033[1;0m"
 
 (
 echo -ne "[" >&2
