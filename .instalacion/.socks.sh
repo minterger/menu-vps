@@ -1,3 +1,4 @@
+#!/bin/bash
 fun_socks () {
 	clear
     if ps x | grep proxy.py|grep -v grep 1>/dev/null 2>/dev/null; then
@@ -171,3 +172,4 @@ fun_socks () {
 	fi
 
 }
+fun_socks
