@@ -32,11 +32,11 @@ fun_socks () {
     if ps x | grep proxy.py|grep -v grep 1>/dev/null 2>/dev/null; then
     	sks='\033[1;32mON'
     	sockspt=$(netstat -nplt |grep 'python' | awk -F ":" {'print $2'} | cut -d " " -f 1 | xargs)
-    	var_sks1="DESATIVAR SOCKS"
+    	var_sks1="DESACTIVAR SOCKS"
     else
     	sks='\033[1;31mOFF'
-    	sockspt="\033[1;31mINDISPONIVEL"
-    	var_sks1="ATIVAR SOCKS"
+    	sockspt="\033[1;31mNO DISPONIBLE"
+    	var_sks1="ACTIVAR SOCKS"
     fi
     echo -e "\E[44;1;37m            ADMINISTRAR PROXY SOCKS             \E[0m"
     echo ""
@@ -63,21 +63,21 @@ fun_socks () {
 				sleep 1
 				screen -wipe > /dev/null
 			}
-			echo -e "\033[1;32mDESATIVANDO O PROXY SOCKS\033[1;33m"
+			echo -e "\033[1;32mDESACTIVANDO PROXY SOCKS\033[1;33m"
 			echo ""
 			fun_bar 'fun_socksoff'
 			echo ""
-			echo -e "\033[1;32mPROXY SOCKS DESATIVADO COM SUCESSO!\033[1;33m"
+			echo -e "\033[1;32mPROXY SOCKS DESACTIVADO CON EXITO!\033[1;33m"
 			sleep 3
 			fun_socks
 		else
 			clear
 			echo -e "\E[44;1;37m             PROXY SOCKS              \E[0m"
 		    echo ""
-		    echo -ne "\033[1;32mQUAL PORTA DESEJA ULTILIZAR \033[1;33m?\033[1;37m: "; read porta
+		    echo -ne "\033[1;32mQUE PUERTO DESEA UTILIZAR \033[1;33m?\033[1;37m: "; read porta
 		    if [[ -z "$porta" ]]; then
 		    	echo ""
-		    	echo -e "\033[1;31mPorta invalida!"
+		    	echo -e "\033[1;31mPuerto invalido!"
 		    	sleep 3
 		    	clear
 		    	fun_conexao
@@ -92,15 +92,15 @@ fun_socks () {
 		    	if grep -w "SSHPlus" /etc/rc.local > /dev/null 2>&1; then
 		    		echo ""
 		    	else
-		    		sed -i '$ iscreen -dmS proxy python /etc/SSHPlus/proxy.py' /etc/rc.local
+		    		sed -i '$ iscreen -dmS proxy python ~/.Menu/.instalacion/proxy.py' /etc/rc.local
 			    fi
 		    }
 		    echo ""
-		    echo -e "\033[1;32mINICIANDO O PROXY SOCKS\033[1;33m"
+		    echo -e "\033[1;32mINICIANDO PROXY SOCKS\033[1;33m"
 		    echo ""
 		    fun_bar 'fun_inisocks'
 		    echo ""
-		    echo -e "\033[1;32mPROXY SOCKS ATIVADO COM SUCESSO\033[1;33m"
+		    echo -e "\033[1;32mPROXY SOCKS ACTIVADO CON EXITO\033[1;33m"
 		    sleep 3
 		    fun_socks
 		fi
@@ -109,19 +109,19 @@ fun_socks () {
 			clear
 			echo -e "\E[44;1;37m            PROXY SOCKS             \E[0m"
 			echo ""
-			echo -e "\033[1;33mPORTAS EM USO: \033[1;32m$sockspt"
+			echo -e "\033[1;33mPUERTO EN USO: \033[1;32m$sockspt"
 			echo ""
-			echo -ne "\033[1;32mQUAL PORTA DESEJA ULTILIZAR \033[1;33m?\033[1;37m: "; read porta
+			echo -ne "\033[1;32mQUE PUERTO DESEA UTILIZAR \033[1;33m?\033[1;37m: "; read porta
 			if [[ -z "$porta" ]]; then
 				echo ""
-				echo -e "\033[1;31mPorta invalida!"
+				echo -e "\033[1;31mPuerto invalido!"
 				sleep 3
 				clear
 				fun_conexao
 			fi
 			#verif_ptrs
 			echo ""
-			echo -e "\033[1;32mINICIANDO O PROXY SOCKS NA PORTA \033[1;31m$porta\033[1;33m"
+			echo -e "\033[1;32mINICIANDO PROXY SOCKS EN EL PUERTO \033[1;31m$porta\033[1;33m"
 			echo ""
 			abrirptsks () {
 				sleep 1
@@ -130,12 +130,12 @@ fun_socks () {
 			}
 			fun_bar 'abrirptsks'
 			echo ""
-			echo -e "\033[1;32mPROXY SOCKS ATIVADO COM SUCESSO\033[1;33m"
+			echo -e "\033[1;32mPROXY SOCKS ACTIVADO CON EXITO\033[1;33m"
 			sleep 3
 			fun_socks
 		else
 			clear
-			echo -e "\033[1;31mFUNCAO INDISPONIVEL\033[1;33m"
+			echo -e "\033[1;31mFUNCION NO DISPONIBLE\033[1;33m"
 			sleep 2
 			fun_socks
 		fi
@@ -147,7 +147,7 @@ fun_socks () {
 			echo ""
 			echo -e "\033[1;33mSTATUS: \033[1;32m$msgsocks"
 			echo""
-			echo -ne "\033[1;32mINFORME SEU STATUS\033[1;31m:\033[1;37m "; read msgg
+			echo -ne "\033[1;32mINFORME SU STATUS\033[1;31m:\033[1;37m "; read msgg
 			if [[ -z "$msgg" ]]; then
 				echo ""
 				echo -e "\033[1;31mStatus invalido!"
@@ -178,23 +178,23 @@ fun_socks () {
 			echo ""
 			fun_bar 'restartsocks'
 			echo ""
-			echo -e "\033[1;32mSTATUS ALTERADO COM SUCESSO!"
+			echo -e "\033[1;32mSTATUS ALTERADO CON EXITO!"
 			sleep 3
 			fun_socks
 		else
 			clear
-			echo -e "\033[1;31mFUNCAO INDISPONIVEL\033[1;33m"
+			echo -e "\033[1;31mFUNCION NO DISPONIBLE\033[1;33m"
 			sleep 2
 			fun_socks
 		fi
 	elif [[ "$resposta" = '0' ]]; then
 		echo ""
-		echo -e "\033[1;31mRetornando...\033[0m"
+		echo -e "\033[1;31mRegresando...\033[0m"
 		sleep 2
 		exit 1
 	else
 		echo ""
-		echo -e "\033[1;31mOpcao invalida !\033[0m"
+		echo -e "\033[1;31mOpcion invalida !\033[0m"
 		sleep 2
 		fun_socks
 	fi
