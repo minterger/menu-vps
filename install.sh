@@ -1,5 +1,46 @@
 #!/bin/bash
+
+fun_bar () {
+comando[0]="$1"
+comando[1]="$2"
+ (
+[[ -e $HOME/fim ]] && rm $HOME/fim
+[[ ! -d ~/.Menu ]] && rm -rf /bin/menu
+${comando[0]} > /dev/null 2>&1
+${comando[1]} > /dev/null 2>&1
+touch $HOME/fim
+ ) > /dev/null 2>&1 &
+ tput civis
+echo -ne "\033[1;33mESPERE \033[1;37m- \033[1;33m["
+while true; do
+   for((i=0; i<18; i++)); do
+   echo -ne "\033[1;31m#"
+   sleep 0.1s
+   done
+   [[ -e $HOME/fim ]] && rm $HOME/fim && break
+   echo -e "\033[1;33m]"
+   sleep 1s
+   tput cuu1
+   tput dl1
+   echo -ne "\033[1;33mESPERE \033[1;37m- \033[1;33m["
+done
+echo -e "\033[1;33m]\033[1;37m -\033[1;32m OK !\033[1;37m"
+tput cnorm
+}
+
 instalar () {
+  if [ -f /usr/bin/unzip ]; then
+    echo "" >/dev/null 2>/dev/null
+  else
+    sudo apt-get update >/dev/null 2>/dev/null
+    sudo apt-get install -y unzip >/dev/null 2>/dev/null
+  fi
+  if [ -f /usr/bin/lsof ]; then
+    echo "" >/dev/null 2>/dev/null
+  else
+    sudo apt-get update >/dev/null 2>/dev/null
+    sudo apt-get install -y lsof >/dev/null 2>/dev/null
+  fi
   cd ~
   wget https://github.com/minterger/menu/archive/master.zip >/dev/null 2>/dev/null
   unzip master.zip >/dev/null 2>/dev/null
@@ -18,28 +59,28 @@ instalar () {
 
 }
 
-instalar2 () {
-  echo -e "\033[1;32mInstalando Script\033[0m"
-  echo
-  (
-  echo -ne "[" >&2
-  while [[ ! -e /tmp/instmp ]]; do
-  echo -ne "." >&2
-  sleep 0.8s
-  done
-  rm /tmp/instmp
-  echo -ne "]" >&2
-  echo
-  ) &
-  install=$(instalar) && touch /tmp/instmp
-  sleep 0.6s
+#instalar2 () {
+#  echo -e "\033[1;32mInstalando Script\033[0m"
+#  echo
+#  (
+#  echo -ne "[" >&2
+#  while [[ ! -e /tmp/instmp ]]; do
+#  echo -ne "." >&2
+#  sleep 0.8s
+#  done
+#  rm /tmp/instmp
+#  echo -ne "]" >&2
+#  echo
+#  ) &
+#  install=$(instalar) && touch /tmp/instmp
+#  sleep 0.6s
 
-  echo
-  echo -e "\033[1;32mScript instalado con exito"
-  echo
-  echo -e "\033[1;32mPara ejecutarlo use \033[1;33mmenu\033[0m"
-  echo
-}
+#  echo
+#  echo -e "\033[1;32mScript instalado con exito"
+#  echo
+#  echo -e "\033[1;32mPara ejecutarlo use \033[1;33mmenu\033[0m"
+#  echo
+#}
 
 if [ -f /bin/menu ]
 then
@@ -47,10 +88,22 @@ then
   rm -r /bin/menu
   rm -r ~/.Menu
   echo
-  instalar2
-
+  echo -e "\033[1;32mInstalando Script\033[0m"
+  echo
+  fun_bar instalar
+  echo
+  echo -e "\033[1;32mScript instalado con exito"
+  echo
+  echo -e "\033[1;32mPara ejecutarlo use \033[1;33mmenu\033[0m"
+  echo
 else
   echo
-  instalar2
-
+  echo -e "\033[1;32mInstalando Script\033[0m"
+  echo
+  fun_bar instalar
+  echo
+  echo -e "\033[1;32mScript instalado con exito"
+  echo
+  echo -e "\033[1;32mPara ejecutarlo use \033[1;33mmenu\033[0m"
+  echo
 fi

@@ -10,7 +10,7 @@ ${comando[1]} > /dev/null 2>&1
 touch $HOME/fim
  ) > /dev/null 2>&1 &
  tput civis
-echo -ne "\033[1;33mAGUARDE \033[1;37m- \033[1;33m["
+echo -ne "\033[1;33mESPERE \033[1;37m- \033[1;33m["
 while true; do
    for((i=0; i<18; i++)); do
    echo -ne "\033[1;31m#"
@@ -21,7 +21,7 @@ while true; do
    sleep 1s
    tput cuu1
    tput dl1
-   echo -ne "\033[1;33mAGUARDE \033[1;37m- \033[1;33m["
+   echo -ne "\033[1;33mESPERE \033[1;37m- \033[1;33m["
 done
 echo -e "\033[1;33m]\033[1;37m -\033[1;32m OK !\033[1;37m"
 tput cnorm
@@ -40,14 +40,14 @@ fun_socks () {
     fi
     echo -e "\E[44;1;37m            ADMINISTRAR PROXY SOCKS             \E[0m"
     echo ""
-    echo -e "\033[1;33mPUERTAS\033[1;37m: \033[1;32m$sockspt"
+    echo -e "\033[1;33mPUERTOS\033[1;37m: \033[1;32m$sockspt"
     echo ""
 	echo -e "\033[1;33m[\033[1;31m1\033[1;33m] \033[1;33m$var_sks1\033[0m"
-	echo -e "\033[1;33m[\033[1;31m2\033[1;33m] \033[1;33mABRIR PUERTA\033[0m"
+	echo -e "\033[1;33m[\033[1;31m2\033[1;33m] \033[1;33mABRIR PUERTO\033[0m"
 	echo -e "\033[1;33m[\033[1;31m3\033[1;33m] \033[1;33mALTERAR STATUS\033[0m"
 	echo -e "\033[1;33m[\033[1;31m0\033[1;33m] \033[1;33mVOLVER\033[0m"
 	echo ""
-	echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;37m "; read resposta
+	echo -ne "\033[1;32mQUE DESEA HACER \033[1;33m?\033[1;37m "; read resposta
 	if [[ "$resposta" = '1' ]]; then
 		if ps x | grep proxy.py|grep -v grep 1>/dev/null 2>/dev/null; then
 			clear
