@@ -22,9 +22,10 @@ countusers () {
           NUM2=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID\]" | wc -l`;
           NUM4=$(($SSH + $NUM2));
   done
-  NUM5=$(($NUM4 + $NUM3))
 
-  echo -e "\e[1;31mCONECTADOS:\e[1;32m [$NUM5] "
+
+  echo -e "\e[1;31mCONECTADOS DROPBEAR:\e[1;32m [$NUM3]"
+  echo -e "\e[1;31mCONECTADOS SSH:\e[1;32m [$NUM4]"
 }
 
 # ver puertos abiertos
