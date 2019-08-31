@@ -6,7 +6,6 @@ version=$(cat versionact)
 countusers () {
   data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
   DBR="0"
-  SSH="0"
   for PID in "${data[@]}"
   do
           #echo "check $PID";
@@ -16,6 +15,7 @@ countusers () {
 
 
   data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
+  SSH="0"
   for PID in "${data[@]}"
   do
           #echo "check $PID";
