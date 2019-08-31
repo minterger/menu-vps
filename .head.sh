@@ -5,16 +5,26 @@ version=$(cat versionact)
 # contador de usuarios beta
 countusers () {
   data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
-  NUM2="0"
+  DBR="0"
+  SSH="0"
   for PID in "${data[@]}"
   do
           #echo "check $PID";
           NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
-          if [ $NUM1 -eq 1 ]; then
-                  NUM2=$(($NUM2 + 1))
-          fi
+          NUM3=$(($DBR + $NUM1));
   done
-  echo -e "\e[1;31mCONECTADOS:\e[1;32m [$NUM2] "
+
+
+  data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
+  for PID in "${data[@]}"
+  do
+          #echo "check $PID";
+          NUM2=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID\]" | wc -l`;
+          NUM4=$(($SSH + $NUM2));
+  done
+  NUM5=$(($NUM4 + $NUM3))
+
+  echo -e "\e[1;31mCONECTADOS:\e[1;32m [$NUM5] "
 }
 
 # ver puertos abiertos
@@ -84,9 +94,10 @@ echo "| | \__/ | || || | \ \ | |   | |   |  ____||  _  / |  __  ||  ____||  _  /
 echo "| |      | || || |  \ \| |   | |   | |____ | | \ \ | |__| || |____ | | \ \ "
 echo "|_|      |_||_||_|   \___|   |_|   |______||_|  \_\|______||______||_|  \_\ "
 echo -e "\e[1;33mV= $version ©"
-echo -e "\e[1;37m-----------------------------------------------------\e[1;0m"
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "\e[1;32mPuertos abiertos:"
-echo -e "\e[1;37m-----------------------------------------------------\e[1;0m"
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 mine_port
 badvpn
-echo -e "\e[1;37m-----------------------------------------------------\e[1;0m"
+countusers
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
