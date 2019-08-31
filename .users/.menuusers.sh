@@ -17,7 +17,7 @@ crearuser () {
   	echo -e -n "\033[1;32mContraseña para el usuario $name:\033[0;37m"; read -p " " pass
   	echo -e -n "\033[1;32mCuantos dias el usuario $name debe durar:\033[0;37m"; read -p " " daysrnf
   	echo -e -n "\033[1;32mLimite de logins simultaneos:\033[0;37m"; read -p " " limiteuser
-    echo -e -n "\033[1;32mEscribe un puerto Dropbear:\033[0;37m"; read -p " " portd
+    echo -e -n "\033[1;32mEscribe un puerto de conexion:\033[0;37m"; read -p " " portd
   	echo -e "\033[0m"
   	if cat /etc/passwd |grep $name: |grep -vi [a-z]$name |grep -v [0-9]$name > /dev/null
   	then
