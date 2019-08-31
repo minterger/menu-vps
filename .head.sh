@@ -11,7 +11,7 @@ countusers () {
           #echo "check $PID";
           NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
   done
-  NUM3=$(($DBR + $NUM1));
+  NUM3=$(($NUM1 + $DBR));
 
   data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
   SSH="0"
@@ -20,7 +20,7 @@ countusers () {
           #echo "check $PID";
           NUM2=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID\]" | wc -l`;
   done
-  NUM4=$(($SSH + $NUM2))
+  NUM4=$(($NUM2 + $SSH));
 
   echo -e "\e[1;31mCONECTADOS DROPBEAR:\e[1;32m [$NUM3]"
   echo -e "\e[1;31mCONECTADOS SSH:\e[1;32m [$NUM4]"
