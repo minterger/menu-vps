@@ -45,6 +45,7 @@ fun_socks () {
 	echo -e "\033[1;33m[\033[1;31m1\033[1;33m] \033[1;33m$var_sks1\033[0m"
 	echo -e "\033[1;33m[\033[1;31m2\033[1;33m] \033[1;33mABRIR PUERTO\033[0m"
 	echo -e "\033[1;33m[\033[1;31m3\033[1;33m] \033[1;33mALTERAR STATUS\033[0m"
+	echo -e "\033[1;33m[\033[1;31m4\033[1;33m] \033[1;33mCAMBIAR PUERTO DEFAULT HOST\033[0m"
 	echo -e "\033[1;33m[\033[1;31m0\033[1;33m] \033[1;33mVOLVER\033[0m"
 	echo ""
 	echo -ne "\033[1;32mQUE DESEA HACER \033[1;33m?\033[1;37m "; read resposta
@@ -179,6 +180,54 @@ fun_socks () {
 			fun_bar 'restartsocks'
 			echo ""
 			echo -e "\033[1;32mSTATUS ALTERADO CON EXITO!"
+			sleep 3
+			fun_socks
+		else
+			clear
+			echo -e "\033[1;31mFUNCION NO DISPONIBLE\033[1;33m"
+			sleep 2
+			fun_socks
+		fi
+  elif [[ "$resposta" = '4' ]]; then
+		if ps x | grep proxy.py|grep -v grep 1>/dev/null 2>/dev/null; then
+			clear
+			msgsocks=$(cat ~/.Menu/.instalacion/proxy.py |grep -E "DEFAULT_HOST =" | awk -F = '{print $2}' |cut -d "'" -f 2| awk -F ":" '{print $2}')
+			echo -e "\E[44;1;37m             PROXY SOCKS              \E[0m"
+			echo ""
+			echo -e "\033[1;33mPUERTO SSH CONFIGURADO: \033[1;32m$msgsocks"
+			echo""
+			echo -ne "\033[1;32mESCRIBA SU PUERTO SSH\033[1;31m:\033[1;37m "; read msgg
+			if [[ -z "$msgg" ]]; then
+				echo ""
+				echo -e "\033[1;31mPuerto invalido!"
+				sleep 3
+				fun_conexao
+			fi
+			fun_msgsocks () {
+				msgsocks2=$(cat ~/.Menu/.instalacion/proxy.py |grep "DEFAULT_HOST =" | awk -F = '{print $2}' | awk -F : '{print $2}')
+				sed -i "s/$msgsocks2/ $msgg'/g" ~/.Menu/.instalacion/proxy.py
+				sleep 1
+			}
+			echo ""
+			echo -e "\033[1;32mCAMBIANDO PUERTO!"
+			echo ""
+			fun_bar 'fun_msgsocks'
+			restartsocks () {
+				if ps x | grep proxy.py|grep -v grep 1>/dev/null 2>/dev/null; then
+					for pidproxy in  `screen -ls | grep ".proxy" | awk {'print $1'}`; do
+						screen -r -S "$pidproxy" -X quit
+					done
+					screen -wipe > /dev/null
+					sleep 1
+					screen -dmS proxy python ~/.Menu/.instalacion/proxy.py
+				fi
+			}
+			echo ""
+			echo -e "\033[1;32mREINICIANDO PROXY SOCKS!"
+			echo ""
+			fun_bar 'restartsocks'
+			echo ""
+			echo -e "\033[1;32mPUERTO CAMBIADO CON EXITO!"
 			sleep 3
 			fun_socks
 		else
