@@ -14,7 +14,7 @@ PASS = ''
 BUFLEN = 4096 * 4
 TIMEOUT = 60
 MSG = 'MINTERGER'
-DEFAULT_HOST = '0.0.0.0:22'
+DEFAULT_HOST = '0.0.0.0:443'
 RESPONSE = "HTTP/1.1 200 " + str(MSG) + "\r\nContent-length: 0\r\n\r\n \r\n\r\n"
 
 class Server(threading.Thread):

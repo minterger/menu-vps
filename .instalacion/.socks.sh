@@ -194,9 +194,9 @@ fun_socks () {
 			msgsocks=$(cat ~/.Menu/.instalacion/proxy.py |grep -E "DEFAULT_HOST =" | awk -F = '{print $2}' |cut -d "'" -f 2| awk -F ":" '{print $2}')
 			echo -e "\E[44;1;37m             PROXY SOCKS              \E[0m"
 			echo ""
-			echo -e "\033[1;33mPUERTO SSH CONFIGURADO: \033[1;32m$msgsocks"
+			echo -e "\033[1;33mPUERTO SSH O DROPBEAR CONFIGURADO EN SOCKS: \033[1;32m$msgsocks"
 			echo""
-			echo -ne "\033[1;32mESCRIBA SU PUERTO SSH\033[1;31m:\033[1;37m "; read msgg
+			echo -ne "\033[1;32mESCRIBA SU PUERTO SSH O DROPBEAR\033[1;31m:\033[1;37m "; read msgg
 			if [[ -z "$msgg" ]]; then
 				echo ""
 				echo -e "\033[1;31mPuerto invalido!"
