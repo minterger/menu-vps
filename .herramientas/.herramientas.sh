@@ -69,6 +69,44 @@ TCPspeed () {
   fi
 }
 
+htop1 () {
+  if [ -f /usr/bin/htop ]; then
+    clear
+    echo
+    echo -e "Ejecutando HTOP\e[1;32m";
+    echo -e "Precione f10 para salir\e[1;31m";
+    echo
+    sleep 3
+    htop
+  else
+    clear
+    echo
+    echo -e "\e[1;31mHTOP NO ESTA INSTALADO"
+    echo
+    echo -e "\e[1;32mPresiona una tecla para continuar...";
+    read foo
+  fi
+}
+
+fast1 () {
+  if [ -f /snap/bin/fast ]; then
+    clear
+    echo -e "\e[1;32mEjecutando test de velocidad:\e[1;31m"
+    echo
+    fast
+    echo
+    echo -e "\e[1;32mPresiona una tecla para continuar...";
+    read foo
+  else
+    clear
+    echo
+    echo -e "\e[1;31mFAST NO ESTA INSTALADO"
+    echo
+    echo -e "\e[1;32mPresiona una tecla para continuar...";
+    read foo
+  fi
+}
+
 killusers () {
   data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
 
@@ -137,10 +175,7 @@ TCPspeed;
 echo;
 echo -e "\e[1;32mPresiona una tecla para continuar...";
 read foo;;
-3) clear;
-echo -e "Ejecutando htop\e[1;31m";
-echo ;
-htop;;
+3) htop1;;
 4) clear;
 echo -e "Servicios funcionando: \e[1;31m";
 echo ;
@@ -157,13 +192,7 @@ bash .real-host.sh.;
 cd .herramientas.;;
 6) clear;
 bash .speedtest.sh;;
-7) clear;
-echo -e "Ejecutando test de velocidad:\e[1;31m";
-echo ;
-fast;
-echo ;
-echo -e "\e[1;32mPresiona una tecla para continuar...";
-read foo;;
+7) fast1;;
 8)
 restart;;
 0) clear;
