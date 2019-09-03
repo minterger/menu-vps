@@ -165,10 +165,10 @@ echo -e "\e[1;31m[2]\e[1;32m Crear usuario"
 echo -e "\e[1;31m[3]\e[1;32m Redefinir usuario"
 echo -e "\e[1;31m[4]\e[1;32m Eliminar usuario"
 echo -e "\e[1;31m[5]\e[1;32m Lista de usuarios"
-echo -e "\e[1;31m[6]\e[1;32m Desconectar todos los usuarios \e[1;31m(beta)"
+echo -e "\e[1;31m[6]\e[1;32m Desconectar todos los usuarios"
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
-echo -n "Seleccione una opcion [1 - 5]: "
+echo -n "Seleccione una opcion [1 - 6]: "
 read opcion
 case $opcion in
 1)
