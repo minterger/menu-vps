@@ -55,13 +55,6 @@ redefiniruser () {
   if cat /etc/passwd |grep $name: > /dev/null
   then
    echo " "
-  else
-   clear
-   echo "El usuario $name no existe"
-   echo
-   echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
-   read foo
-  fi
   clear
   echo -e "\033[1;33mOpciones a modificar ?\033[1;30m
   1) Numero de Conexiones
@@ -95,6 +88,14 @@ redefiniruser () {
     echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
     read foo
   fi
+else
+ clear
+ echo "El usuario $name no existe"
+ echo
+ echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
+ read foo
+fi
+
 }
 
 killusers () {
