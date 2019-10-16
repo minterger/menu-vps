@@ -147,6 +147,8 @@ DROPBEAR_PORT=443
       echo "DROPBEAR_EXTRA_ARGS=\"-p 444\"" >>/etc/default/dropbear;;
   esac
 
+echo "Minterger dropbear" > /home/banner.net
+
 echo '
 # specify an optional banner file containing a message to be
 # sent to clients before they connect, such as "/etc/issue.net"
