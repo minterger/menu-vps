@@ -90,7 +90,7 @@ redefiniruser () {
   fi
 else
  clear
- echo "\e[1;32mEl usuario \e[1;31m$name \e[1;32mno existe\e[1;0m"
+ echo -e "\e[1;32mEl usuario \e[1;31m$name \e[1;32mno existe\e[1;0m"
  echo
  echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
  read foo
