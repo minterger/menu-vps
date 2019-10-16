@@ -47,7 +47,7 @@ fun_socks () {
 	echo -e "\033[1;33m[\033[1;31m1\033[1;33m] \033[1;33m$var_sks1\033[0m"
 	echo -e "\033[1;33m[\033[1;31m2\033[1;33m] \033[1;33mABRIR PUERTO\033[0m"
 	echo -e "\033[1;33m[\033[1;31m3\033[1;33m] \033[1;33mALTERAR STATUS\033[0m"
-	echo -e "\033[1;33m[\033[1;31m4\033[1;33m] \033[1;33mCAMBIAR PUERTO DEFAULT HOST\033[0m"
+	echo -e "\033[1;33m[\033[1;31m4\033[1;33m] \033[1;33mCAMBIAR PUERTO INTERNO\033[0m"
 	echo -e "\033[1;33m[\033[1;31m0\033[1;33m] \033[1;33mVOLVER\033[0m"
 	echo ""
 	echo -ne "\033[1;32mQUE DESEA HACER \033[1;33m?\033[1;37m "; read resposta
