@@ -51,7 +51,7 @@ crearuser () {
 }
 
 redefiniruser () {
-    read -e -p "\e[1;32mNombre del usuario:\e[1;0m " name
+    read -pe "\e[1;32mNombre del usuario:\e[1;0m " name
   if cat /etc/passwd |grep $name: > /dev/null
   then
    echo " "
