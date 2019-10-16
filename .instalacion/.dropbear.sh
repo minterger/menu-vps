@@ -150,7 +150,7 @@ DROPBEAR_PORT=443
 echo '
 # specify an optional banner file containing a message to be
 # sent to clients before they connect, such as "/etc/issue.net"
-DROPBEAR_BANNER="/etc/issue.net"
+DROPBEAR_BANNER="/home/banner.net"
 
 # RSA hostkey file (default: /etc/dropbear/dropbear_rsa_host_key)
 #DROPBEAR_RSAKEY="/etc/dropbear/dropbear_rsa_host_key"
