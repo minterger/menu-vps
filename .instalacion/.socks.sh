@@ -29,6 +29,7 @@ tput cnorm
 
 fun_socks () {
 	clear
+  sockexp=$(grep "DEFAULT_HOST =" proxy.py | awk -F : '{print $2}' | awk -F "'" '{print $1}')
     if ps x | grep proxy.py|grep -v grep 1>/dev/null 2>/dev/null; then
     	sks='\033[1;32mON'
     	sockspt=$(netstat -nplt |grep 'python' | awk -F ":" {'print $2'} | cut -d " " -f 1 | xargs)
@@ -40,7 +41,8 @@ fun_socks () {
     fi
     echo -e "\E[44;1;37m            ADMINISTRAR PROXY SOCKS             \E[0m"
     echo ""
-    echo -e "\033[1;33mPUERTOS\033[1;37m: \033[1;32m$sockspt"
+    echo -e "\033[1;33mPUERTOS INTERNO\033[1;37m: \033[1;32m$sockexp"
+    echo -e "\033[1;33mPUERTOS EXPUESTOS\033[1;37m: \033[1;32m$sockspt"
     echo ""
 	echo -e "\033[1;33m[\033[1;31m1\033[1;33m] \033[1;33m$var_sks1\033[0m"
 	echo -e "\033[1;33m[\033[1;31m2\033[1;33m] \033[1;33mABRIR PUERTO\033[0m"
