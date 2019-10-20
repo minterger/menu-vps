@@ -2,7 +2,7 @@
 
 banner=$(grep "banner /home/banner.net" /etc/ssh/ssh_config)
 
-if [ "$banner" = "banner /home/banner.net" ]
+if [ "$banner" = "banner /home/banner.net" ]; then
   clear
 else
   echo "banner /home/banner.net" >>/etc/ssh/sshd_config
