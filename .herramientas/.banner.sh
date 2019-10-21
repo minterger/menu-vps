@@ -40,3 +40,9 @@ while [[ condition ]]; do
   fi
 
 done
+
+clear
+
+echo /home/banner
+
+read foo
