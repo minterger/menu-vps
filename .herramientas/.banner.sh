@@ -9,6 +9,8 @@ else
   service sshd reload >/dev/null 2>/dev/null
 fi
 
+clear
+
 cd ~/.Menu
 echo -e "\e[32mPara salir escriba exit\e[31m"
 echo
