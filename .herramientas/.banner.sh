@@ -35,6 +35,8 @@ while [[ condition ]]; do
     else
       clear
     fi
+    service sshd reload >/dev/null 2>/dev/null
+    service dropbear restart >/dev/null 2>/dev/null
     echo -e "\e[0m"
     exit
   else
