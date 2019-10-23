@@ -32,8 +32,12 @@ crearuser () {
   		echo -e "\033[1;36mUsuario: \033[0m$name"
   		echo -e "\033[1;36mContraseña: \033[0m$pass"
   		echo -e "\033[1;36mExpira:\033[0m $datexp"
-      echo -e "\033[1;36mDatos HTTP custom:\033[0m $ip:$portd@$name:$pass "
-  	    echo "$pass" > ~/.Menu/.users/passwd/$name
+      if [["$portd" = ""]];then
+        echo -e "\033[1;36mPara generar datos para HTTP custom escriba un puerto\033[0m"
+      else
+        echo -e "\033[1;36mDatos HTTP custom:\033[0m $ip:$portd@$name:$pass "
+      fi
+        echo "$pass" > ~/.Menu/.users/passwd/$name
       echo
       echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
       read foo
