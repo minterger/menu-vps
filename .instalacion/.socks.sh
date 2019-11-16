@@ -251,6 +251,7 @@ fun_socks () {
 	fi
 
 }
+
 if [ -f /usr/bin/python ]; then
   fun_socks
 else
