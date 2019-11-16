@@ -251,4 +251,11 @@ fun_socks () {
 	fi
 
 }
-fun_socks
+if [ -f /usr/bin/python ]; then
+  fun_socks
+else
+  echo -e "\e[1;32mInstalando dependencias.....\e[1;32m"
+  apt-get update >/dev/null 2>/dev/null
+  apt-get install -y python >/dev/null 2>/dev/null
+  velocity
+fi
