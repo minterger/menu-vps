@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 banner=$(grep "banner /home/banner.net" /etc/ssh/sshd_config)
 
 if [ "$banner" = "banner /home/banner.net" ]; then

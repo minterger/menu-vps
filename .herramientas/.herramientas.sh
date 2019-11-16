@@ -131,6 +131,10 @@ killusers () {
   done
 }
 
+banner () {
+  bash .banner.sh
+}
+
 restart () {
   echo ""
   echo "Eperando para reiniciar"
@@ -161,7 +165,8 @@ echo -e "\e[1;31m[4]\e[1;32m Servicios \e[1;37m(ver los servicios funcionando)\e
 echo -e "\e[1;31m[5]\e[1;32m Host extractor \e[1;37m(extraer host para payload)\e[1;0m"
 echo -e "\e[1;31m[6]\e[1;32m Speedtest \e[1;37m(hacer un test total de velocidad)\e[1;0m"
 echo -e "\e[1;31m[7]\e[1;32m Fast \e[1;37m(medir solo velocidad de descarga)\e[1;0m"
-echo -e "\e[1;31m[8]\e[1;32m Reiniciar vps"
+echo -e "\e[1;31m[8]\e[1;32m Cambiar banner"
+echo -e "\e[1;31m[9]\e[1;32m Reiniciar vps"
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
 echo -n "Seleccione una opcion [1 - 8]: "
@@ -194,6 +199,8 @@ cd .herramientas.;;
 bash .speedtest.sh;;
 7) fast1;;
 8)
+banner;;
+9)
 restart;;
 0) clear;
 exit 1;;
