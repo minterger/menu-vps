@@ -169,7 +169,7 @@ echo -e "\e[1;31m[8]\e[1;32m Cambiar banner"
 echo -e "\e[1;31m[9]\e[1;32m Reiniciar vps"
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
-echo -n "Seleccione una opcion [1 - 8]: "
+echo -n "Seleccione una opcion [1 - 9]: "
 read opcion
 case $opcion in
 1)BadVPN;
