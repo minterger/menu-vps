@@ -36,6 +36,8 @@ check () {
 }
 
 cd ~/.Menu
+
+clear
 echo -e "\e[1;37mChequeando actualizaciones\e[1;0m"
 
 fun_bar check
