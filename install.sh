@@ -1,5 +1,23 @@
 #!/bin/bash
 
+## banner ##
+
+if [ -f /home/banner.net ]; then
+  clear
+else
+  echo "Script by MINTERGER" > /home/banner.net
+fi
+
+## configurar banner para sshd ##
+banner=$(grep "banner /home/banner.net" /etc/ssh/sshd_config)
+
+if [ "$banner" = "banner /home/banner.net" ]; then
+  clear
+else
+  echo "banner /home/banner.net" >>/etc/ssh/sshd_config
+  service sshd reload >/dev/null 2>/dev/null
+fi
+
 #animacion de carga
 fun_bar () {
 comando[0]="$1"
