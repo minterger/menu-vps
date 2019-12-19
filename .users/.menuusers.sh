@@ -4,7 +4,7 @@ users () {
   clear
   bash .users.sh
   echo
-  echo -e "\e[1;32mPresiona una tecla para continuar..."
+  echo -e "\e[1;32mPresiona enter para continuar..."
   read foo
 }
 
@@ -40,7 +40,7 @@ crearuser () {
       fi
         echo "$pass" > ~/.Menu/.users/passwd/$name
       echo
-      echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
+      echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
       read foo
   	fi
   else
@@ -71,7 +71,7 @@ redefiniruser () {
     read -p "Cual es el nuevo limite de logins: " liml
     limite $name $liml
     echo
-    echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
+    echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
     read foo
   fi
 
@@ -81,7 +81,7 @@ redefiniruser () {
     chage -E $date $name 2> /dev/null
     echo -e "\033[1;31mEl usuario $name se desconectara el dia: $date\033[0m"
     echo
-    echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
+    echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
     read foo
   fi
   if [ $option -eq 3 ]
@@ -91,14 +91,14 @@ redefiniruser () {
     echo "$pass" > ~/.Menu/.users/passwd/$name
     echo "Nueva contraseña aplicada: $pass"
     echo
-    echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
+    echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
     read foo
   fi
 else
  clear
  echo -e "\e[1;32mEl usuario \e[1;31m$name \e[1;32mno existe\e[1;0m"
  echo
- echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
+ echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
  read foo
 fi
 
@@ -139,14 +139,14 @@ userdelete () {
     echo
     echo -e "\e[1;32mUsuario \e[1;31m$name \e[1;32mno existe\e[1;0m"
     echo
-    echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
+    echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
     read foo
   else
     userdel --force $name > /dev/null 2>/dev/null
     echo
     echo -e "\e[1;32mEl usuario \e[1;31m$name \e[1;32mfue eliminado\e[1;0m"
     echo
-    echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
+    echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
     read foo
   fi
 }
@@ -155,7 +155,7 @@ userlist () {
   clear
   bash .listusers.sh
   echo
-  echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
+  echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
   read foo
 }
 
@@ -194,7 +194,7 @@ killusers;;
 exit 1;;
 *) clear;
 echo -e "\e[1;31mEs una opcion invalida:";
-echo -e "\e[1;32mPresiona una tecla para continuar...";
+echo -e "\e[1;32mPresiona enter para continuar...";
 read foo;;
 esac
 done

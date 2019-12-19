@@ -21,7 +21,7 @@ update () {
   sudo rm -r install.sh >/dev/null 2>/dev/null
   echo -e "\033[1;32mPara terminar la actualizacion salga del script y vuelva a entrar\033[0m"
   echo
-  echo -e "\033[1;32mPresione una tecla para continuar\033[0m"
+  echo -e "\033[1;32mPresione enter para continuar\033[0m"
   read foo
   exit 1
 }
@@ -75,7 +75,7 @@ inf_system () {
   echo -e "${null2}Version del Kernel: ${null}$(uname -r)"
   echo -e "${null2}Arquitectura: ${null}$(uname -m)"
   echo -e "\e[1;37m-----------------------------------------------------\e[1;0m"
-  echo -e "\e[1;32mPresiona una tecla para continuar..."
+  echo -e "\e[1;32mPresiona enter para continuar..."
   read foo
   return 0
 }
@@ -126,7 +126,7 @@ update;;
 exit 1;;
 *) clear;
 echo -e "\e[1;31mEs una opcion invalida:";
-echo -e "\e[1;32mPresiona una tecla para continuar...";
+echo -e "\e[1;32mPresiona enter para continuar...";
 read foo;;
 esac
 done

@@ -45,7 +45,7 @@ echo -e "\033[1;32mDOWNLOAD: \033[1;37m$down"
 echo -e "\033[1;32mUPLOAD: \033[1;37m$upl"
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo
-echo -e "\e[1;32mPresiona una tecla para continuar...\e[1;0m"
+echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
 read foo
 rm -rf $HOME/speed
 }

@@ -78,11 +78,11 @@ echo -e "Desinstalando Htop:\e[1;31m";
 echo ;
 fun_bar desinstalar;
 echo ;
-echo -e "\e[1;32mDesinstalado\nPresiona una tecla para continuar...";
+echo -e "\e[1;32mDesinstalado\nPresiona enter para continuar...";
 read foo;
 exit 1;;
 n|N) clear;
-echo -e "\e[1;32mPresiona una tecla para continuar...";
+echo -e "\e[1;32mPresiona enter para continuar...";
 read foo;
 exit 1;;
 esac
@@ -93,7 +93,7 @@ else
   echo -e "\033[1;32mInstalacion completada\033[0m"
 
   echo
-  echo -e "\e[1;32mPresiona una tecla para continuar..."
+  echo -e "\e[1;32mPresiona enter para continuar..."
   read foo
   exit 1
 

@@ -109,11 +109,11 @@ case $opcion in
   echo ;
   fun_bar desinstalar;
   echo ;
-  echo -e "\e[1;32mDesinstalado.\n\nPresiona una tecla para continuar...";
+  echo -e "\e[1;32mDesinstalado.\n\nPresiona enter para continuar...";
   read foo;
   exit 1;;
   n|N) clear;
-  echo -e "\e[1;32mPresiona una tecla para continuar...";
+  echo -e "\e[1;32mPresiona enter para continuar...";
   read foo;
   exit 1;;
 esac
@@ -172,7 +172,7 @@ DROPBEAR_RECEIVE_WINDOW=65536
   service dropbear start >/dev/null 2>/dev/null
   service ssh start >/dev/null 2>/dev/null
 
-  echo -e "\e[1;32mPresiona una tecla para continuar...\033[1;0m"
+  echo -e "\e[1;32mPresiona enter para continuar...\033[1;0m"
   read foo
   exit 1
 fi

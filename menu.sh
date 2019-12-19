@@ -75,7 +75,7 @@ exit 1;;
 *) clear;
 echo -e "\e[1;31mEs una opcion invalida:";
 echo;
-echo -e "\e[1;32mPresiona una tecla para continuar...";
+echo -e "\e[1;32mPresiona enter para continuar...";
 read foo;;
 esac
 done

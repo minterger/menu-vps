@@ -112,11 +112,11 @@ case $opcion in
   echo ;
   fun_bar desinstalar;
   echo ;
-  echo -e "\e[1;32mDesinstalado.\n\nPresiona una tecla para continuar...";
+  echo -e "\e[1;32mDesinstalado.\n\nPresiona enter para continuar...";
   read foo;
   exit 1;;
   n|N) clear;
-  echo -e "\e[1;32mPresiona una tecla para continuar...";
+  echo -e "\e[1;32mPresiona enter para continuar...";
   read foo;
   exit 1;;
 esac
@@ -195,7 +195,7 @@ desinstala=$(service squid restart) && touch /tmp/instmp
 sleep 0.6s
 
   echo
-  echo -e "\e[1;32mPresiona una tecla para continuar...\033[1;0m"
+  echo -e "\e[1;32mPresiona enter para continuar...\033[1;0m"
   read foo
   exit 1
 fi

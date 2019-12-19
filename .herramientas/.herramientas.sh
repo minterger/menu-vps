@@ -83,7 +83,7 @@ htop1 () {
     echo
     echo -e "\e[1;31mHTOP NO ESTA INSTALADO"
     echo
-    echo -e "\e[1;32mPresiona una tecla para continuar...";
+    echo -e "\e[1;32mPresiona enter para continuar...";
     read foo
   fi
 }
@@ -95,14 +95,14 @@ fast1 () {
     echo
     fast
     echo
-    echo -e "\e[1;32mPresiona una tecla para continuar...";
+    echo -e "\e[1;32mPresiona enter para continuar...";
     read foo
   else
     clear
     echo
     echo -e "\e[1;31mFAST NO ESTA INSTALADO"
     echo
-    echo -e "\e[1;32mPresiona una tecla para continuar...";
+    echo -e "\e[1;32mPresiona enter para continuar...";
     read foo
   fi
 }
@@ -173,12 +173,12 @@ echo -n "Seleccione una opcion [1 - 9]: "
 read opcion
 case $opcion in
 1)BadVPN;
-echo -e "\e[1;32mPresiona una tecla para continuar...";
+echo -e "\e[1;32mPresiona enter para continuar...";
 read foo;;
 2) clear;
 TCPspeed;
 echo;
-echo -e "\e[1;32mPresiona una tecla para continuar...";
+echo -e "\e[1;32mPresiona enter para continuar...";
 read foo;;
 3) htop1;;
 4) clear;
@@ -186,7 +186,7 @@ echo -e "Servicios funcionando: \e[1;31m";
 echo ;
 lsof -n -i -P | grep '*';
 echo ;
-echo -e "\e[1;32mPresiona una tecla para continuar...";
+echo -e "\e[1;32mPresiona enter para continuar...";
 read foo;;
 5) clear;
 echo -e "Ejecutando Script: \e[1;31m";
@@ -206,7 +206,7 @@ restart;;
 exit 1;;
 *) clear;
 echo -e "\e[1;31mEs una opcion invalida:";
-echo -e "\e[1;32mPresiona una tecla para continuar...";
+echo -e "\e[1;32mPresiona enter para continuar...";
 read foo;;
 esac
 done
