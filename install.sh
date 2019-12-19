@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#animacion de carga
 fun_bar () {
 comando[0]="$1"
 comando[1]="$2"
@@ -27,8 +28,13 @@ done
 echo -e "\033[1;33m]\033[1;37m -\033[1;32m OK !\033[1;37m"
 tput cnorm
 }
+#fin animacion de carga
 
+
+#funcion para instalar
 instalar () {
+
+  #verificacion e intalacion de dependencias
   if [ -f /usr/bin/unzip ]; then
     echo "" >/dev/null 2>/dev/null
   else
@@ -41,6 +47,8 @@ instalar () {
     sudo apt-get update >/dev/null 2>/dev/null
     sudo apt-get install -y lsof >/dev/null 2>/dev/null
   fi
+  #fin de verificacion e intalacion
+
   cd ~
   wget https://github.com/minterger/menu/archive/master.zip >/dev/null 2>/dev/null
   unzip master.zip >/dev/null 2>/dev/null
@@ -59,6 +67,8 @@ instalar () {
 
 }
 
+
+#### animacion antigua #####
 #instalar2 () {
 #  echo -e "\033[1;32mInstalando Script\033[0m"
 #  echo
@@ -84,6 +94,7 @@ instalar () {
 
 if [ -f /bin/menu ]
 then
+  #actualizar o reinstalar
   echo -e "\033[1;32mBorrando Version anterior\033[0m"
   rm -r /bin/menu
   rm -r ~/.Menu
@@ -97,6 +108,7 @@ then
   echo -e "\033[1;32mPara ejecutarlo use \033[1;33mmenu\033[0m"
   echo
 else
+  #solo instalacion
   echo
   echo -e "\033[1;32mInstalando Script\033[0m"
   echo
