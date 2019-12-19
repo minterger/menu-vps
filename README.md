@@ -1,8 +1,8 @@
-# vpsmanager
-# vpsmanager
-# vpsmanager
+# [vpsmanager](https://github.com/minterger/menu)
+# [vpsmanager](https://github.com/minterger/menu)
+# [vpsmanager](https://github.com/minterger/menu)
 #### PARA INSTALAR EJECUTE:
 wget https://raw.githubusercontent.com/minterger/menu/master/install.sh && sudo bash install.sh && sudo rm -r install.sh
-# vpsmanager
-# vpsmanager
-# vpsmanager
+# [vpsmanager](https://github.com/minterger/menu)
+# [vpsmanager](https://github.com/minterger/menu)
+# [vpsmanager](https://github.com/minterger/menu)
