@@ -47,7 +47,7 @@ do
         USER=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID\]" | awk '{print $9}'`;
         IP=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID\]" | awk '{print $11}'`;
         if [ $NUM2 -eq 1 ]; then
-          echo -e "\e[1;32m[PID]:\e[1;33m $PID \e[1;32m- [Usuario]:\e[1;33m $USER";
+          echo -e "\e[1;32m[PID]:\e[1;33m $PID \e[1;32m- [Usuario]:\e[1;33m $USER \e[1;32m- [Ip]:\e[1;33m $IP"";
           echo -e "\e[1;32m[TOTAL en Dropbear]:\e[1;33m $NUM2";
           SSH=$(($SSH + 1))
         fi
