@@ -6,12 +6,11 @@
 ##      Licencia: GPL v2
 ##########################################################
 
-# Declaracion de Variables
-
 cd ..
 bash .head.sh
 cd .herramientas
 
+# Declaracion de Variables
 NUM=$(cat /etc/passwd | cut -d: -f3) # > tmp/user
 MIN="999"
 MAX="2000"
