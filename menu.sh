@@ -1,9 +1,44 @@
 #!/bin/bash
 
+#animacion de carga
+fun_bar () {
+comando[0]="$1"
+comando[1]="$2"
+ (
+[[ -e $HOME/fim ]] && rm $HOME/fim
+[[ ! -d ~/.Menu ]] && rm -rf /bin/menu
+${comando[0]} > /dev/null 2>&1
+${comando[1]} > /dev/null 2>&1
+touch $HOME/fim
+ ) > /dev/null 2>&1 &
+ tput civis
+echo -ne "\033[1;33mESPERE \033[1;37m- \033[1;33m["
+while true; do
+   for((i=0; i<18; i++)); do
+   echo -ne "\033[1;31m#"
+   sleep 0.1s
+   done
+   [[ -e $HOME/fim ]] && rm $HOME/fim && break
+   echo -e "\033[1;33m]"
+   sleep 1s
+   tput cuu1
+   tput dl1
+   echo -ne "\033[1;33mESPERE \033[1;37m- \033[1;33m["
+done
+echo -e "\033[1;33m]\033[1;37m -\033[1;32m OK !\033[1;37m"
+tput cnorm
+}
+#fin animacion de carga
+
+check () {
+  sudo rm -r version >/dev/null 2>/dev/null
+  wget https://raw.githubusercontent.com/minterger/menu/master/version >/dev/null 2>/dev/nul
+}
+
 cd ~/.Menu
 echo -e "\e[1;37mChequeando actualizaciones\e[1;0m"
-sudo rm -r version >/dev/null 2>/dev/null
-wget https://raw.githubusercontent.com/minterger/menu/master/version >/dev/null 2>/dev/null
+
+fun_bar check
 
 while :
 do
