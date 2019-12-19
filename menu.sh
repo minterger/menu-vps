@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#ingresar al directorio del script
+cd ~/.Menu
+
 #animacion de carga
 fun_bar () {
 comando[0]="$1"
@@ -30,17 +33,16 @@ tput cnorm
 }
 #fin animacion de carga
 
+########### check de actualizacion ############
 check () {
   sudo rm -r version >/dev/null 2>/dev/null
   wget https://raw.githubusercontent.com/minterger/menu/master/version >/dev/null 2>/dev/nul
 }
 
-cd ~/.Menu
-
 clear
 echo -e "\e[1;37mChequeando actualizaciones\e[1;0m"
-
 fun_bar check
+######### fin check de actualizacion ##########
 
 while :
 do
