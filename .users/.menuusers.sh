@@ -66,7 +66,7 @@ redefiniruser () {
   \e[36m1) \e[96mNumero de Conexiones
   \e[36m2) \e[96mFecha de expiracion
   \e[36m3) \e[96mCambiar contraseña del usuario
-  \e[36m4) \e[96mVolver\e[32m"
+  \e[36m0) \e[96mVolver\e[32m"
   read -p " opcion: " option
   if [ $option -eq 1 ]; then
     read -p "Cual es el nuevo limite de logins: " liml
