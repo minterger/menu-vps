@@ -62,7 +62,7 @@ redefiniruser () {
   then
    echo " "
   clear
-  echo -e "\e[100m \033[1;33mOpciones a modificar ?\033[1;30m
+  echo -e "\e[100m \033[1;33mOpciones a modificar ?\033[1;30m \e[0m
   \e[36m1) \e[96mNumero de Conexiones
   \e[36m2) \e[96mFecha de expiracion
   \e[36m3) \e[96mCambiar contraseña del usuario\e[32m"
