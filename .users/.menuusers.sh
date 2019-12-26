@@ -65,7 +65,8 @@ redefiniruser () {
   echo -e "\e[100m \033[1;33mOpciones a modificar ?\033[1;30m \e[0m
   \e[36m1) \e[96mNumero de Conexiones
   \e[36m2) \e[96mFecha de expiracion
-  \e[36m3) \e[96mCambiar contraseña del usuario\e[32m"
+  \e[36m3) \e[96mCambiar contraseña del usuario
+  \e[36m4) \e[96mVolver\e[32m"
   read -p " opcion: " option
   if [ $option -eq 1 ]; then
     read -p "Cual es el nuevo limite de logins: " liml
@@ -94,13 +95,18 @@ redefiniruser () {
     echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
     read foo
   fi
-else
- clear
- echo -e "\e[1;32mEl usuario \e[1;31m$name \e[1;32mno existe\e[1;0m"
- echo
- echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
- read foo
-fi
+  else
+   clear
+   echo -e "\e[1;32mEl usuario \e[1;31m$name \e[1;32mno existe\e[1;0m"
+   echo
+   echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
+   read foo
+  fi
+
+  if [ $option -eq 0 ]
+  then
+    clear
+  fi
 
 }
 
