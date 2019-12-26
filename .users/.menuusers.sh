@@ -62,11 +62,11 @@ redefiniruser () {
   then
    echo " "
   clear
-  echo -e "\033[1;33mOpciones a modificar ?\033[1;30m
-  1) Numero de Conexiones
-  2) Fecha de expiracion
-  3) Cambiar contraseña del usuario"
-  read -p "opcion: " option
+  echo -e "\e[100m \033[1;33mOpciones a modificar ?\033[1;30m
+  \e[36m1) \e[96mNumero de Conexiones
+  \e[36m2) \e[96mFecha de expiracion
+  \e[36m3) \e[96mCambiar contraseña del usuario\e[32m"
+  read -p " opcion: " option
   if [ $option -eq 1 ]; then
     read -p "Cual es el nuevo limite de logins: " liml
     limite $name $liml
