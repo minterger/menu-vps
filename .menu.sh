@@ -12,29 +12,22 @@ updates () {
 }
 
 update () {
-  if [ -f ~/backup ]; then
-    cd ~
-    cp ~/.Menu/.users/passwd ~/backup/
-    cp ~/.Menu/.instalacion/proxy.py ~/backup/
-  else
-    cd ~
-    mkdir backup
-    cp ~/.Menu/.users/passwd ~/backup/
-    cp ~/.Menu/.instalacion/proxy.py ~/backup/
-  fi
+
+  cd ~
+  mkdir backup
+  cp -r ~/.Menu/.users/passwd ~/backup/
+  cp ~/.Menu/.instalacion/proxy.py ~/backup/
 
   echo -e "\e[1;0m"
   echo -e "\033[1;32mDescargando"
   echo
-  ## wget https://raw.githubusercontent.com/minterger/menu/master/install.sh >/dev/null 2>/dev/null
-  ## bash install.sh
-  ## sudo rm -r install.sh >/dev/null 2>/dev/null
+  wget https://raw.githubusercontent.com/minterger/menu/master/install.sh >/dev/null 2>/dev/null
+  bash install.sh
+  sudo rm -r install.sh >/dev/null 2>/dev/null
 
-  if [ -f ~/backup ]; then
-    cp ~/backup/passwd ~/.Menu/.users/
-    cp ~/backup/proxy.py ~/.Menu/.instalacion/
-    rm ~/backup/proxy.py
-  fi
+  cp -r ~/backup/passwd ~/.Menu/.users/
+  cp ~/backup/proxy.py ~/.Menu/.instalacion/
+  rm -r ~/backup
 
   echo -e "\033[1;32mPara terminar la actualizacion salga del script y vuelva a entrar\033[0m"
   echo
