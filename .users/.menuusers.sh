@@ -147,6 +147,7 @@ userdelete () {
     echo -e "\e[1;32mEl usuario \e[1;31m$name \e[1;32mfue eliminado\e[1;0m"
     echo
     echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
+    rm ~/.Menu/.users/passwd/$name*
     read foo
   fi
 }

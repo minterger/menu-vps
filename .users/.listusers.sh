@@ -20,6 +20,7 @@ echo
 for ID in do $NUM; do
     if [ $ID -gt $MIN > /dev/null 2>&1 ] && [ $ID -lt $MAX > /dev/null 2>&1 ] ; then
                 USER=$(cat /etc/passwd | cut -d: -f1-3 | grep $ID | cut -d: -f1)
-                echo -e "\e[1;31m>\e[1;30m $USER"
+                PASSWD=$(cat ~/.Menu/.users/passwd/$USER)
+                echo -e "\e[1;31m>\e[1;30m $USER contraseña: $PASSWD"
         fi
 done
