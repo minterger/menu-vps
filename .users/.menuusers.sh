@@ -73,6 +73,17 @@ redefiniruser () {
     read -p "Cual es el nuevo limite de logins: " liml
     limite $name $liml
     echo
+
+    LIMITE=$(cat /root/usuarios.db | grep "$name " | awk '{print $2}')
+    USER=$(cat /root/usuarios.db | grep "$name " | awk '{print $1}')
+
+    if [ $USER == $name ];then
+      sed "s/$USER $LIMITE/$name $liml/" /root/usuarios.db > /root/usuariosnew.db
+      mv /root/usuariosnew.db /root/usuarios.db
+    else
+      echo "$name $limiteuser" >> /root/usuarios.db
+    fi
+
     echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
     read foo
   fi
