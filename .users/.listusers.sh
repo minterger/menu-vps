@@ -28,7 +28,7 @@ for ID in do $NUM; do
                 fi
 
                 if [ -f /root/usuarios.db ]; then
-                  LIMITE=$(cat /root/usuarios.db | grep "$user " | awk '{print $2}')
+                  LIMITE=$(cat /root/usuarios.db | grep "$USER " | awk '{print $2}')
                   if [ "$LIMITE" = "" ];then
                     LIMITE="null"
                   fi
