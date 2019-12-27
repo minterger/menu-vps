@@ -71,6 +71,7 @@ redefiniruser () {
   read -p " opcion: " option
   if [ $option -eq 1 ]; then
     read -p "Cual es el nuevo limite de logins: " liml
+    echo
     limite $name $liml
     echo
 
