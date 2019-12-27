@@ -27,6 +27,6 @@ for ID in do $NUM; do
                   PASSWD="Contraseña no encontrada"
                 fi
 
-                echo -e "\e[1;31m>\e[1;30m $USER contraseña: $PASSWD"
+                echo -e "\e[1;31m>\e[1;30mUsuario: $USER    contraseña: $PASSWD"
         fi
 done
