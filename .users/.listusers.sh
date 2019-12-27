@@ -24,16 +24,16 @@ for ID in do $NUM; do
                 if [ -f ~/.Menu/.users/passwd/$USER ]; then
                   PASSWD=$(cat ~/.Menu/.users/passwd/$USER)
                 else
-                  PASSWD="Contraseña no encontrada"
+                  PASSWD="null"
                 fi
 
                 if [ -f /root/usuarios.db ]; then
                   LIMITE=$(cat /root/usuarios.db | grep "$user " | awk '{print $2}')
                   if [ $LIMITE = "" ];then
-                    LIMITE="nulo"
+                    LIMITE="null"
                   fi
                 else
-                  LIMITE="no database"
+                  LIMITE="null"
                 fi
 
                 echo -e "\e[1;31m>\e[1;30mUsuario: $USER    contraseña: $PASSWD   limite_ssh: $LIMITE"
