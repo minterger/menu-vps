@@ -39,6 +39,7 @@ crearuser () {
         echo -e "\033[1;36mDatos HTTP custom:\033[0m $ip:$portd@$name:$pass "
       fi
         echo "$pass" > ~/.Menu/.users/passwd/$name
+        echo "$name $limiteuser" >> /root/usuarios.db
       echo
       echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
       read foo
@@ -154,6 +155,8 @@ userdelete () {
     echo
     echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
     rm ~/.Menu/.users/passwd/$name*
+    sed "/$name /d " /root/usuarios.db > /root/usuariosdel.db
+    mv /root/usuariosdel.db /root/usuarios.db
     read foo
   fi
 }
