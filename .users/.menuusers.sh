@@ -77,7 +77,7 @@ redefiniruser () {
     LIMITE=$(cat /root/usuarios.db | grep "$name " | awk '{print $2}')
     USER=$(cat /root/usuarios.db | grep "$name " | awk '{print $1}')
 
-    if [ $USER == $name ];then
+    if [ "$USER" == "$name" ];then
       sed "s/$USER $LIMITE/$name $liml/" /root/usuarios.db > /root/usuariosnew.db
       mv /root/usuariosnew.db /root/usuarios.db
     else
