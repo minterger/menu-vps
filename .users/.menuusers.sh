@@ -182,6 +182,7 @@ userlist () {
 }
 
 monitorssh () {
+  clear
   database="/root/usuarios.db"
   echo $$ > /tmp/kids
   while true
@@ -201,11 +202,13 @@ monitorssh () {
   		fi
   	done < "$database"
   	echo ""
-  	exit 1
-  done
+    echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
+    read foo
+    done
 }
 
 killmulti () {
+  clear
   database="/root/usuarios.db"
   echo $$ > /tmp/pids
   if [ ! -f "$database" ]
