@@ -187,7 +187,7 @@ monitorssh () {
   echo $$ > /tmp/kids
   while true
   do
-  tput setaf 7 ; tput setab 1 ; tput bold ; printf '%28s%s%-18s\n' "SSH Monitor"
+  tput setaf 7 ; tput setab 1 ; tput bold ; printf '%29s%s%-20s\n' "SSH Monitor"
   tput setaf 7 ; tput setab 1 ; printf '  %-30s%s\n' "Usuário" "Conexión / Límite" ; echo "" ; tput sgr0
   	while read usline
   	do
@@ -218,7 +218,7 @@ killmulti () {
   fi
   while true
   do
-  tput setaf 7 ; tput setab 4 ; tput bold ; printf '%28s%s%-18s\n' "SSH Limiter"
+  tput setaf 7 ; tput setab 4 ; tput bold ; printf '%29s%s%-20s\n' "SSH Limiter"
   tput setaf 7 ; tput setab 4 ; printf '  %-30s%s\n' "Usuário" "Conexión / Límite " ; echo "" ; tput sgr0
   	while read usline
   	do
