@@ -188,7 +188,7 @@ monitorssh () {
   while true
   do
   tput setaf 7 ; tput setab 1 ; tput bold ; printf '%29s%s%-20s\n' "SSH Monitor"
-  tput setaf 7 ; tput setab 1 ; printf '  %-30s%s\n' "Usuário" "Conexión / Límite " ; echo "" ; tput sgr0
+  tput setaf 7 ; tput setab 1 ; printf '  %-30s%s\n' "Usuário" "contraseña" "Conexión / Límite " ; echo "" ; tput sgr0
   	while read usline
   	do
   		user="$(echo $usline | cut -d' ' -f1)"
@@ -196,9 +196,15 @@ monitorssh () {
   		if [ -z "$user" ] ; then
   			echo "" > /dev/null
   		else
+        if [ -f ~/.Menu/.users/passwd/$user ]; then
+          passwd=$(cat ~/.Menu/.users/passwd/$user)
+        else
+          passwd="null"
+        fi
+
   			ps x | grep [[:space:]]$user[[:space:]] | grep -v grep | grep -v pts > /tmp/tmp8
   			s1ssh="$(cat /tmp/tmp8 | wc -l)"
-  			tput setaf 3 ; tput bold ; printf '  %-35s%s\n' $user $s1ssh/$s2ssh; tput sgr0
+  			tput setaf 3 ; tput bold ; printf '  %-35s%s\n' $user $passwd $s1ssh/$s2ssh; tput sgr0
   		fi
   	done < "$database"
   	echo ""
