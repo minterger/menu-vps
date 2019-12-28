@@ -249,7 +249,7 @@ killmulti () {
   		fi
   	done < "$database"
     echo ""
-    echo "\e[1;32m Para salir precione Ctrl + C\e[1;0m"
+    echo -e "\e[1;32m Para salir precione Ctrl + C\e[1;0m"
   	sleep 5
   	clear
   done
