@@ -204,6 +204,7 @@ monitorssh () {
   	echo ""
     echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
     read foo
+    break
     done
 }
 
