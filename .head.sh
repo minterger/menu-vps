@@ -22,8 +22,8 @@ countusers () {
           NUM4=$(($NUM4 + $NUM2));
   done
 
-  echo -e "\e[1;31mCONECTADOS DROPBEAR:\e[1;32m [$NUM3]"
-  echo -e "\e[1;31mCONECTADOS SSH:\e[1;32m [$NUM4]"
+  dbr1="$(echo -e "\e[1;31mCONECTADOS DROPBEAR:\e[1;32m [$NUM3]")"
+  ssh1="$(echo -e "\e[1;31mCONECTADOS SSH:\e[1;32m [$NUM4]")"
 }
 
 # ver puertos abiertos
@@ -84,6 +84,7 @@ badvpn () {
   echo -e "\e[1;31mBADVPN:\e[1;32m $startbad "
 }
 
+countusers
 clear
 echo -e "\e[1;33m(Main)\e[1;32m"
 echo " ___    ___  _  ___     _  _______  ______  _____   ______  ______  _____  "
@@ -98,5 +99,7 @@ echo -e "\e[1;32mPuertos abiertos:"
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 mine_port
 badvpn
+echo "$dbr1"
+echo "$ssh1"
 countusers
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
