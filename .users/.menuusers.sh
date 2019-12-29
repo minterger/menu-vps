@@ -1,31 +1,4 @@
 #!/bin/bash
-fun_bar () {
-  comando[0]="$1"
-  comando[1]="$2"
-    (
-      [[ -e $HOME/fim ]] && rm $HOME/fim
-      [[ ! -d ~/.Menu ]] && rm -rf /bin/menu
-      ${comando[0]} > /dev/null 2>&1
-      ${comando[1]} > /dev/null 2>&1
-      touch $HOME/fim
-    ) > /dev/null 2>&1 &
-  tput civis
-  echo -ne "\033[1;33mESPERE \033[1;37m- \033[1;33m["
-  while true; do
-     for((i=0; i<18; i++)); do
-       echo -ne "\033[1;31m#"
-       sleep 0.1s
-     done
-     [[ -e $HOME/fim ]] && rm $HOME/fim && break
-     echo -e "\033[1;33m]"
-     sleep 1s
-     tput cuu1
-     tput dl1
-     echo -ne "\033[1;33mESPERE \033[1;37m- \033[1;33m["
-  done
-  echo -e "\033[1;33m]\033[1;37m -\033[1;32m OK !\033[1;37m"
-  tput cnorm
-}
 
 users () {
   clear
@@ -389,41 +362,10 @@ monitordropbear () {
     done
 }
 
-fun_socksoffssh () {
-  for pidkillssh in  `screen -ls | grep ".killssh" | awk {'print $1'}`; do
-    screen -r -S "$pidkillssh" -X quit
-  done
-  sleep 1
-  screen -wipe > /dev/null
-}
-
-fun_inisocks () {
-  screen -dmS killssh bash ~/.Menu/.users/.killssh.sh
-}
-
 autokill () {
-  if ps x | grep .killssh.sh | grep -v grep 1>/dev/null 2>/dev/null; then
-    clear
-
-    echo -e "\033[1;32mDESACTIVANDO AUTOKILLSSH\033[1;33m"
-    echo ""
-    fun_bar 'fun_socksoffssh'
-    echo ""
-    echo -e "\033[1;32mAUTOKILLSSH DESACTIVADO CON EXITO!\033[1;33m"
-    sleep 3
-    clear
-  else
-    clear
-
-    echo ""
-    echo -e "\033[1;32mINICIANDO PROXY SOCKS\033[1;33m"
-    echo ""
-    fun_bar 'fun_inisocks'
-    echo ""
-    echo -e "\033[1;32mPROXY SOCKS ACTIVADO CON EXITO\033[1;33m"
-    sleep 3
-    clear
-  fi
+  clear
+  echo -e "Autokill: \e[1;31m"
+  bash .autokill.sh
 }
 
 while :
@@ -443,9 +385,10 @@ echo -e "\e[1;31m[5]\e[1;32m Eliminar usuario"
 echo -e "\e[1;31m[6]\e[1;32m Desconectar todos los usuarios"
 echo -e "\e[1;31m[7]\e[1;32m Desconectar usarios de mas en Dropbear"
 echo -e "\e[1;31m[8]\e[1;32m Desconectar usarios de mas en SSH"
+echo -e "\e[1;31m[9]\e[1;32m Menu autokill"
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
-echo -n "Seleccione una opcion [1 - 8]: "
+echo -n "Seleccione una opcion [1 - 9]: "
 read opcion
 case $opcion in
 #1)
