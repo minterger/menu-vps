@@ -436,6 +436,8 @@ killusers;;
 killmultidbr;;
 8)
 killmulti;;
+9)
+autokill;;
 
 0) clear;
 exit 1;;
