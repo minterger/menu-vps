@@ -362,6 +362,38 @@ monitordropbear () {
     done
 }
 
+autokill () {
+  if ps x | grep .killssh.sh|grep -v grep 1>/dev/null 2>/dev/null; then
+    clear
+    fun_socksoffssh () {
+      for pidkillssh in  `screen -ls | grep ".killssh" | awk {'print $1'}`; do
+        screen -r -S "$pidkillssh" -X quit
+      done
+      sleep 1
+      screen -wipe > /dev/null
+    }
+    echo -e "\033[1;32mDESACTIVANDO AUTOKILLSSH\033[1;33m"
+    echo ""
+    fun_bar 'fun_socksoffssh'
+    echo ""
+    echo -e "\033[1;32mAUTOKILLSSH DESACTIVADO CON EXITO!\033[1;33m"
+    sleep 3
+    clear
+  else
+    clear
+    fun_inisocks () {
+      screen -dmS killssh bash ~/.Menu/.users/.killssh.sh
+    }
+    echo ""
+    echo -e "\033[1;32mINICIANDO PROXY SOCKS\033[1;33m"
+    echo ""
+    fun_bar 'fun_inisocks'
+    echo ""
+    echo -e "\033[1;32mPROXY SOCKS ACTIVADO CON EXITO\033[1;33m"
+    sleep 3
+    clear
+}
+
 while :
 do
 cd ..
