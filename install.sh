@@ -2,6 +2,8 @@
 
 ## banner ##
 
+touch /root/usuarios.db
+
 if [ -f /home/banner.net ]; then
   clear
 else
