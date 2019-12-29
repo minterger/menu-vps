@@ -255,6 +255,113 @@ killmulti () {
   done
 }
 
+killmultidbr () {
+  touch /tmp/users;
+  database="/root/usuarios.db"
+  echo $$ > /tmp/pids
+  if [ ! -f "$database" ]
+  then
+  	echo "Archivo /root/usuarios.db no encontrado"
+  	exit 1
+  fi
+
+  while true
+  do
+    rm /tmp/users
+    data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
+    for PID in "${data[@]}"
+    do
+            #echo "check $PID";
+            NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
+            USER=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $10}'`;
+            IP=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $12}'`;
+            if [ $NUM1 -eq 1 ]; then
+                    echo "$PID $USER" >> /tmp/users;
+            else
+                    touch /tmp/users;
+            fi
+    done
+
+  clear
+  tput setaf 7 ; tput setab 4 ; tput bold ; printf '%29s%s%-20s\n' "Dropbear Limiter"
+  tput setaf 7 ; tput setab 4 ; printf '  %-30s%s\n' "Usuário" "Conexión / Límite " ; echo "" ; tput sgr0
+
+    while read usline
+  	do
+  		user="$(echo $usline | cut -d' ' -f1)"
+  		s2ssh="$(echo $usline | cut -d' ' -f2)"
+  		if [ -z "$user" ] ; then
+  			echo "" > /dev/null
+  		else
+        cat /tmp/users | grep "'$user'" | grep -v grep | grep -v pts > /tmp/tmp2
+        s1ssh="$(cat /tmp/tmp2 | wc -l)"
+  			tput setaf 3 ; tput bold ; printf '  %-35s%s\n' $user $s1ssh/$s2ssh; tput sgr0
+  			if [ "$s1ssh" -gt "$s2ssh" ]; then
+  				tput setaf 7 ; tput setab 1 ; tput bold ; echo " Usuário desconectado por ultrapassar el limite!" ; tput sgr0
+  				while read line
+  				do
+  					tmp="$(echo $line | cut -d' ' -f1)"
+  					kill $tmp
+  				done < /tmp/tmp2
+  				rm /tmp/tmp2
+  			fi
+  		fi
+  	done < "$database"
+    echo ""
+    echo -e "\e[1;32m Para salir precione Ctrl + C\e[1;0m"
+  	sleep 5
+  done
+}
+
+monitordropbear () {
+  database="/root/usuarios.db"
+  echo $$ > /tmp/kids
+  while true
+  do
+
+    data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
+    for PID in "${data[@]}"
+    do
+            #echo "check $PID";
+            NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
+            USER=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $10}'`;
+            IP=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $12}'`;
+            if [ $NUM1 -eq 1 ]; then
+                    echo "$PID $USER" >> /tmp/users;
+            else
+                    touch /tmp/users;
+            fi
+    done
+    clear
+
+  tput setaf 7 ; tput setab 1 ; tput bold ; printf '%29s%s%-20s\n' "Dropbear Monitor"
+  tput setaf 7 ; tput setab 1 ; printf '  %-15s%-16s%s\n' "Usuário" "contraseña" "Conexión / Límite " ; echo "" ; tput sgr0
+  	while read usline
+  	do
+  		user="$(echo $usline | cut -d' ' -f1)"
+  		s2ssh="$(echo $usline | cut -d' ' -f2)"
+  		if [ -z "$user" ] ; then
+  			echo "" > /dev/null
+  		else
+        if [ -f ~/.Menu/.users/passwd/$user ]; then
+          passwd=$(cat ~/.Menu/.users/passwd/$user)
+        else
+          passwd="null"
+        fi
+
+  			cat /tmp/users | grep "'$user'" | grep -v grep | grep -v pts > /tmp/tmp8
+  			s1ssh="$(cat /tmp/tmp8 | wc -l)"
+  			tput setaf 3 ; tput bold ; printf '  %-14s%-23s%s\n' $user $passwd $s1ssh/$s2ssh; tput sgr0
+  		fi
+  	done < "$database"
+  	echo ""
+    rm /tmp/users
+    echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
+    read foo
+    break
+    done
+}
+
 while :
 do
 cd ..
@@ -262,31 +369,39 @@ bash .head.sh
 cd .users
 echo -e "\e[1;32mEscoja una opcion "
 echo
-echo -e "\e[1;31m[1]\e[1;32m Usuario conectados"
-echo -e "\e[1;31m[2]\e[1;32m Crear usuario"
-echo -e "\e[1;31m[3]\e[1;32m Redefinir usuario"
-echo -e "\e[1;31m[4]\e[1;32m Eliminar usuario"
-echo -e "\e[1;31m[5]\e[1;32m Lista de usuarios"
+#echo -e "\e[1;31m[1]\e[1;32m Usuarios conectados"
+echo -e "\e[1;31m[1]\e[1;32m Monitor SSH"
+echo -e "\e[1;31m[2]\e[1;32m Monitor Dropbear"
+echo -e "\e[1;31m[3]\e[1;32m Crear usuario"
+echo -e "\e[1;31m[4]\e[1;32m Redefinir usuario"
+echo -e "\e[1;31m[5]\e[1;32m Eliminar usuario"
+#echo -e "\e[1;31m[6]\e[1;32m Lista de usuarios"
 echo -e "\e[1;31m[6]\e[1;32m Desconectar todos los usuarios"
+echo -e "\e[1;31m[7]\e[1;32m Desconectar usarios de mas en Dropbear"
+echo -e "\e[1;31m[8]\e[1;32m Desconectar usarios de mas en SSH"
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
-echo -n "Seleccione una opcion [1 - 6]: "
+echo -n "Seleccione una opcion [1 - 8]: "
 read opcion
 case $opcion in
+#1)
+#users;;
 1)
-users;;
+monitorssh;;
 2)
-crearuser;;
+monitordropbear;;
 3)
-redefiniruser;;
+crearuser;;
 4)
-userdelete;;
+redefiniruser;;
 5)
-userlist;;
+userdelete;;
+#6)
+#userlist;;
 6)
 killusers;;
 7)
-monitorssh;;
+killmultidbr;;
 8)
 killmulti;;
 
