@@ -363,7 +363,7 @@ monitordropbear () {
 }
 
 autokill () {
-  if ps x | grep .killssh.sh|grep -v grep 1>/dev/null 2>/dev/null; then
+  if ps x | grep .killssh.sh | grep -v grep 1>/dev/null 2>/dev/null; then
     clear
     fun_socksoffssh () {
       for pidkillssh in  `screen -ls | grep ".killssh" | awk {'print $1'}`; do
