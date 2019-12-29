@@ -79,8 +79,7 @@ redefiniruser () {
     USER=$(cat /root/usuarios.db | grep "$name " | awk '{print $1}')
 
     if [ "$USER" == "$name" ];then
-      sed "s/$USER $LIMITE/$name $liml/" /root/usuarios.db > /root/usuariosnew.db
-      mv /root/usuariosnew.db /root/usuarios.db
+      sed -i "s/$USER $LIMITE/$name $liml/" /root/usuarios.db
     else
       echo "$name $liml" >> /root/usuarios.db
     fi
@@ -167,8 +166,7 @@ userdelete () {
     echo
     echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
     rm ~/.Menu/.users/passwd/$name*
-    sed "/$name /d " /root/usuarios.db > /root/usuariosdel.db
-    mv /root/usuariosdel.db /root/usuarios.db
+    sed -i "/$name /d " /root/usuarios.db
     read foo
   fi
 }
