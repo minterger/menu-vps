@@ -423,6 +423,7 @@ autokill () {
     echo -e "\033[1;32mPROXY SOCKS ACTIVADO CON EXITO\033[1;33m"
     sleep 3
     clear
+  fi
 }
 
 while :
