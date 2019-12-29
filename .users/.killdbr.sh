@@ -53,7 +53,7 @@ killmultidbr () {
   	done < "$database"
     echo ""
     echo -e "\e[1;32m Para salir precione Ctrl + C\e[1;0m"
-  	sleep 5
+  	sleep 15
   done
 }
 
