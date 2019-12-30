@@ -10,7 +10,7 @@ echo "Script by MINTERGER" > /home/banner.net
 
 cuentas () {
   read linea
-  echo "$linea" >>/home/banner
+  echo "$linea" >>/home/banner.net
 }
 
 while [[ condition ]]; do
