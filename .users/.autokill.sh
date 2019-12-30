@@ -65,7 +65,7 @@ autokill () {
   fi
 }
 
-fun_socksoffsshdbr () {
+fun_socksoffdbr () {
   for pidkilldbr in  `screen -ls | grep ".killdbr" | awk {'print $1'}`; do
     screen -r -S "$pidkilldbr" -X quit
   done
@@ -74,7 +74,7 @@ fun_socksoffsshdbr () {
 }
 
 fun_inisocksdbr () {
-  screen -dmS killdbr bash ~/.Menu/.users/.killssh.sh
+  screen -dmS killdbr bash ~/.Menu/.users/.killdbr.sh
 }
 
 autokilldbr () {
@@ -83,7 +83,7 @@ autokilldbr () {
 
     echo -e "\033[1;32mDESACTIVANDO AUTOKILLSSH\033[1;33m"
     echo ""
-    fun_bar 'fun_socksoffsshdbr'
+    fun_bar 'fun_socksoffdbr'
     echo ""
     echo -e "\033[1;32mAUTOKILLSSH DESACTIVADO CON EXITO!\033[1;33m"
     sleep 3
