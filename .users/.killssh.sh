@@ -19,8 +19,8 @@ killmulti () {
   		if [ -z "$user" ] ; then
   			echo "" > /dev/null
   		else
-  			ps x | grep [[:space:]]$user[[:space:]] | grep -v grep | grep -v pts > /tmp/tmp2
-  			s1ssh="$(cat /tmp/tmp2 | wc -l)"
+  			ps x | grep [[:space:]]$user[[:space:]] | grep -v grep | grep -v pts > /tmp/tmp3
+  			s1ssh="$(cat /tmp/tmp3 | wc -l)"
   			tput setaf 3 ; tput bold ; printf '  %-35s%s\n' $user $s1ssh/$s2ssh; tput sgr0
   			if [ "$s1ssh" -gt "$s2ssh" ]; then
   				tput setaf 7 ; tput setab 1 ; tput bold ; echo " Usuário desconectado por ultrapassar el limite!" ; tput sgr0
@@ -28,8 +28,8 @@ killmulti () {
   				do
   					tmp="$(echo $line | cut -d' ' -f1)"
   					kill $tmp
-  				done < /tmp/tmp2
-  				rm /tmp/tmp2
+  				done < /tmp/tmp3
+  				rm /tmp/tmp3
   			fi
   		fi
   	done < "$database"

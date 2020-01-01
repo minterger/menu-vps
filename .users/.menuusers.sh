@@ -200,8 +200,8 @@ monitorssh () {
           passwd="null"
         fi
 
-  			ps x | grep [[:space:]]$user[[:space:]] | grep -v grep | grep -v pts > /tmp/tmp8
-  			s1ssh="$(cat /tmp/tmp8 | wc -l)"
+  			ps x | grep [[:space:]]$user[[:space:]] | grep -v grep | grep -v pts > /tmp/tmp7
+  			s1ssh="$(cat /tmp/tmp7 | wc -l)"
   			tput setaf 3 ; tput bold ; printf '  %-14s%-22s%s\n' $user $passwd $s1ssh/$s2ssh; tput sgr0
   		fi
   	done < "$database"

@@ -1,6 +1,6 @@
 #!/bin/bash
 killmultidbr () {
-  touch /tmp/users;
+  touch /tmp/usersdbr;
   database="/root/usuarios.db"
   echo $$ > /tmp/pids
   if [ ! -f "$database" ]
@@ -11,7 +11,7 @@ killmultidbr () {
 
   while true
   do
-    rm /tmp/users
+    rm /tmp/usersdbr
     data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
     for PID in "${data[@]}"
     do
@@ -20,9 +20,9 @@ killmultidbr () {
             USER=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $10}'`;
             IP=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $12}'`;
             if [ $NUM1 -eq 1 ]; then
-                    echo "$PID $USER" >> /tmp/users;
+                    echo "$PID $USER" >> /tmp/usersdbr;
             else
-                    touch /tmp/users;
+                    touch /tmp/usersdbr;
             fi
     done
 
@@ -37,7 +37,7 @@ killmultidbr () {
   		if [ -z "$user" ] ; then
   			echo "" > /dev/null
   		else
-        cat /tmp/users | grep "'$user'" | grep -v grep | grep -v pts > /tmp/tmp2
+        cat /tmp/usersdbr | grep "'$user'" | grep -v grep | grep -v pts > /tmp/tmp2
         s1ssh="$(cat /tmp/tmp2 | wc -l)"
   			tput setaf 3 ; tput bold ; printf '  %-35s%s\n' $user $s1ssh/$s2ssh; tput sgr0
   			if [ "$s1ssh" -gt "$s2ssh" ]; then
