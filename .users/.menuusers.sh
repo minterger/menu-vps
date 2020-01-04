@@ -374,16 +374,16 @@ cd .users
 echo -e "\e[1;32mEscoja una opcion "
 echo
 #echo -e "\e[1;31m[1]\e[1;32m Usuarios conectados"
-echo -e "\e[1;31m[1]\e[1;32m Monitor SSH"
-echo -e "\e[1;31m[2]\e[1;32m Monitor Dropbear"
-echo -e "\e[1;31m[3]\e[1;32m Crear usuario"
-echo -e "\e[1;31m[4]\e[1;32m Redefinir usuario"
-echo -e "\e[1;31m[5]\e[1;32m Eliminar usuario"
+echo -e "\e[1;31m[1]\e[1;32m Crear usuario"
+echo -e "\e[1;31m[2]\e[1;32m Redefinir usuario"
+echo -e "\e[1;31m[3]\e[1;32m Eliminar usuario"
+echo -e "\e[1;31m[4]\e[1;32m Monitor SSH"
+echo -e "\e[1;31m[5]\e[1;32m Monitor Dropbear"
 #echo -e "\e[1;31m[6]\e[1;32m Lista de usuarios"
-echo -e "\e[1;31m[6]\e[1;32m Desconectar todos los usuarios"
+echo -e "\e[1;31m[6]\e[1;32m Desconectar usarios de mas en SSH"
 echo -e "\e[1;31m[7]\e[1;32m Desconectar usarios de mas en Dropbear"
-echo -e "\e[1;31m[8]\e[1;32m Desconectar usarios de mas en SSH"
-echo -e "\e[1;31m[9]\e[1;32m Menu autokill"
+echo -e "\e[1;31m[8]\e[1;32m Menu autodesconectar users"
+echo -e "\e[1;31m[9]\e[1;32m Desconectar todos los usuarios"
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
 echo -n "Seleccione una opcion [1 - 9]: "
@@ -392,25 +392,25 @@ case $opcion in
 #1)
 #users;;
 1)
-monitorssh;;
-2)
-monitordropbear;;
-3)
 crearuser;;
-4)
+2)
 redefiniruser;;
-5)
+3)
 userdelete;;
+4)
+monitorssh;;
+5)
+monitordropbear;;
 #6)
 #userlist;;
 6)
-killusers;;
+killmulti;;
 7)
 killmultidbr;;
 8)
-killmulti;;
-9)
 autokill;;
+9)
+killusers;;
 
 0) clear;
 exit 1;;
