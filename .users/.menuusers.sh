@@ -19,7 +19,6 @@ userkill () {
 userkill2 () {
   clear
   bash .menunuevo.sh
-  echo
   echo -e "\e[1;32mPresiona enter para continuar..."
   read foo
 }
