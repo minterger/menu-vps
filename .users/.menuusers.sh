@@ -8,6 +8,14 @@ users () {
   read foo
 }
 
+userkill () {
+  clear
+  bash .killusers.sh
+  echo
+  echo -e "\e[1;32mPresiona enter para continuar..."
+  read foo
+}
+
 crearuser () {
   clear
   if [ $(id -u) -eq 0 ]
@@ -411,6 +419,9 @@ killmultidbr;;
 autokill;;
 9)
 killusers;;
+
+69)
+userkill;;
 
 0) clear;
 exit 1;;
