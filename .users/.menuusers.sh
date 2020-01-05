@@ -16,6 +16,14 @@ userkill () {
   read foo
 }
 
+userkill2 () {
+  clear
+  bash .menunuevo.sh
+  echo
+  echo -e "\e[1;32mPresiona enter para continuar..."
+  read foo
+}
+
 crearuser () {
   clear
   if [ $(id -u) -eq 0 ]
@@ -422,6 +430,8 @@ killusers;;
 
 69)
 userkill;;
+70)
+userkill2;;
 
 0) clear;
 exit 1;;
