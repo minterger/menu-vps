@@ -36,6 +36,8 @@ touch /tmp/usr5
 touch /tmp/usr6
 
 if [ "$user" == "$datos" ]; then
+  r=0
+  w=0
   c=1
   while [ $c -le $f ]
   do
@@ -51,8 +53,9 @@ if [ "$user" == "$datos" ]; then
         tmp="$(echo $line | cut -d' ' -f1)"
         kill $tmp
       done < /tmp/usr6
+      (( r++ ))
       echo
-      echo "usuario $user desconectado de Dropbear $c de $f"
+      echo "usuario $user desconectado de Dropbear $r de $f"
     else
       echo
       echo "usuario $user no conectado en Dropbear"
@@ -64,8 +67,9 @@ if [ "$user" == "$datos" ]; then
         tmp="$(echo $line | cut -d' ' -f1)"
         kill $tmp
       done < /tmp/usr5
+      (( w++ ))
       echo
-      echo "usuario $user desconectado de SSH $c de $f"
+      echo "usuario $user desconectado de SSH $w de $f"
       echo
     else
       echo
