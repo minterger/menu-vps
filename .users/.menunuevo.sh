@@ -27,45 +27,57 @@ clear
 echo -ne "Que usuario quieres desconectar?: "
 read user
 
+echo -ne "Cuantas veces quieres desconectarlo?: "
+read f
+
 datos="$(cat $database | grep $user | awk '{print $1}')"
 
 touch /tmp/usr5
 touch /tmp/usr6
 
 if [ "$user" == "$datos" ]; then
-  cat /tmp/usersdbr | grep "'$user'" | grep -v grep | grep -v pts > /tmp/usr6
-  ps x | grep [[:space:]]$user[[:space:]] | grep -v grep | grep -v pts > /tmp/usr5
+  c=1
+  while [ $c -le $f ]
+  do
+    cat /tmp/usersdbr | grep "'$user'" | grep -v grep | grep -v pts > /tmp/usr6
+    ps x | grep [[:space:]]$user[[:space:]] | grep -v grep | grep -v pts > /tmp/usr5
 
-  dbr="$(cat /tmp/usersdbr | grep "'$user'" | grep -v grep | grep -v pts | awk '{print $2}')"
-  ssh="$(ps x | grep [[:space:]]$user[[:space:]] | grep -v grep | grep -v pts | awk '{print $6}')"
+    dbr="$(cat /tmp/usersdbr | grep "'$user'" | grep -v grep | grep -v pts | awk '{print $2}')"
+    ssh="$(ps x | grep [[:space:]]$user[[:space:]] | grep -v grep | grep -v pts | awk '{print $6}')"
 
-  if [ "$user" == "$dbr" ]; then
-    while read line
-    do
-      tmp="$(echo $line | cut -d' ' -f1)"
-      kill $tmp
-    done < /tmp/usr6
-    echo
-    echo "usuario $user desconectado de Dropbear"
-  else
-    echo
-    echo "usuario $user no conectado en Dropbear"
-  fi
+    if [ "$user" == "$dbr" ]; then
+      while read line
+      do
+        tmp="$(echo $line | cut -d' ' -f1)"
+        kill $tmp
+      done < /tmp/usr6
+      echo
+      echo "usuario $user desconectado de Dropbear $c de $f"
+    else
+      echo
+      echo "usuario $user no conectado en Dropbear"
+    fi
 
-  if [ "$user" == "$ssh" ]; then
-    while read line
-    do
-      tmp="$(echo $line | cut -d' ' -f1)"
-      kill $tmp
-    done < /tmp/usr5
-    echo
-    echo "usuario $user desconectado de SSH"
-    echo
-  else
-    echo
-    echo "usuario $user no conectado en SSH"
-    echo
-  fi
+    if [ "$user" == "$ssh" ]; then
+      while read line
+      do
+        tmp="$(echo $line | cut -d' ' -f1)"
+        kill $tmp
+      done < /tmp/usr5
+      echo
+      echo "usuario $user desconectado de SSH $c de $f"
+      echo
+    else
+      echo
+      echo "usuario $user no conectado en SSH"
+      echo
+    fi
+
+    sleep 3s
+    basedbr
+  	(( c++ ))
+  done
+
 
 else
   echo
