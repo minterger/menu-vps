@@ -44,10 +44,10 @@ if [ "$user" == "$datos" ]; then
     cat /tmp/usersdbr | grep "'$user'" | grep -v grep | grep -v pts > /tmp/usr6
     ps x | grep [[:space:]]$user[[:space:]] | grep -v grep | grep -v pts > /tmp/usr5
 
-    dbr="$(cat /tmp/usersdbr | grep "'$user'" | grep -v grep | grep -v pts | awk '{print $2}')"
-    ssh="$(ps x | grep [[:space:]]$user[[:space:]] | grep -v grep | grep -v pts | awk '{print $6}')"
+    dbr="$(cat /tmp/usersdbr | grep "'$user'" | grep -v grep | grep -v pts | awk '{print $2}' | wc -l)"
+    ssh="$(ps x | grep [[:space:]]$user[[:space:]] | grep -v grep | grep -v pts | awk '{print $6}' | wc -l)"
 
-    if [ "$user" == "$dbr" ]; then
+    if [ "$dbr" -eq 1 ]; then
       while read line
       do
         tmp="$(echo $line | cut -d' ' -f1)"
@@ -55,13 +55,13 @@ if [ "$user" == "$datos" ]; then
       done < /tmp/usr6
       (( r++ ))
       echo
-      echo "usuario $user desconectado de Dropbear $r de $f"
+      echo "usuario $user desconectado de Dropbear $r"
     else
       echo
       echo "usuario $user no conectado en Dropbear"
     fi
 
-    if [ "$user" == "$ssh" ]; then
+    if [ "$ssh" -eq 1 ]; then
       while read line
       do
         tmp="$(echo $line | cut -d' ' -f1)"
@@ -69,7 +69,7 @@ if [ "$user" == "$datos" ]; then
       done < /tmp/usr5
       (( w++ ))
       echo
-      echo "usuario $user desconectado de SSH $w de $f"
+      echo "usuario $user desconectado de SSH $w"
       echo
     else
       echo
