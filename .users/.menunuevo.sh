@@ -77,7 +77,7 @@ if [ "$user" == "$datos" ]; then
       echo
     fi
 
-    sleep 3s
+    sleep 2s
     basedbr
   	(( c++ ))
   done
