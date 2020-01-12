@@ -4,24 +4,31 @@ version=$(cat versionact)
 
 # contador de usuarios beta
 countusers () {
-  data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
-  NUM3="0"
-  for PID in "${data[@]}"
-  do
-          #echo "check $PID";
-          NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
-          NUM3=$(($NUM3 + $NUM1));
-  done
+  data=( `ps aux | grep -i dropbear | awk '{print $2}' | wc -l`) ;
+  num2=2
+  num3=$(($data - $num2))
 
-  data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
-  NUM4="0"
-  for PID in "${data[@]}"
-  do
-          #echo "check $PID";
-          NUM2=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID\]" | wc -l`;
-          NUM4=$(($NUM4 + $NUM2));
-  done
+  num4=( `ps x | grep "\[priv\]" | grep sshd |wc -l`);
 
+
+#  data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
+#  NUM3="0"
+#  for PID in "${data[@]}"
+#  do
+#          #echo "check $PID";
+#          NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
+#          NUM3=$(($NUM3 + $NUM1));
+#  done
+#
+#  data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
+#  NUM4="0"
+#  for PID in "${data[@]}"
+#  do
+#          #echo "check $PID";
+#          NUM2=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID\]" | wc -l`;
+#          NUM4=$(($NUM4 + $NUM2));
+#  done
+#
   dbr1="$(echo -e "\e[1;31mCONECTADOS DROPBEAR:\e[1;32m [$NUM3]")"
   ssh1="$(echo -e "\e[1;31mCONECTADOS SSH:\e[1;32m [$NUM4]")"
 }
