@@ -7,10 +7,10 @@ countusers () {
   data=( `ps aux | grep -i dropbear | awk '{print $2}' | wc -l`) ;
   num2=2
   NUM3=$(($data - $num2))
-  if [[ $NUM3 < 0 ]]; then
-    NUM3=0
+  if [[ $NUM3 == -1 ]]; then
+    NUM3="0"
   fi
-  
+
   user="$(cat /root/usuarios.db | awk '{print $1}')"
   NUM4="$(ps x | grep "[[:space:]]$user[[:space:]]" | grep -v grep | grep -v pts | wc -l)"
 
