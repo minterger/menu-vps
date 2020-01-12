@@ -6,9 +6,9 @@ version=$(cat versionact)
 countusers () {
   data=( `ps aux | grep -i dropbear | awk '{print $2}' | wc -l`) ;
   num2=2
-  num3=$(($data - $num2))
+  NUM3=$(($data - $num2))
 
-  num4=( `ps x | grep "\[priv\]" | grep sshd |wc -l`);
+  NUM4=( `ps x | grep "\[priv\]" | grep sshd |wc -l`);
 
 
 #  data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
