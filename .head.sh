@@ -12,7 +12,7 @@ countusers () {
   fi
 
   user="$(cat /root/usuarios.db | awk '{print $1}')"
-  NUM4="$(ps x | grep "[[:space:]]$user[[:space:]]" | grep -v grep | grep -v pts | wc -l)"
+  NUM4="$(ps x | grep "[[:space:]]$user" | grep -v grep | grep -v pts | wc -l)"
 
 #  data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
 #  NUM3="0"
