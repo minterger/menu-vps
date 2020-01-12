@@ -8,8 +8,8 @@ countusers () {
   num2=2
   NUM3=$(($data - $num2))
 
-# NUM4=( `ps x | grep "\[priv\]" | grep sshd |wc -l`);
-
+  user="$(cat /root/usuarios.db | awk '{print $1}')"
+  NUM4="$(ps x | grep "[[:space:]]$user[[:space:]]" | grep -v grep | grep -v pts | wc -l)"
 
 #  data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
 #  NUM3="0"
@@ -20,14 +20,14 @@ countusers () {
 #          NUM3=$(($NUM3 + $NUM1));
 #  done
 
-  data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
-  NUM4="0"
-  for PID in "${data[@]}"
-  do
-          #echo "check $PID";
-          NUM2=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID\]" | wc -l`;
-          NUM4=$(($NUM4 + $NUM2));
-  done
+#  data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
+#  NUM4="0"
+#  for PID in "${data[@]}"
+#  do
+#          #echo "check $PID";
+#          NUM2=`cat /var/log/auth.log | grep -i sshd | grep -i "Accepted password for" | grep "sshd\[$PID\]" | wc -l`;
+#          NUM4=$(($NUM4 + $NUM2));
+#  done
 
   dbr1="$(echo -e "\e[1;31mCONECTADOS DROPBEAR:\e[1;32m [$NUM3]")"
   ssh1="$(echo -e "\e[1;31mCONECTADOS SSH:\e[1;32m [$NUM4]")"
