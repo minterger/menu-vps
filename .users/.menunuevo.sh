@@ -42,7 +42,7 @@ if [ "$user" == "$datos" ]; then
   while [ $c -le $f ]
   do
     data="$(ps aux | grep -i dropbear | awk '{print $2}')" ;
-    cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$data\]" | grep "'$user'" | awk -F "[" '{print $2}' | awk -F "]" '{print $1}' > /tmp/user6
+    cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$data\]" | grep "'$user'" | awk -F "[" '{print $2}' | awk -F "]" '{print $1}' > /tmp/usr6
 #   cat /tmp/usersdbr | grep "'$user'" | grep -v grep | grep -v pts > /tmp/usr6
     ps x | grep [[:space:]]$user[[:space:]] | grep -v grep | grep -v pts > /tmp/usr5
 
