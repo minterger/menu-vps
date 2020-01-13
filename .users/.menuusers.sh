@@ -280,20 +280,20 @@ killmultidbr () {
 
   while true
   do
-    rm /tmp/users
-    data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
-    for PID in "${data[@]}"
-    do
-            #echo "check $PID";
-            NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
-            USER=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $10}'`;
-            IP=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $12}'`;
-            if [ $NUM1 -eq 1 ]; then
-                    echo "$PID $USER" >> /tmp/users;
-            else
-                    touch /tmp/users;
-            fi
-    done
+#    rm /tmp/users
+#    data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
+#    for PID in "${data[@]}"
+#    do
+#            #echo "check $PID";
+#            NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
+#            USER=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $10}'`;
+#            IP=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $12}'`;
+#            if [ $NUM1 -eq 1 ]; then
+#                    echo "$PID $USER" >> /tmp/users;
+#            else
+#                    touch /tmp/users;
+#            fi
+#    done
 
   clear
   tput setaf 7 ; tput setab 4 ; tput bold ; printf '%29s%s%-20s\n' "Dropbear Limiter"
@@ -306,7 +306,9 @@ killmultidbr () {
   		if [ -z "$user" ] ; then
   			echo "" > /dev/null
   		else
-        cat /tmp/users | grep "'$user'" | grep -v grep | grep -v pts > /tmp/tmp2
+        data="$(ps aux | grep -i dropbear | awk '{print $2}')" ;
+        cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$data\]" | grep "'$user'" | awk -F "[" '{print $2}' | awk -F "]" '{print $1}' > /tmp/tmp2
+#        cat /tmp/users | grep "'$user'" | grep -v grep | grep -v pts > /tmp/tmp2
         s1ssh="$(cat /tmp/tmp2 | wc -l)"
   			tput setaf 3 ; tput bold ; printf '  %-35s%s\n' $user $s1ssh/$s2ssh; tput sgr0
   			if [ "$s1ssh" -gt "$s2ssh" ]; then
