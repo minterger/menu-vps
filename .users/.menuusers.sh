@@ -332,19 +332,19 @@ monitordropbear () {
   while true
   do
 
-    data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
-    for PID in "${data[@]}"
-    do
-            #echo "check $PID";
-            NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
-            USER=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $10}'`;
-            IP=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $12}'`;
-            if [ $NUM1 -eq 1 ]; then
-                    echo "$PID $USER" >> /tmp/users;
-            else
-                    touch /tmp/users;
-            fi
-    done
+#    data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
+#    for PID in "${data[@]}"
+#    do
+#            #echo "check $PID";
+#            NUM1=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | wc -l`;
+#            USER=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $10}'`;
+#            IP=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$PID\]" | awk '{print $12}'`;
+#            if [ $NUM1 -eq 1 ]; then
+#                    echo "$PID $USER" >> /tmp/users;
+#            else
+#                    touch /tmp/users;
+#            fi
+#    done
     clear
 
   tput setaf 7 ; tput setab 1 ; tput bold ; printf '%29s%s%-20s\n' "Dropbear Monitor"
@@ -362,13 +362,14 @@ monitordropbear () {
           passwd="null"
         fi
 
-  			cat /tmp/users | grep "'$user'" | grep -v grep | grep -v pts > /tmp/tmp8
+        cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$data\]" | grep "'$user'" | awk -F "[" '{print $2}' | awk -F "]" '{print $1}' > /tmp/tmp2
+#  			cat /tmp/users | grep "'$user'" | grep -v grep | grep -v pts > /tmp/tmp8
   			s1ssh="$(cat /tmp/tmp8 | wc -l)"
   			tput setaf 3 ; tput bold ; printf '  %-14s%-22s%s\n' $user $passwd $s1ssh/$s2ssh; tput sgr0
   		fi
   	done < "$database"
   	echo ""
-    rm /tmp/users
+#    rm /tmp/users
     echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
     read foo
     break
