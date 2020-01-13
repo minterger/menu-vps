@@ -363,7 +363,7 @@ monitordropbear () {
         fi
 
         data="$(ps aux | grep -i dropbear | awk '{print $2}')" ;
-        cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$data\]" | grep "'$user'" | awk -F "[" '{print $2}' | awk -F "]" '{print $1}' > /tmp/tmp2
+        cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$data\]" | grep "'$user'" | awk -F "[" '{print $2}' | awk -F "]" '{print $1}' > /tmp/tmp8
 #  			cat /tmp/users | grep "'$user'" | grep -v grep | grep -v pts > /tmp/tmp8
   			s1ssh="$(cat /tmp/tmp8 | wc -l)"
   			tput setaf 3 ; tput bold ; printf '  %-14s%-22s%s\n' $user $passwd $s1ssh/$s2ssh; tput sgr0
