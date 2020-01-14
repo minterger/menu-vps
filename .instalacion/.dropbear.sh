@@ -59,7 +59,7 @@ agregarpuerto () {
 
 desinstalar () {
   service dropbear stop > /dev/null 2>&1
-  apt-get remove -y dropbear >/dev/null 2>/dev/null
+  apt-get remove -y dropbear dropbear-bin >/dev/null 2>/dev/null
   apt-get autoremove -y >/dev/null 2>/dev/null
 }
 
