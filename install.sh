@@ -3,6 +3,7 @@
 ## banner ##
 
 touch /root/usuarios.db
+touch /root/fechaexp.db
 
 if [ -f /home/banner.net ]; then
   clear

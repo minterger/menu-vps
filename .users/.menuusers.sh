@@ -1,5 +1,74 @@
 #!/bin/bash
 
+########################################################
+
+fun_bar () {
+  comando[0]="$1"
+  comando[1]="$2"
+    (
+      [[ -e $HOME/fim ]] && rm $HOME/fim
+      [[ ! -d ~/.Menu ]] && rm -rf /bin/menu
+      ${comando[0]} > /dev/null 2>&1
+      ${comando[1]} > /dev/null 2>&1
+      touch $HOME/fim
+    ) > /dev/null 2>&1 &
+  tput civis
+  echo -ne "\033[1;33mESPERE \033[1;37m- \033[1;33m["
+  while true; do
+     for((i=0; i<18; i++)); do
+       echo -ne "\033[1;31m#"
+       sleep 0.1s
+     done
+     [[ -e $HOME/fim ]] && rm $HOME/fim && break
+     echo -e "\033[1;33m]"
+     sleep 1s
+     tput cuu1
+     tput dl1
+     echo -ne "\033[1;33mESPERE \033[1;37m- \033[1;33m["
+  done
+  echo -e "\033[1;33m]\033[1;37m -\033[1;32m OK !\033[1;37m"
+  tput cnorm
+}
+
+fun_offfechaexp () {
+  for pidfechaexp in  `screen -ls | grep ".fechaexp" | awk {'print $1'}`; do
+    screen -r -S "$pidfechaexp" -X quit
+  done
+  sleep 1
+  screen -wipe > /dev/null
+}
+
+fun_inifechaexp () {
+  screen -dmS fechaexp bash ~/.Menu/.users/.fechaexp.sh
+}
+
+fechaexp () {
+  if ps x | grep .fechaexp.sh | grep -v grep 1>/dev/null 2>/dev/null; then
+    clear
+
+    echo -e "\033[1;32mDESACTIVANDO REMOVEDOR DE EXPIRADOS\033[1;33m"
+    echo ""
+    fun_bar 'fun_offfechaexp'
+    echo ""
+    echo -e "\033[1;32mREMOVEDOR DE EXPIRADOS DESACTIVADO CON EXITO!\033[1;33m"
+    sleep 3
+    clear
+  else
+    clear
+
+    echo ""
+    echo -e "\033[1;32mINICIANDO REMOVEDOR DE EXPIRADOS\033[1;33m"
+    echo ""
+    fun_bar 'fun_inifechaexp'
+    echo ""
+    echo -e "\033[1;32mREMOVEDOR DE EXPIRADOS ACTIVADO CON EXITO\033[1;33m"
+    sleep 3
+    clear
+  fi
+}
+
+##########################################################
+
 users () {
   clear
   bash .users.sh
@@ -55,6 +124,7 @@ crearuser () {
       fi
         echo "$pass" > ~/.Menu/.users/passwd/$name
         echo "$name $limiteuser" >> /root/usuarios.db
+        echo "$name $valid" >> /root/fechaexp.db
       echo
       echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
       read foo
@@ -107,6 +177,17 @@ redefiniruser () {
     echo "Cual es la nueva fecha : formato AAAA/MM/DD"
     read -p ": " date
     chage -E $date $name 2> /dev/null
+
+    FECHA=$(cat /root/fechaexp.db | grep "$name " | awk '{print $2}')
+    USER2=$(cat /root/fechaexp.db | grep "$name " | awk '{print $1}')
+
+
+    if [ "$USER2" == "$name" ];then
+      sed -i "s/$USER $FECHA/$name $date/" /root/fechaexp.db
+    else
+      echo "$name $date" >> /root/fechaexp.db
+    fi
+
     echo -e "\033[1;31mEl usuario $name se desconectara el dia: $date\033[0m"
     echo
     echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
@@ -182,6 +263,7 @@ userdelete () {
     echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
     rm ~/.Menu/.users/passwd/$name*
     sed -i "/$name /d " /root/usuarios.db
+    sed -i "/$name /d " /root/fechaexp.db
     read foo
   fi
 }
@@ -435,6 +517,9 @@ killusers;;
 userkill;;
 70)
 userkill2;;
+71)
+fechaexp;;
+
 
 0) clear;
 exit 1;;
