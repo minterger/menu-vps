@@ -21,8 +21,8 @@ do
 		todate1=$(date -d $fecha1 +"%Y%m%d")
 
 		if [ $todate -ge $todate1 ] ;then
-			userdel --force $name > /dev/null 2>/dev/null
-			echo "usuario $name eliminado"
+			userdel --force $user > /dev/null 2>/dev/null
+			echo " usuario $user eliminado"
 		fi
 
     echo ""
