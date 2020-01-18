@@ -13,7 +13,7 @@ do
 	do
 
 		user="$(echo $usline | cut -d' ' -f1)"
-		fecha="$(echo $usline | cut -d' ' -f2)"
+		fecha="$(Cat /root/fechaexp.db | grep $user | awk '{print $1}')"
     fecha1=$(date -d $fecha +"%Y-%m-%d")
 		tput setaf 3 ; tput bold ; printf '  %-30s%s\n' $user $fecha1; tput sgr0
 
