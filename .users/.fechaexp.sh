@@ -14,11 +14,10 @@ do
 
 		user="$(echo $usline | cut -d' ' -f1)"
 		fecha=$(cat /root/fechaexp.db | grep $user | awk '{print $2}')
-    fecha1=$(date -d $fecha +"%Y-%m-%d")
-		tput setaf 3 ; tput bold ; printf '  %-30s%s\n' $user $fecha1; tput sgr0
+		tput setaf 3 ; tput bold ; printf '  %-30s%s\n' $user $fecha; tput sgr0
 
 		todate=$(date -d $valid +"%Y%m%d")
-		todate1=$(date -d $fecha1 +"%Y%m%d")
+		todate1=$(date -d $fecha +"%Y%m%d")
 
 		if [ $todate -ge $todate1 ] ;then
 			userdel --force $user > /dev/null 2>/dev/null

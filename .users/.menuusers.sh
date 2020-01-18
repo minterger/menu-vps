@@ -180,13 +180,13 @@ redefiniruser () {
 
     FECHA=$(cat /root/fechaexp.db | grep "$name " | awk '{print $2}')
     USER2=$(cat /root/fechaexp.db | grep "$name " | awk '{print $1}')
-
+    fecha=$(date -d $date +"%Y-%m-%d")
 
     if [ "$USER2" == "$name" ];then
-      sed -i "/$name /d " /root/fechaexp.db
+      sed -i "s/$USER $FECHA/$name $fecha/" /root/fechaexp.db
+    else
+      echo "$name $date" >> /root/fechaexp.db
     fi
-
-    echo "$name $date" >> /root/fechaexp.db
 
     echo -e "\033[1;31mEl usuario $name se desconectara el dia: $date\033[0m"
     echo
