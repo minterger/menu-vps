@@ -18,7 +18,11 @@ while true ; do
 		todate=$(date -d $valid +"%Y%m%d")
 		todate1=$(date -d $fecha +"%Y%m%d")
 
+<<<<<<< HEAD
 		if [ $todate -ge $todate1 ] ;then
+=======
+		if [ $todate1 -ge $todate ] ;then
+>>>>>>> 7d7ad493f94d23fd98f6c525b428cbb272536ac2
 			userdel --force $name > /dev/null 2>/dev/null
 			echo "usuario $name eliminado"
 		fi
