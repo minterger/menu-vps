@@ -2,6 +2,16 @@
 
 ########################################################
 
+onoff () {
+  statefecha="$(ps x | grep .fechaexp.sh | grep -v grep)"
+
+  if [ "$statefecha" = "" ]; then
+    stateexp="[off]"
+  else
+    stateexp="[on]"
+  fi
+}
+
 fun_bar () {
   comando[0]="$1"
   comando[1]="$2"
@@ -469,6 +479,7 @@ autokill () {
 
 while :
 do
+onoff
 cd ..
 bash .head.sh
 cd .users
@@ -484,10 +495,11 @@ echo -e "\e[1;31m[5]\e[1;32m Monitor Dropbear"
 echo -e "\e[1;31m[6]\e[1;32m Desconectar usarios de mas en SSH"
 echo -e "\e[1;31m[7]\e[1;32m Desconectar usarios de mas en Dropbear"
 echo -e "\e[1;31m[8]\e[1;32m Menu autodesconectar users"
-echo -e "\e[1;31m[9]\e[1;32m Desconectar todos los usuarios"
+echo -e "\e[1;31m[9]\e[1;32m Autoeliminar users expirados $stateexp"
+echo -e "\e[1;31m[10]\e[1;32m Desconectar todos los usuarios"
 echo -e "\e[1;31m[0]\e[1;32m Salir"
 echo
-echo -n "Seleccione una opcion [1 - 9]: "
+echo -n "Seleccione una opcion [1 - 10]: "
 read opcion
 case $opcion in
 #1)
@@ -511,14 +523,14 @@ killmultidbr;;
 8)
 autokill;;
 9)
+fechaexp;;
+10)
 killusers;;
 
 69)
 userkill;;
 70)
 userkill2;;
-71)
-fechaexp;;
 
 
 0) clear;
