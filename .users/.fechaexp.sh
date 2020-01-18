@@ -7,7 +7,7 @@ do
 
 	valid=$(date '+%C%y-%m-%d')
   clear
-	tput setaf 7 ; tput setab 4 ; tput bold ; printf '%29s%s%-22s\n' "REMOVEDOR DE EXPIRADOS"
+	tput setaf 7 ; tput setab 4 ; tput bold ; printf '%29s%s%-20s\n' "REMOVEDOR DE EXPIRADOS"
 	tput setaf 7 ; tput setab 4 ; printf '  %-30s%s\n' "Usuário" "Fecha Expiracion " ; echo "" ; tput sgr0
 	while read usline
 	do
