@@ -23,7 +23,7 @@ do
 		if [ $todate -ge $todate1 ] ;then
 			userdel --force $user > /dev/null 2>/dev/null
       sed -i "/$name $fecha /d " /root/fechaexp.db
-      sed -i "/$name $fecha /d " /root/usuarios.db
+      sed -i "/$name /d " /root/usuarios.db
 			echo "   -=Usuario $user eliminado=-"
 		fi
 
