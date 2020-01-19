@@ -29,6 +29,6 @@ do
     echo ""
 	done < "$database"
 
-sleep 60
+sleep 1h
 
 done
