@@ -36,7 +36,7 @@ fun_bar () {
 ########### check de actualizacion ############
 check () {
   sudo rm -r version >/dev/null 2>/dev/null
-  wget https://raw.githubusercontent.com/minterger/menu/master/version >/dev/null 2>/dev/nul
+  wget https://raw.githubusercontent.com/minterger/menu-vps/master/version >/dev/null 2>/dev/nul
 }
 
 clear
