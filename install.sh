@@ -74,7 +74,7 @@ instalar () {
   wget https://github.com/minterger/menu-vps/archive/master.zip >/dev/null 2>/dev/null
   unzip master.zip >/dev/null 2>/dev/null
   rm -r master.zip
-  mv menu-master .Menu
+  mv menu-vps-master .Menu
   cd .Menu >/dev/null 2>/dev/null
   mkdir .users/passwd
   mkdir .users/limite
