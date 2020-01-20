@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 BadVPN () {
 pid_badvpn=$(ps x | grep badvpn | grep -v grep | awk '{print $1}')
   if [ "$pid_badvpn" = "" ]; then
@@ -193,7 +193,7 @@ echo -e "Ejecutando Script: \e[1;31m";
 echo ;
 cd ..;
 cd .host
-bash .real-host.sh.;
+bash .real-host.shh;
 cd .herramientas.;;
 6) clear;
 bash .speedtest.sh;;
