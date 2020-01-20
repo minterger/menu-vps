@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#
 BadVPN () {
 pid_badvpn=$(ps x | grep badvpn | grep -v grep | awk '{print $1}')
   if [ "$pid_badvpn" = "" ]; then
