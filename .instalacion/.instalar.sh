@@ -14,7 +14,7 @@ echo -e "\e[1;31m[5]\e[1;32m Instalar HTOP"
 echo -e "\e[1;31m[6]\e[1;32m Proxy SOCKS"
 echo -e "\e[1;31m[0]\e[1;32m Volver"
 echo
-echo -n "Seleccione una opcion [1 - 5]: "
+echo -n "Seleccione una opcion [1 - 6]: "
 read opcion
 case $opcion in
 1) clear;
