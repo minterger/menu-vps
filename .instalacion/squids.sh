@@ -105,3 +105,6 @@ else
 fi
 #/usr/bin/htpasswd -b -c /etc/squid/passwd USERNAME_HERE PASSWORD_HERE
 }
+
+clear
+squid_19
