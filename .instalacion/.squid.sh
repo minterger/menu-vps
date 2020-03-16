@@ -62,6 +62,11 @@ desinstalar () {
   service squid stop > /dev/null 2>&1
   apt-get remove -y squid >/dev/null 2>/dev/null
   apt-get autoremove -y >/dev/null 2>/dev/null
+
+  /sbin/iptables -D INPUT -p tcp --dport 80 -j ACCEPT
+  /sbin/iptables -D INPUT -p tcp --dport 8080 -j ACCEPT
+  /sbin/iptables -D INPUT -p tcp --dport 3128 -j ACCEPT
+  /sbin/iptables-save
 }
 
 #desinstalar2 () {
@@ -125,7 +130,7 @@ else
 
   echo -e "\033[1;32mInstalacion completada\033[0m"
   echo
-  echo -e "\033[1;37mEjecutando en el puerto \e[1;31m80,3128 \e[1;37my\e[1;31m 8080\e[1;0m"
+  echo -e "\033[1;37mEjecutando en el puerto \e[1;31m3128 \e[1;37my\e[1;31m 8080\e[1;0m"
   echo
 
 ip=$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')
@@ -177,6 +182,12 @@ refresh_pattern -i (/cgi-bin/|\?) 0	0%	0
 refresh_pattern .		0	20%	4320
 visible_hostname proxy.mastahit.com
 " >> /etc/squid/squid.conf
+
+/sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+/sbin/iptables -I INPUT -p tcp --dport 8080 -j ACCEPT
+/sbin/iptables -I INPUT -p tcp --dport 3128 -j ACCEPT
+/sbin/iptables-save
+systemctl enable squid
 
   echo -e "\033[1;32mReiniciando Squid\033[1;0m"
 
