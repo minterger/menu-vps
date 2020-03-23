@@ -183,11 +183,11 @@ refresh_pattern .		0	20%	4320
 visible_hostname proxy.mastahit.com
 " >> /etc/squid/squid.conf
 
-/sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT
-/sbin/iptables -I INPUT -p tcp --dport 8080 -j ACCEPT
-/sbin/iptables -I INPUT -p tcp --dport 3128 -j ACCEPT
-/sbin/iptables-save
-systemctl enable squid
+/sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT >/dev/null 2>/dev/null
+/sbin/iptables -I INPUT -p tcp --dport 8080 -j ACCEPT >/dev/null 2>/dev/null
+/sbin/iptables -I INPUT -p tcp --dport 3128 -j ACCEPT >/dev/null 2>/dev/null
+/sbin/iptables-save >/dev/null 2>/dev/null
+systemctl enable squid >/dev/null 2>/dev/null
 
   echo -e "\033[1;32mReiniciando Squid\033[1;0m"
 
