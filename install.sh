@@ -90,7 +90,7 @@ instalar () {
 
 ip () {
   if [ -f /home/ip ]; then
-    ip="$(cat /home/ip)"
+    ip=$(cat /home/ip)
     echo -e "\033[1;32mip guardada:\033[0m $ip"
   else
     ip=$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')
