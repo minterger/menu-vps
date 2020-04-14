@@ -91,10 +91,10 @@ instalar () {
 ip () {
   if [ -f /home/ip ]; then
     ip="$(cat /home/ip)"
-    echo "\033[1;32mip guardada:\033[0m $ip"
+    echo -e "\033[1;32mip guardada:\033[0m $ip"
   else
     ip="$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')"
-    read -p "\033[1;32mConfirme su ip o escriba su dominio:\033[0m " -e -i $ip ip1
+    read -p -e "\033[1;32mConfirme su ip o escriba su dominio:\033[0m " -e -i $ip ip1
     echo "$ip1" > /home/ip
   fi
 }
