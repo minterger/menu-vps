@@ -133,7 +133,7 @@ then
   echo
   fun_bar instalar
   echo
-  ip
+  #ip
   echo
   echo -e "\033[1;32mScript instalado con exito"
   echo
@@ -146,7 +146,7 @@ else
   echo
   fun_bar instalar
   echo
-  ip
+  #ip
   echo
   echo -e "\033[1;32mScript instalado con exito"
   echo
