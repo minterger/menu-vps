@@ -97,7 +97,8 @@ ip () {
     echo -e "\033[1;32mip:\033[0m"
     echo "\033[1;33m$ip"
     echo
-    while [[ condition ]]; do
+    while :
+    do
       if [ "$ip1" = "" ]; then
         echo -e -n "\033[1;32mConfirme su ip o escriba su dominio:\033[0m "
         read ip1
