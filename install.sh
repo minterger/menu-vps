@@ -88,7 +88,7 @@ instalar () {
 
 }
 
-ip () {
+confirmip () {
   if [ -f /home/ip ]; then
     ip=$(cat /home/ip)
     echo -e "\033[1;32mip guardada:\033[0m $ip"
@@ -146,7 +146,7 @@ then
   echo
   fun_bar instalar
   echo
-  ip
+  confirmip
   echo
   echo -e "\033[1;32mScript instalado con exito"
   echo
@@ -159,7 +159,7 @@ else
   echo
   fun_bar instalar
   echo
-  ip
+  confirmip
   echo
   echo -e "\033[1;32mScript instalado con exito"
   echo
