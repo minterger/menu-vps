@@ -93,7 +93,7 @@ ip () {
     ip=$(cat /home/ip)
     echo -e "\033[1;32mip guardada:\033[0m $ip"
   else
-    read -p "\033[1;32mConfirme su ip o escriba su dominio:\033[0m " -e -i $(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}') ip1
+    read -p "\033[1;32mConfirme su ip o escriba su dominio:\033[0m " -e -i  ip1
     echo "$ip1" > /home/ip
   fi
 }
