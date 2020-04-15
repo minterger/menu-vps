@@ -93,9 +93,9 @@ confirmip () {
     ip=$(cat /home/ip)
     echo -e "\033[1;32mip guardada:\033[0m $ip"
   else
-    ip=$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')
+    #ip="$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')"
     echo -e "\033[1;32mip:\033[0m"
-    echo "\033[1;33m$ip"
+    echo "\033[1;33m$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')"
     echo
     ip1=""
     while :
