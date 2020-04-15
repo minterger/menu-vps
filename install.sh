@@ -93,9 +93,24 @@ ip () {
     ip=$(cat /home/ip)
     echo -e "\033[1;32mip guardada:\033[0m $ip"
   else
-    read -p "\033[1;32mConfirme su ip o escriba su dominio:\033[0m " -e -i  ip1
+    ip=$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')
+    echo -e "\033[1;32mip:\033[0m"
+    echo "\033[1;33m$ip"
+    echo
+    while [[ condition ]]; do
+      if [ "$ip1" = "" ]; then
+        echo -e -n "\033[1;32mConfirme su ip o escriba su dominio:\033[0m "
+        read ip1
+      else
+        break
+      fi
+    done
     echo "$ip1" > /home/ip
   fi
+}
+
+ipconfirm () {
+
 }
 
 #### animacion antigua #####
