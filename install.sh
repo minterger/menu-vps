@@ -97,6 +97,7 @@ ip () {
     echo -e "\033[1;32mip:\033[0m"
     echo "\033[1;33m$ip"
     echo
+    ip1=""
     while :
     do
       if [ "$ip1" = "" ]; then
