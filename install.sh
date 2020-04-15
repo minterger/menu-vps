@@ -109,10 +109,6 @@ ip () {
   fi
 }
 
-ipconfirm () {
-
-}
-
 #### animacion antigua #####
 #instalar2 () {
 #  echo -e "\033[1;32mInstalando Script\033[0m"
