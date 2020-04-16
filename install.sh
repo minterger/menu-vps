@@ -93,21 +93,21 @@ confirmip () {
     ip=$(cat /home/ip)
     echo -e "\033[1;32mip guardada:\033[0m $ip"
   else
-    #ip="$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')"
-    echo -e "\033[1;32mip:\033[0m"
-    echo "\033[1;33m$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')"
-    echo
+    ip3="$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')"
     ip1=""
     while :
     do
       if [ "$ip1" = "" ]; then
-        echo -e -n "\033[1;32mConfirme su ip o escriba su dominio:\033[0m "
-        read ip1
+        text="$(echo -e "\033[1;32mConfirme su ip o escriba su dominio:\033[0m ")"
+        read -p "$text" -e -i $ip3 ip1
       else
         break
       fi
     done
     echo "$ip1" > /home/ip
+    ip=$(cat /home/ip)
+    echo
+    echo -e "\033[1;32mip guardada:\033[0m $ip"
   fi
 }
 
