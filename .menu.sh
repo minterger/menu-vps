@@ -81,7 +81,7 @@ inf_system () {
   echo -e "${null2}Memoria Virtual Swap: ${null}$(($swapram / 1024))MB"
   echo -e "${null2}Tiempo Online: ${null}$(uptime)"
   echo -e "${null2}Nombre De La Maquina: ${null}$(hostname)"
-  echo -e "${null2}Direccion IP De La Maquina: ${null}$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')"
+  echo -e "${null2}Direccion IP De La Maquina: ${null}$(cat /home/ip)"
   echo -e "${null2}Version del Kernel: ${null}$(uname -r)"
   echo -e "${null2}Arquitectura: ${null}$(uname -m)"
   echo -e "\e[1;37m-----------------------------------------------------\e[1;0m"

@@ -133,7 +133,7 @@ else
   echo -e "\033[1;37mEjecutando en el puerto \e[1;31m3128 \e[1;37my\e[1;31m 8080\e[1;0m"
   echo
 
-ip=$(ip addr | grep inet | grep -v inet6 | grep -v "host lo" | awk '{print $2}' | awk -F "/" '{print $1}')
+ip=$(cat /home/ip)
 
   echo "acl manager proto cache_object
 acl localhost src 127.0.0.1/32 ::1
@@ -190,19 +190,8 @@ visible_hostname proxy.mastahit.com
 systemctl enable squid >/dev/null 2>/dev/null
 
   echo -e "\033[1;32mReiniciando Squid\033[1;0m"
-
-(
-echo -ne "[" >&2
-while [[ ! -e /tmp/instmp ]]; do
-echo -ne "." >&2
-sleep 0.8s
-done
-rm /tmp/instmp
-echo -ne "]" >&2
-echo
-) &
-desinstala=$(service squid restart) && touch /tmp/instmp
-sleep 0.6s
+  echo
+  fun_bar service squid restart
 
   echo
   echo -e "\e[1;32mPresiona enter para continuar...\033[1;0m"
