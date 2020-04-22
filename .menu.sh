@@ -79,7 +79,7 @@ inf_system () {
   echo -e "${null2}Memoria Virtual En Uso: ${null}$(($usedram / 1024))"
   echo -e "${null2}Memoria Virtual Libre: ${null}$(($freeram / 1024))"
   echo -e "${null2}Memoria Virtual Swap: ${null}$(($swapram / 1024))MB"
-  echo -e "${null2}Tiempo Online: ${null}$(uptime | awk -F "," '{print $1}' | awk -F "up" '{print $2}')"
+  echo -e "${null2}Tiempo Online:${null}$(uptime | awk -F "," '{print $1}' | awk -F "up" '{print $2}')"
   echo -e "${null2}Nombre De La Maquina: ${null}$(hostname)"
   echo -e "${null2}Direccion IP De La Maquina: ${null}$(cat /home/ip)"
   echo -e "${null2}Version del Kernel: ${null}$(uname -r)"
