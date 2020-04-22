@@ -108,35 +108,35 @@ install () {
 
 while :
 do
-bash .head.sh
-echo -e "\e[1;32mEscoja una opcion "
-echo
-echo -e "\e[1;31m[1]\e[1;32m Administrar usuarios"
-echo -e "\e[1;31m[2]\e[1;32m Informacion del sistema"
-echo -e "\e[1;31m[3]\e[1;32m Herramientas"
-echo -e "\e[1;31m[4]\e[1;32m Menu de instalacion"
-echo -n -e "\e[1;31m[5]\e[1;32m Update Script"
-updates
-echo -e "\e[1;31m[0]\e[1;32m Salir"
-echo
-echo -n "Seleccione una opcion [1 - 5]: "
-read opcion
-case $opcion in
-1)
-menuusers;;
-2)
-inf_system;;
-3)
-herramientas;;
-4)
-install;;
-5)
-update;;
-0) clear;
-exit 1;;
-*) clear;
-echo -e "\e[1;31mEs una opcion invalida:";
-echo -e "\e[1;32mPresiona enter para continuar...";
-read foo;;
-esac
+  bash .head.sh
+  echo -e "\e[1;32mEscoja una opcion "
+  echo
+  echo -e "\e[1;31m[1]\e[1;32m Administrar usuarios"
+  echo -e "\e[1;31m[2]\e[1;32m Informacion del sistema"
+  echo -e "\e[1;31m[3]\e[1;32m Herramientas"
+  echo -e "\e[1;31m[4]\e[1;32m Menu de instalacion"
+  echo -n -e "\e[1;31m[5]\e[1;32m Update Script"
+  updates
+  echo -e "\e[1;31m[0]\e[1;32m Salir"
+  echo
+  echo -n "Seleccione una opcion [1 - 5]: "
+  read opcion
+  case $opcion in
+    1)
+    menuusers;;
+    2)
+    inf_system;;
+    3)
+    herramientas;;
+    4)
+    install;;
+    5)
+    update;;
+    0) clear;
+    exit 1;;
+    *) clear;
+    echo -e "\e[1;31mEs una opcion invalida:";
+    echo -e "\e[1;32mPresiona enter para continuar...";
+    read foo;;
+  esac
 done

@@ -88,6 +88,7 @@ instalar () {
 
 }
 
+#deteccion de ip interna
 confirmip () {
   if [ -f /home/ip ]; then
     ip=$(cat /home/ip)
