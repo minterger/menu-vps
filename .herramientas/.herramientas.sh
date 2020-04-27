@@ -26,7 +26,7 @@ unset pid_badvpn
 
 TCPspeed () {
   resposta=""
-  if [[ `grep -c "^#ADM" /etc/sysctl.conf` -eq 0 ]]; then
+  if [[ `grep -c "^#Minterger" /etc/sysctl.conf` -eq 0 ]]; then
     #INSTALA
     echo "TCP Speed No esta Activado, Desea Activar Ahora?"
     echo
@@ -35,7 +35,7 @@ TCPspeed () {
       tput cuu1 && tput dl1
     done
     [[ "$resposta" = @(s|S|y|Y) ]] && {
-    echo "#ADM" >> /etc/sysctl.conf
+    echo "#Minterger" >> /etc/sysctl.conf
     echo "net.ipv4.tcp_window_scaling = 1
     net.core.rmem_max = 16777216
     net.core.wmem_max = 16777216
@@ -55,7 +55,7 @@ TCPspeed () {
       tput cuu1 && tput dl1
     done
     [[ "$resposta" = @(s|S|y|Y) ]] && {
-    grep -v "^#ADM
+    grep -v "^#Minterger
     net.ipv4.tcp_window_scaling = 1
     net.core.rmem_max = 16777216
     net.core.wmem_max = 16777216
