@@ -6,13 +6,12 @@ badvpn1 () {
 
   if [ "$badvpn" = "tcp" ]
   then
-    startbad="stop"
+    startbad="Stop"
   else
-    startbad="start"
+    startbad="Start"
   fi
 }
 
-badvpn1
 
 # iniciar/apagar badvpn
 BadVPN () {
@@ -171,6 +170,7 @@ do
 cd ..
 bash .head.sh
 cd .herramientas
+badvpn1
 echo -e "\e[1;32mEscoja una opcion "
 echo
 echo -e "\e[1;31m[1]\e[1;32m $startbad BADVPN \e[1;37m(habilitar llamadas udp)\e[1;0m"
