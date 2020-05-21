@@ -1,5 +1,20 @@
 #!/bin/bash
 
+# cambiar mensaje de badvpn en el menu
+badvpn1 () {
+  badvpn=`netstat -tunlp | grep badvpn | grep tcp | awk '{print $1}'`
+
+  if [ "$badvpn" = "tcp" ]
+  then
+    startbad="stop"
+  else
+    startbad="start"
+  fi
+}
+
+badvpn1
+
+# iniciar/apagar badvpn
 BadVPN () {
 pid_badvpn=$(ps x | grep badvpn | grep -v grep | awk '{print $1}')
   if [ "$pid_badvpn" = "" ]; then
@@ -158,7 +173,7 @@ bash .head.sh
 cd .herramientas
 echo -e "\e[1;32mEscoja una opcion "
 echo
-echo -e "\e[1;31m[1]\e[1;32m start/stop BADVPN \e[1;37m(habilitar llamadas udp)\e[1;0m"
+echo -e "\e[1;31m[1]\e[1;32m $startbad BADVPN \e[1;37m(habilitar llamadas udp)\e[1;0m"
 echo -e "\e[1;31m[2]\e[1;32m TCP Speed \e[1;37m(mojorar conexion)\e[1;0m"
 echo -e "\e[1;31m[3]\e[1;32m Htop \e[1;37m(ver el consumo de recursos)\e[1;0m"
 echo -e "\e[1;31m[4]\e[1;32m Servicios \e[1;37m(ver los servicios funcionando)\e[1;0m"
