@@ -6,9 +6,9 @@ badvpn1 () {
 
   if [ "$badvpn" = "tcp" ]
   then
-    startbad="Stop"
+    startbad="Detener"
   else
-    startbad="Start"
+    startbad="Iniciar"
   fi
 }
 
