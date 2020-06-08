@@ -6,18 +6,18 @@
 
 #### :100: INFORMACION DEL SCRIPT: :100:
 ###### Este Script es compatible con:
-    * Ubuntu 16.04 y version posteriores
+  * Ubuntu 16.04 y version posteriores
 
 ###### Contiene:
-    * Instalador BadVpn
-    * tcp tweaker
-    * Instalador dropbear
-    * Instalador squid proxy
-    * Instalador proxy socks python
-    * Test de velocidad: speedtest, fast
-    * Cambio de Banner
-    * Limite por usuario
-    * Fecha de vencimiento
+  * Instalador BadVpn
+  * tcp tweaker
+  * Instalador dropbear
+  * Instalador squid proxy
+  * Instalador proxy socks python
+  * Test de velocidad: speedtest, fast
+  * Cambio de Banner
+  * Limite por usuario
+  * Fecha de vencimiento
 
 #### :sunglasses: PARA INSTALAR EJECUTE: :sunglasses:
 ```shell
