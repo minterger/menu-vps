@@ -1,6 +1,5 @@
 
-# [vpsmanager](https://github.com/minterger/menu)
-[Captura del Script](#smirk-captura-del-script-smirk)
+# [vpsmanager](#sunglasses-para-instalar-ejecute-sunglasses)
 
 #### :smirk: Captura del script :smirk:
 ![VPS Manager](https://raw.githubusercontent.com/minterger/menu-vps/master/img.png)
