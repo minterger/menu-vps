@@ -5,10 +5,10 @@
 ![VPS Manager](https://raw.githubusercontent.com/minterger/menu-vps/master/img.png)
 
 #### :100: COMPATIBLE CON: :100:
- Este Script es compatible con:
+###### Este Script es compatible con:
         * Ubuntu 16.04 y version posteriores
 
- Contiene:
+###### Contiene:
         * Instalador BadVpn
         * tcp tweaker
         * Instalador dropbear
