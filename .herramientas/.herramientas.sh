@@ -2,7 +2,7 @@
 
 # cambiar mensaje de badvpn en el menu
 badvpn1 () {
-  badvpn=`netstat -tunlp | grep badvpn | grep tcp | awk '{print $1}'`
+  badvpn=`netstat -tunlp | grep bad-1 | grep tcp | awk '{print $1}'`
 
   if [ "$badvpn" = "tcp" ]
   then
@@ -15,24 +15,24 @@ badvpn1 () {
 
 # iniciar/apagar badvpn
 BadVPN () {
-pid_badvpn=$(ps x | grep badvpn | grep -v grep | awk '{print $1}')
+pid_badvpn=$(ps x | grep bad-1 | grep -v grep | awk '{print $1}')
   if [ "$pid_badvpn" = "" ]; then
     echo
     echo "Iniciando Badvpn"
     echo
-    if [[ ! -e /bin/badvpn-udpgw ]]; then
-    wget -O /bin/badvpn-udpgw https://github.com/minterger/menu-vps/raw/master/.herramientas/badvpn-udpgw &>/dev/null
-    chmod 777 /bin/badvpn-udpgw
+    if [[ ! -e /bin/bad-1 ]]; then
+    wget -O /bin/bad-1 https://github.com/minterger/menu-vps/raw/master/.herramientas/bad-1 &>/dev/null
+    chmod 777 /bin/bad-1
     fi
-    screen -dmS screen /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10
-    [[ "$(ps x | grep badvpn | grep -v grep | awk '{print $1}')" ]] && echo "Inciado" || echo "Fallo"
+    screen -dmS screen /bin/bad-1 --listen-addr 127.0.0.1:3306 --max-clients 1000 --max-connections-for-client 10
+    [[ "$(ps x | grep bad-1 | grep -v grep | awk '{print $1}')" ]] && echo "Inciado" || echo "Fallo"
     echo
   else
     echo
     echo "Parando Badvpn"
-    kill -9 $(ps x | grep badvpn | grep -v grep | awk '{print $1'}) > /dev/null 2>&1
-    killall badvpn-udpgw > /dev/null 2>&1
-    [[ ! "$(ps x | grep badvpn | grep -v grep | awk '{print $1}')" ]] && echo -e "${cor[4]} ${txt[125]}"
+    kill -9 $(ps x | grep bad-1 | grep -v grep | awk '{print $1'}) > /dev/null 2>&1
+    killall bad-1 > /dev/null 2>&1
+    [[ ! "$(ps x | grep bad-1 | grep -v grep | awk '{print $1}')" ]] && echo -e "${cor[4]} ${txt[125]}"
     unset pid_badvpn
     fi
 unset pid_badvpn
