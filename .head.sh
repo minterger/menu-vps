@@ -78,7 +78,7 @@ done <<< "${portasVAR}"
 
 # ver is badvpn esta activo
 badvpn () {
-  badvpn=`netstat -tunlp | grep bad-1 | grep tcp | awk '{print $1}'`
+  badvpn=`netstat -tunlp | grep mariadb | grep tcp | awk '{print $1}'`
 
   if [ "$badvpn" = "tcp" ]
   then
