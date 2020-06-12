@@ -7,9 +7,14 @@ countusers () {
   data="$(ps aux | grep -i dropbear | awk '{print $2}')" ;
   NUM3=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$data\]" | wc -l`;
 
-  user="$(cat /root/usuarios.db | awk '{print $1}')"
-  NUM4="$(ps x | grep "[[:space:]]$user[[:space:]]" | grep -v grep | grep -v pts | wc -l)"
-
+  userdb=$(cat /root/usuarios.db | wc -l)
+  if [ $userdb -eq "0" ]; then
+    NUM4="0"
+  else
+    user="$(cat /root/usuarios.db | awk '{print $1}')"
+    NUM4="$(ps x | grep "[[:space:]]$user[[:space:]]" | grep -v grep | grep -v pts | wc -l)"
+  fi
+  
 #  data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
 #  NUM3="0"
 #  for PID in "${data[@]}"
