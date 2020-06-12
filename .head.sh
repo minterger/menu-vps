@@ -7,9 +7,13 @@ countusers () {
   data="$(ps aux | grep -i dropbear | awk '{print $2}')" ;
   NUM3=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$data\]" | wc -l`;
 
-  user="$(cat /root/usuarios.db | awk '{print $1}')"
-  NUM4="$(ps x | grep "[[:space:]]$user[[:space:]]" | grep -v grep | grep -v pts | wc -l)"
-
+  userdb=$(cat /root/usuarios.db | wc -l)
+  if [ $userdb -eq "0" ]; then
+    NUM4="0"
+  else
+    user="$(cat /root/usuarios.db | awk '{print $1}')"
+    NUM4="$(ps x | grep "[[:space:]]$user[[:space:]]" | grep -v grep | grep -v pts | wc -l)"
+  fi
 #  data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
 #  NUM3="0"
 #  for PID in "${data[@]}"
@@ -78,7 +82,7 @@ done <<< "${portasVAR}"
 
 # ver is badvpn esta activo
 badvpn () {
-  badvpn=`netstat -tunlp | grep mariadb | grep tcp | awk '{print $1}'`
+  badvpn=`netstat -tunlp | grep badvpn | grep tcp | awk '{print $1}'`
 
   if [ "$badvpn" = "tcp" ]
   then
@@ -92,7 +96,7 @@ badvpn () {
 
 countusers
 clear
-echo -e "\e[1;33m(By Minterger)\e[1;32m"
+echo -e "\e[1;33m(Main)\e[1;32m"
 echo -e "\e[1;96m ___    ___  _  ___     _  _______  ______  _____   ______  ______  _____  "
 echo -e "\e[1;96m|   \  /   || ||   \   | ||__   __||  ____||  _  \ |  ____||  ____||  _  \ "
 echo -e "\e[1;96m| |\ \/ /| || || |\ \  | |   | |   | |____ | |_| | | |____ | |____ | |_| | "
