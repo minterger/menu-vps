@@ -1,6 +1,16 @@
 #!/bin/bash
 
+clear;
+
 speedtest () {
+
+  if [ -f speed ]; then
+    rm speed
+    touch speed
+  else
+    touch speed  
+  fi
+
   aguarde () {
     comando[0]="$1"
     comando[1]="$2"
@@ -48,6 +58,11 @@ speedtest () {
   echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
   read foo
   rm -rf $HOME/speed
+
+  if [ -f speed ]; then
+    rm speed
+  fi 
+
 }
 
 if [ -f /usr/bin/python ]; then
