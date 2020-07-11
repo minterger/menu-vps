@@ -174,7 +174,7 @@ badvpn1
 echo -e "\e[1;32mEscoja una opcion "
 echo
 echo -e "\e[1;31m[1]\e[1;32m $startbad BADVPN \e[1;37m(habilitar llamadas udp)\e[1;0m"
-echo -e "\e[1;31m[2]\e[1;32m TCP Speed \e[1;37m(mojorar conexion)\e[1;0m"
+echo -e "\e[1;31m[2]\e[1;32m TCP Speed \e[1;37m(mejorar conexion)\e[1;0m"
 echo -e "\e[1;31m[3]\e[1;32m Htop \e[1;37m(ver el consumo de recursos)\e[1;0m"
 echo -e "\e[1;31m[4]\e[1;32m Servicios \e[1;37m(ver los servicios funcionando)\e[1;0m"
 echo -e "\e[1;31m[5]\e[1;32m Host extractor \e[1;37m(extraer host para payload)\e[1;0m"
