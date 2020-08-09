@@ -2,7 +2,7 @@
 
 # cambiar mensaje de badvpn en el menu
 badvpn1 () {
-  badvpn=`netstat -tunlp | grep mariadb | grep tcp | awk '{print $1}'`
+  badvpn=`netstat -tunlp | grep udpgw | grep tcp | awk '{print $1}'`
 
   if [ "$badvpn" = "tcp" ]
   then
@@ -15,24 +15,24 @@ badvpn1 () {
 
 # iniciar/apagar badvpn
 BadVPN () {
-pid_badvpn=$(ps x | grep mariadb | grep -v grep | awk '{print $1}')
+pid_badvpn=$(ps x | grep udpgw | grep -v grep | awk '{print $1}')
   if [ "$pid_badvpn" = "" ]; then
     echo
     echo "Iniciando Badvpn"
     echo
-    if [[ ! -e /bin/mariadb ]]; then
-    wget -O /bin/mariadb https://github.com/minterger/menu-vps/raw/master/.herramientas/mariadb &>/dev/null
-    chmod 777 /bin/mariadb
+    if [[ ! -e /bin/udpgw ]]; then
+    wget -O /bin/udpgw https://github.com/minterger/menu-vps/raw/master/.herramientas/udpgw &>/dev/null
+    chmod 777 /bin/udpgw
     fi
-    screen -dmS screen /bin/mariadb --listen-addr 127.0.0.1:3306 --max-clients 1000 --max-connections-for-client 10
-    [[ "$(ps x | grep mariadb | grep -v grep | awk '{print $1}')" ]] && echo "Inciado" || echo "Fallo"
+    screen -dmS screen /bin/udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10
+    [[ "$(ps x | grep udpgw | grep -v grep | awk '{print $1}')" ]] && echo "Inciado" || echo "Fallo"
     echo
   else
     echo
     echo "Parando Badvpn"
-    kill -9 $(ps x | grep mariadb | grep -v grep | awk '{print $1'}) > /dev/null 2>&1
-    killall mariadb > /dev/null 2>&1
-    [[ ! "$(ps x | grep mariadb | grep -v grep | awk '{print $1}')" ]] && echo -e "${cor[4]} ${txt[125]}"
+    kill -9 $(ps x | grep udpgw | grep -v grep | awk '{print $1'}) > /dev/null 2>&1
+    killall udpgw > /dev/null 2>&1
+    [[ ! "$(ps x | grep udpgw | grep -v grep | awk '{print $1}')" ]] && echo -e "${cor[4]} ${txt[125]}"
     unset pid_badvpn
     fi
 unset pid_badvpn
