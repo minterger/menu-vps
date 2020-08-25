@@ -40,7 +40,7 @@ fun_inisocks () {
   screen -dmS killssh bash ~/.Menu/.users/.killssh.sh
 }
 
-autokill () {
+autokillssh () {
   if ps x | grep .killssh.sh | grep -v grep 1>/dev/null 2>/dev/null; then
     clear
 
@@ -136,7 +136,7 @@ echo -n "Seleccione una opcion [1 - 2]: "
 read opcion
 case $opcion in
 1)
-autokill;;
+autokillssh;;
 2)
 autokilldbr;;
 0) clear;
