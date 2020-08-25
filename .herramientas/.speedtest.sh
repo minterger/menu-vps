@@ -1,14 +1,17 @@
 #!/bin/bash
 
+# log donde se guardan los datos de speedtest
+log="speed.log"
+
 clear;
 
 speedtest () {
 
   if [ -f speed ]; then
-    rm speed
-    touch speed
+    rm $log
+    touch $log
   else
-    touch speed  
+    touch $log
   fi
 
   aguarde () {
@@ -39,16 +42,16 @@ speedtest () {
     tput cnorm
   }
   fun_tst () {
-    python speedtest.py > speed
+    python speedtest.py > $log
   }
   echo ""
   echo -e "\e[1;32mEjecutando test de velocidad: \e[1;0m"
   echo ""
   aguarde 'fun_tst'
   echo ""
-  png=$(cat speed | grep ms | awk -F ": " '{print $2}')
-  down=$(cat speed | grep Download: | awk '{print $2 " " $3}')
-  upl=$(cat speed | grep Upload: | awk '{print $2 " " $3}')
+  png=$(cat $log | grep ms | awk -F ": " '{print $2}')
+  down=$(cat $log | grep Download: | awk '{print $2 " " $3}')
+  upl=$(cat $log | grep Upload: | awk '{print $2 " " $3}')
   echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
   echo -e "\033[1;32mPING (LATENCIA): \033[1;37m$png"
   echo -e "\033[1;32mDOWNLOAD: \033[1;37m$down"
@@ -57,10 +60,10 @@ speedtest () {
   echo
   echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
   read foo
-  rm -rf $HOME/speed
+  rm -rf $HOME/$log
 
-  if [ -f speed ]; then
-    rm speed
+  if [ -f $log ]; then
+    rm $log
   fi 
 
 }
