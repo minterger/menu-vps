@@ -5,13 +5,14 @@ version=$(cat versionact)
 # contador de usuarios beta
 countusers () {
   data="$(ps aux | grep -i dropbear | awk '{print $2}')" ;
-  NUM3=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$data\]" | wc -l`;
-
   userdb=$(cat /root/usuarios.db | wc -l)
+  user="$(cat /root/usuarios.db | awk '{print $1}')"
+
+  NUM3=`cat /var/log/auth.log | grep -i dropbear | grep -i "Password auth succeeded" | grep "dropbear\[$data\]" | grep "'$user'" | wc -l`;
+
   if [ $userdb -eq "0" ]; then
     NUM4="0"
   else
-    user="$(cat /root/usuarios.db | awk '{print $1}')"
     NUM4="$(ps x | grep "[[:space:]]$user[[:space:]]" | grep -v grep | grep -v pts | wc -l)"
   fi
   
