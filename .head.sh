@@ -34,8 +34,11 @@ countusers () {
 #          NUM4=$(($NUM4 + $NUM2));
 #  done
 
+  NUM5=$NUM3+$NUM4
+
   dbr1="$(echo -e "\e[1;31mCONECTADOS DROPBEAR:\e[1;32m [$NUM3]")"
   ssh1="$(echo -e "\e[1;31mCONECTADOS SSH:\e[1;32m [$NUM4]")"
+  total1="$(echo -e "\e[1;31mCONECTADOS EN TOTAL:\e[1;32m [$NUM5]")"
 }
 
 # ver puertos abiertos
