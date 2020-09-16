@@ -116,5 +116,6 @@ mine_port
 badvpn
 echo "$dbr1"
 echo "$ssh1"
+echo "$total1"
 countusers
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
