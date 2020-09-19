@@ -60,8 +60,7 @@ speedtest () {
   echo
   echo -e "\e[1;32mPresiona enter para continuar...\e[1;0m"
   read foo
-  rm -rf $HOME/$log
-
+  
   if [ -f $log ]; then
     rm $log
   fi 
